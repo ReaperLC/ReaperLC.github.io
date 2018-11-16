@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>基础讲解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="集锦解答 1、为什么说Objective-C是一门动态的语言？ 这里动态语言指的是不需要在编译时确定所有的东西，在运行时还可以动态的添加变量、方法和类。 Objective-C 可以通过Runtime 这个运行时机制，在运行时确定类或者变量的类型，动态的添加变 量、方法、类等，所以说Objective-C 是一门动态的语言。 2、讲一下MVC和MVVM，MVP？ MVC ：  简单来说就是逻辑、试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础讲解">
+<meta property="og:url" content="http://yoursite.com/2018/01/22/15165912880700/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="集锦解答 1、为什么说Objective-C是一门动态的语言？ 这里动态语言指的是不需要在编译时确定所有的东西，在运行时还可以动态的添加变量、方法和类。 Objective-C 可以通过Runtime 这个运行时机制，在运行时确定类或者变量的类型，动态的添加变 量、方法、类等，所以说Objective-C 是一门动态的语言。 2、讲一下MVC和MVVM，MVP？ MVC ：  简单来说就是逻辑、试">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-16T07:30:50.088Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础讲解">
+<meta name="twitter:description" content="集锦解答 1、为什么说Objective-C是一门动态的语言？ 这里动态语言指的是不需要在编译时确定所有的东西，在运行时还可以动态的添加变量、方法和类。 Objective-C 可以通过Runtime 这个运行时机制，在运行时确定类或者变量的类型，动态的添加变 量、方法、类等，所以说Objective-C 是一门动态的语言。 2、讲一下MVC和MVVM，MVP？ MVC ：  简单来说就是逻辑、试">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">基础讲解</h2>
+  <p class="sub">Jan 22, 2018</p>
+  <article class="content">
+    <p><a href="https://www.jianshu.com/p/56e40ea56813" target="_blank" rel="noopener">集锦</a><br><a href="https://www.cnblogs.com/jukaiit/p/7932313.html" target="_blank" rel="noopener">解答</a></p>
+<p>1、为什么说Objective-C是一门动态的语言？</p>
+<pre><code>这里动态语言指的是不需要在编译时确定所有的东西，在运行时还可以动态的添加变量、方法和类。
+Objective-C 可以通过Runtime 这个运行时机制，在运行时确定类或者变量的类型，动态的添加变
+量、方法、类等，所以说Objective-C 是一门动态的语言。
+</code></pre><p>2、讲一下MVC和MVVM，MVP？</p>
+<pre><code>MVC ：  简单来说就是逻辑、试图、数据进行分层，实现解耦。最早存在于桌面程序中的, M是指业务
+        数据, V是指用户界面, C则是控制器在具体的业务场景中, C作为M和V之间的连接, 负责获
+        取输入的业务数据,然后将处理后的数据输出到界面上做相应展示, 另外, 在数据有所更新
+        时, C还需要及时提交相应更新到界面展示. 在上述过程中, 因为M和V之间是完全隔离的, 
+        所以在业务场景切换时, 通常只需要替换相应的C, 复用已有的M和V便可快速搭建新的业务
+        场景.
+ MVVM： 由视图(View)、视图模型(ViewModel)、模型(Model)三部分组成，将一部分逻辑(耗时，
+       公共方法，网络请求等)和数据的处理等操作从控制器里面搬运到ViewModel中
+</code></pre><p>3、为什么代理要用weak？代理的delegate和dataSource有什么区别？block和代理的区别?</p>
+<pre><code>weak:  指明该对象并不负责保持delegate这个对象，delegate这个对象的销毁由外部控制,防止循环引用。
+delegate:偏重于与用户交互的回调，有那些方法可以供我使用
+dataSource:偏重于数据的回调
+delegate是操作，datasource是数据
+
+**block与代理**
+1、都是进行单一回调，
+2、delegate是个对象，然后用过一个对象自己调用代理协议函数来完成整个流程。block是传递一个函
+   数指针，利用函数指针执行来进行回调。
+3、在内存管理上，delegate不需要保存引用。block对引用数据有copy的处理。
+</code></pre><p>4、属性的实质是什么？包括哪几个部分？属性默认的关键字都有哪些？@dynamic关键字和@synthesize关键字是用来做什么的？</p>
+<pre><code>@property = 实例变量 + get方法 + set方法  （因此使用property会自动生成get和set）
+
+readwrite，assign, atomic;
+
+@synthesize和@dynamic区别, 在声明property属性后，有2种实现选择:
+
+@synthesize
+编译器期间，让编译器自动生成getter/setter方法。当有自定义的存或取方法时，自定义会屏蔽自动生
+成该方法
+
+@dynamic
+告诉编译器，不自动生成getter/setter方法，避免编译期间产生警告，然后由自己实现存取方法。或存
+取方法在运行时动态创建绑定：主要使用在CoreData的实现NSManagedObject子类时使用，由Core 
+Data框架在程序运行的时动态生成子类属性 
+</code></pre><p>5、属性的默认关键字是什么？</p>
+<pre><code>对于基本数据类型默认关键字是atomic,readwrite,assign
+
+对于普通的OC对象atomic,readwrite,strong    
+</code></pre><p>6、NSString为什么要用copy关键字，如果用strong会有什么问题？（注意：这里没有说用strong就一定不行。使用copy和strong是看情况而定</p>
+<table>
+<thead>
+<tr>
+<th>属性关键字</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>strong</td>
+<td style="text-align:center">在赋值时调用被指向对象的retain方法，使其引用计数加1</td>
+</tr>
+<tr>
+<td>weak</td>
+<td style="text-align:center">不增加对象的引用计数，不持有对象，对象消失，指针自动变为nil</td>
+</tr>
+<tr>
+<td>assign</td>
+<td style="text-align:center">只用来修饰基础数据类型（int double等），不改变引用计数</td>
+</tr>
+<tr>
+<td>copy</td>
+<td style="text-align:center">建立一个引用计数为1的对象，通常用于NSString和block</td>
+</tr>
+<tr>
+<td>atomic</td>
+<td style="text-align:center">原子操作，提供线程安全，默认属性，耗费系统资源</td>
+</tr>
+<tr>
+<td>nonatomic</td>
+<td style="text-align:center">非原子操作，不提供线程安全，效率更高</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td style="text-align:center">只读属性</td>
+</tr>
+<tr>
+<td>readwrite</td>
+<td style="text-align:center">读写属性，默认</td>
+</tr>
+<tr>
+<td>unsafe_unretained</td>
+<td style="text-align:center">类似weak,但引用计数为0，指针不会nil</td>
+</tr>
+</tbody>
+</table>
+<p>7、如何令自己所写的对象具有拷贝功能?</p>
+<pre><code>具体步骤：
+
+1、需声明该类遵从 NSCopying 协议
+2、实现 NSCopying 协议。该协议只有一个方法:
+- (id)copyWithZone:(NSZone *)zone;
+注意：一提到让自己的类用 copy 修饰符，我们总是想覆写copy方法，其实真正需要实现的却是 “copyWithZone” 方法。
+</code></pre><p>8、可变集合类 和 不可变集合类的 copy 和 mutablecopy有什么区别？如果是集合是内容复制的话，集合里面的元素也是内容复制么？</p>
+<p>9、为什么IBOutlet修饰的UIView也适用weak关键字？</p>
+<pre><code>因为当我们将控件拖到Storyboard上，相当于新创建了一个对象，而这个对象是加到视图控制器的view
+上，view有一个subViews属性，这个属性是一个数组，里面是这个view的所有子view，而我们加的控
+件就位于这个数组中，那么说明，实际上我们的控件对象是属于view的，也就是说view对加到它上面的控
+件是强引用。当我们使用Outlet属性的时候，我们是在viewController里面使用，而这个Outlet属性
+是有view来进行强引用的，我们在viewController里面仅仅是对其使用，并没有必要拥有它，所以是
+weak的
+</code></pre><p>10、nonatomic和atomic的区别？atomic是绝对的线程安全么？为什么？如果不是，那应该如何实现？</p>
+<pre><code>nonatomic的内存管理语义是非原子性的，非原子性的操作本来就是线程不安全，而atomic的操作是原
+子性的，但并不意味着他就是线程安全的，它会增加正确的几率，能够更好的避免线程错误，但仍旧是不
+安全的。
+</code></pre><p>11、UICollectionView自定义layout如何实现？</p>
+<p>12、用StoryBoard开发界面有什么弊端？如何避免？</p>
+<pre><code>1、难以维护
+2、性能瓶颈
+3、错误定位困难
+</code></pre><p>13、进程和线程的区别？同步异步的区别？并行和并发的区别？</p>
+<pre><code>进程和线程: 
+同步和异步:
+并行(parallellism)和并发(concurrency)
+</code></pre><p>14、线程间通信？</p>
+<p>15、GCD的一些常用的函数？（group，barrier，信号量，线程同步）</p>
+<p>16、如何使用队列来避免资源抢夺？</p>
+<p>17、数据持久化的几个方案（fmdb用没用过）</p>
+<pre><code>plist文件（属性列表）
+
+preference（偏好设置）
+
+NSKeyedArchiver（归档）
+
+SQLite 3
+
+CoreData
+</code></pre><p>18、说一下AppDelegate的几个方法？从后台到前台调用了哪些方法？第一次启动调用了哪些方法？从前台到后台调用了哪些方法？<br>1、 <strong>– (BOOL)application:(UIApplication )application didFinishLaunchingWithOptions:<br> (NSDictionary )launchOptions NS_AVAILABLE_IOS(3_0);</strong></p>
+<pre><code>当应用程序启动时（不包括已在后台的情况下转到前台），调用此回调。launchOptions是启动参数，假
+如用户通过点击push通知启动的应用，这个参数里会存储一些push通知的信息。
+</code></pre><p>2、 <strong>– (void)applicationDidBecomeActive:(UIApplication *)application;</strong></p>
+<pre><code> // Restart any tasks that were paused (or not yet started) while the 
+ application was inactive. If the application was previously in the 
+ background, optionally refresh the user interface.
+
+当应用程序全新启动，或者在后台转到前台，完全激活时，都会调用这个方法。如果应用程序是以前运行
+在后台，这时可以选择刷新用户界面。
+</code></pre><p>3、 <strong>– (void)applicationDidEnterBackground:(UIApplication *)application NS_AVAILABLE_IOS(4_0);</strong></p>
+<pre><code> // Use this method to release shared resources, save user data, invalidate 
+ timers, and store enough application state information to restore your 
+ application to its current state in case it is terminated later.
+// If your application supports background execution, this method is called 
+instead of applicationWillTerminate: when the user quits.
+
+当用户从前台状态转入后台时，调用此方法。使用此方法来释放资源共享，保存用户数据，无效计时器，
+并储存足够的应用程序状态信息的情况下被终止后，将应用 程序恢复到目前的状态。如果您的应用程序支
+持后台运行，这种方法被调用，否则调用applicationWillTerminate：用户退出。
+</code></pre><p>4、<strong>– (void)applicationWillEnterForeground:(UIApplication *)application NS_AVAILABLE_IOS(4_0);</strong></p>
+<pre><code>// Called as part of the transition from the background to the inactive state; 
+here you can undo many of the changes made on entering the background.
+
+当应用在后台状态，将要进行动前台运行状态时，会调用此方法。如果应用不在后台状态，而是直接启
+动，则不会回调此方法。从后台到前台2, 4; 第一次启动1, 2; 从前台到后台3;
+</code></pre><p>19、NSCache优于NSDictionary的几点？</p>
+<pre><code>NSCache胜过NSDictionary之处在于，当系统资源将要耗尽时，它可以自动删减缓存。如果采用普通的
+字典，那么就要自己编写挂钩，在系统发出“低内存”通知时手工删减缓存。
+
+NSCache并不会“拷贝”键，而是会“保留”它。此行为用NSDictionary也可以实现，然而需要编写相当复
+杂的代码。NSCache对象不拷贝键的原因在于：很多时候，键都是不支持拷贝操作的对象来充当的。因
+此，NSCache不会自动拷贝键，所以说，在键不支持拷贝操作的情况下，该类用起来比字典更方便。另
+外，NSCache是线程安全的，而NSDictionary则绝对不具备此优势
+</code></pre><p>20、知不知道Designated Initializer？使用它的时候有什么需要注意的问题？</p>
+<p>21、实现description方法能取到什么效果？</p>
+<p>22、objc使用什么机制管理对象内存？</p>
+<p>中级Block</p>
+<p>1、block的实质是什么？一共有几种block？都是什么情况下生成的？</p>
+<p>   结构体</p>
+<pre><code>struct Block_descriptor {
+    unsigned long int reserved;
+    unsigned long int size;
+    void (*copy)(void *dst, void *src);
+    void (*dispose)(void *);
+};
+
+struct Block_layout {
+    void *isa;
+    int flags;
+    int reserved; 
+    void (*invoke)(void *, ...);
+    struct Block_descriptor *descriptor;
+    /* Imported variables. */
+};
+
+
+根据isa指针，block一共有3种类型的block
+
+_NSConcreteGlobalBlock 全局静态
+_NSConcreteStackBlock  保存在栈中，出函数作用域就销毁
+_NSConcreteMallocBlock 保存在堆中，retainCount == 0销毁而ARC和MRC中，还略有不同;
+</code></pre><p>2、为什么在默认情况下无法修改被block捕获的变量？ __block都做了什么？</p>
+<p>3、模拟一下循环引用的一个情况？block实现界面反向传值如何实现？</p>
+<p>Runtime</p>
+<blockquote>
+<p>1、objc在向一个对象发送消息时，发生了什么？</p>
+</blockquote>
+<p>2、什么时候会报unrecognized selector错误？iOS有哪些机制来避免走到这一步？</p>
+<p>3、能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</p>
+<p>4、runtime如何实现weak变量的自动置nil？</p>
+<p>5、给类添加一个属性后，在类结构体里哪些元素会发生变化？</p>
+<p>类结构</p>
+<p>1、isa指针？（对象的isa，类对象的isa，元类的isa都要说）</p>
+<p>2、类方法和实例方法有什么区别？</p>
+<p>3、介绍一下分类，能用分类做什么？内部是如何实现的？它为什么会覆盖掉原来的方法？</p>
+<p>4、运行时能增加成员变量么？能增加属性么？如果能，如何增加？如果不能，为什么？</p>
+<p>5、objc中向一个nil对象发送消息将会发生什么？（返回值是对象，是标量，结构体）</p>
+<p>高级</p>
+<p>1、UITableview的优化方法（缓存高度，异步绘制，减少层级，hide，避免离屏渲染）</p>
+<p>2、有没有用过运行时，用它都能做什么？（交换方法，创建类，给新创建的类增加方法，改变isa指针）</p>
+<p>3、看过哪些第三方框架的源码？都是如何实现的？（如果没有，问一下多图下载的设计）</p>
+<p>4、SDWebImage的缓存策略？</p>
+<p>5、AFN为什么添加一条常驻线程？</p>
+<p>6、KVO的使用？实现原理？（为什么要创建子类来实现）</p>
+<p>7、KVC的使用？实现原理？（KVC拿到key以后，是如何赋值的？知不知道集合操作符，能不能访问私有属性，能不能直接访问_ivar）</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/03/02/UICollectionView Layout自定义 Layout布局/" class="link f-fl">⟵UICollectionView Layout自定义 Layout布局</a>
+    
+    
+      <a href="/2017/12/25/iOS 个性化视频录制/" class="link f-fr">iOS 个性化视频录制⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

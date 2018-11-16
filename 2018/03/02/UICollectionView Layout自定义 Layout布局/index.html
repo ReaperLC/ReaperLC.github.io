@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>UICollectionView Layout自定义 Layout布局 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UICollectionView Layout自定义 Layout布局 #前言 要从容地着手去做一件事,但一旦开始,就要坚持到底。——比阿斯【美】对于UIcollectionView的基础使用相信各位早已烂熟于心，那么对于UICollectionView Layout自定义布局呢？你知道多少？当我们使用系统自带的UICollectionViewFlowLayout无法实现我们的布局时，我们就不得不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UICollectionView Layout自定义 Layout布局">
+<meta property="og:url" content="http://yoursite.com/2018/03/02/UICollectionView Layout自定义 Layout布局/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="UICollectionView Layout自定义 Layout布局 #前言 要从容地着手去做一件事,但一旦开始,就要坚持到底。——比阿斯【美】对于UIcollectionView的基础使用相信各位早已烂熟于心，那么对于UICollectionView Layout自定义布局呢？你知道多少？当我们使用系统自带的UICollectionViewFlowLayout无法实现我们的布局时，我们就不得不">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-16T07:22:17.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UICollectionView Layout自定义 Layout布局">
+<meta name="twitter:description" content="UICollectionView Layout自定义 Layout布局 #前言 要从容地着手去做一件事,但一旦开始,就要坚持到底。——比阿斯【美】对于UIcollectionView的基础使用相信各位早已烂熟于心，那么对于UICollectionView Layout自定义布局呢？你知道多少？当我们使用系统自带的UICollectionViewFlowLayout无法实现我们的布局时，我们就不得不">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">UICollectionView Layout自定义 Layout布局</h2>
+  <p class="sub">Mar 2, 2018</p>
+  <article class="content">
+    <p>UICollectionView Layout自定义 Layout布局</p>
+<p>#前言</p>
+<h3 id="要从容地着手去做一件事-但一旦开始-就要坚持到底。——比阿斯【美】"><a href="#要从容地着手去做一件事-但一旦开始-就要坚持到底。——比阿斯【美】" class="headerlink" title="要从容地着手去做一件事,但一旦开始,就要坚持到底。——比阿斯【美】"></a><strong>要从容地着手去做一件事,但一旦开始,就要坚持到底。——比阿斯【美】</strong></h3><p>对于UIcollectionView的基础使用相信各位早已烂熟于心，那么对于UICollectionView Layout自定义布局呢？你知道多少？当我们使用系统自带的UICollectionViewFlowLayout无法实现我们的布局时，我们就不得不考虑自定义layout。现将自定义布局规为以下三部曲：</p>
+<ul>
+<li><p>覆写prepareLayout方法，并在里面事先就计算好必要的布局信息并存储起来，初始化。</p>
+</li>
+<li><p>基于prepareLayout方法中的布局信息，使用collectionViewContentSize方法返回UICollectionView的内容尺寸。</p>
+</li>
+<li><p>使用layoutAttributesForElementsInRect:方法返回指定区域cell、Supplementary View和Decoration View的布局属性。</p>
+</li>
+</ul>
+<h1 id="重写PrepareLayout"><a href="#重写PrepareLayout" class="headerlink" title="重写PrepareLayout"></a>重写PrepareLayout</h1><h1 id="重写collectionViewContentSize"><a href="#重写collectionViewContentSize" class="headerlink" title="重写collectionViewContentSize"></a>重写collectionViewContentSize</h1><h1 id="重写layoutAttributesForElementsInRect"><a href="#重写layoutAttributesForElementsInRect" class="headerlink" title="重写layoutAttributesForElementsInRect"></a>重写layoutAttributesForElementsInRect</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>前人栽树，后人乘凉，开发道路上已经有各位大佬为我们趟过雷，剩下的就是需要我们自己去吸收，去探索那些遗留的雷区，谁能发现，当然就会成为造福人类的英雄了。</p>
+<p>1、<a href="https://www.jianshu.com/p/cabec2786241?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation" target="_blank" rel="noopener">详细分享UICollectionView的自定义布局(瀑布流, 线性, 圆形…)</a><br>2、<a href="https://www.jianshu.com/p/83f2d6ac7e68" target="_blank" rel="noopener">自定义布局和自定义流水布局（CollectionViewLayout和CollectionViewFlowLayout）</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/03/23/fromView and toView/" class="link f-fl">⟵iOS转场动画-让你的页面app不再单调</a>
+    
+    
+      <a href="/2018/01/22/15165912880700/" class="link f-fr">基础讲解⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

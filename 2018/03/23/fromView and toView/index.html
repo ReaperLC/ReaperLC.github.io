@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>iOS转场动画-让你的页面app不再单调 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="fromView and toView转场动画中时常会出现 fromView 和 toView 这一组相对的概念 fromView:跳转前的视图toView：跳转后的视图 当然这两个视图是相对的，比如A present to B ,此时 A =  fromView , B = toView然而B dismiss to A ,此时 B =  fromView , A = toView所以fromVi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS转场动画-让你的页面app不再单调">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/fromView and toView/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="fromView and toView转场动画中时常会出现 fromView 和 toView 这一组相对的概念 fromView:跳转前的视图toView：跳转后的视图 当然这两个视图是相对的，比如A present to B ,此时 A =  fromView , B = toView然而B dismiss to A ,此时 B =  fromView , A = toView所以fromVi">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-16T07:22:07.421Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS转场动画-让你的页面app不再单调">
+<meta name="twitter:description" content="fromView and toView转场动画中时常会出现 fromView 和 toView 这一组相对的概念 fromView:跳转前的视图toView：跳转后的视图 当然这两个视图是相对的，比如A present to B ,此时 A =  fromView , B = toView然而B dismiss to A ,此时 B =  fromView , A = toView所以fromVi">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">iOS转场动画-让你的页面app不再单调</h2>
+  <p class="sub">Mar 23, 2018</p>
+  <article class="content">
+    <h1 id="fromView-and-toView"><a href="#fromView-and-toView" class="headerlink" title="fromView and toView"></a>fromView and toView</h1><p>转场动画中时常会出现 fromView 和 toView 这一组相对的概念</p>
+<p>fromView:跳转前的视图<br>toView：跳转后的视图</p>
+<p>当然这两个视图是相对的，<br>比如A present to B ,此时 A =  fromView , B = toView<br>然而B dismiss to A ,此时 B =  fromView , A = toView<br>所以fromView和toView不是固定且一成不变的，会随着动画的执行和结束发生变化，扮演不同的角色</p>
+<h1 id="presentedViewController-and-presentingViewController"><a href="#presentedViewController-and-presentingViewController" class="headerlink" title="presentedViewController and presentingViewController"></a>presentedViewController and presentingViewController</h1><p>听过  fromView 和 toView ，想必  presentedViewController 和 presentingViewController也不会太陌生，这也是一组相对概念，而且容易与第一组混淆。</p>
+<p>不同之处在于  presentedViewController 和 presentingViewController  的身份不受present影响，简单说还是上面的例子<br>比如A present to B ,此时 A = presentedViewController , B = presentingViewController<br>然而B dismiss to A ,此时 A = presentedViewController , B = presentingViewController</p>
+<h1 id="modalPresentationStyle"><a href="#modalPresentationStyle" class="headerlink" title="modalPresentationStyle"></a>modalPresentationStyle</h1><p>系统提供的一个present时动画的枚举类型</p>
+<pre><code>typedef NS_ENUM(NSInteger, UIModalPresentationStyle) {
+        UIModalPresentationFullScreen = 0,
+        UIModalPresentationPageSheet NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED,
+        UIModalPresentationFormSheet NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED,
+        UIModalPresentationCurrentContext NS_ENUM_AVAILABLE_IOS(3_2),
+        UIModalPresentationCustom NS_ENUM_AVAILABLE_IOS(7_0),
+        UIModalPresentationOverFullScreen NS_ENUM_AVAILABLE_IOS(8_0),
+        UIModalPresentationOverCurrentContext NS_ENUM_AVAILABLE_IOS(8_0),
+        UIModalPresentationPopover NS_ENUM_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED,
+        UIModalPresentationBlurOverFullScreen __TVOS_AVAILABLE(11_0) __IOS_PROHIBITED __WATCHOS_PROHIBITED,
+        UIModalPresentationNone NS_ENUM_AVAILABLE_IOS(7_0) = -1,
+};</code></pre>
+
+<p>其中可以自定义动画效果的只有两种：FullScreen和Custom，两者的区别在于FullScreen会移除fromView，而Custom不会。</p>
+<h1 id="UIViewControllerTransitioningDelegate"><a href="#UIViewControllerTransitioningDelegate" class="headerlink" title="UIViewControllerTransitioningDelegate"></a>UIViewControllerTransitioningDelegate</h1><h1 id="transitionFromViewController"><a href="#transitionFromViewController" class="headerlink" title="transitionFromViewController"></a>transitionFromViewController</h1><p>通常的使用场景是 在多个Child ViewController之间切换.</p>
+<pre><code>[self transitionFromViewController:<#(nonnull uiviewcontroller="" *)#="">
+                      toViewController:<#(nonnull uiviewcontroller="" *)#="">
+                              duration:<#(nstimeinterval)#>
+                               options:<#(uiviewanimationoptions)#>
+                            animations:<#^(void)animations#>
+                            completion:<#^(bool finished)completion#="">];
+                            </#^(bool></#^(void)animations#></#(uiviewanimationoptions)#></#(nstimeinterval)#></#(nonnull></#(nonnull></code></pre>
+
+
+
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/04/02/实用框架/" class="link f-fl">⟵实用框架</a>
+    
+    
+      <a href="/2018/03/02/UICollectionView Layout自定义 Layout布局/" class="link f-fr">UICollectionView Layout自定义 Layout布局⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

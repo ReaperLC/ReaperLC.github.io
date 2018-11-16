@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Git初识 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Git使用##1、创建空目录 $ mkdir learngit $ cd learngit $ pwd /Users/michael/learngit   pwd用于显示当前目录  ##2、初始化仓库 git init  Initialized empty Git repository in /Users/michael/learngit/.git/   ls -ah 查看隐藏文件  ##3、添加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git初识">
+<meta property="og:url" content="http://yoursite.com/2018/07/27/Git使用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Git使用##1、创建空目录 $ mkdir learngit $ cd learngit $ pwd /Users/michael/learngit   pwd用于显示当前目录  ##2、初始化仓库 git init  Initialized empty Git repository in /Users/michael/learngit/.git/   ls -ah 查看隐藏文件  ##3、添加">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-16T07:20:23.781Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git初识">
+<meta name="twitter:description" content="Git使用##1、创建空目录 $ mkdir learngit $ cd learngit $ pwd /Users/michael/learngit   pwd用于显示当前目录  ##2、初始化仓库 git init  Initialized empty Git repository in /Users/michael/learngit/.git/   ls -ah 查看隐藏文件  ##3、添加">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Git初识</h2>
+  <p class="sub">Jul 27, 2018</p>
+  <article class="content">
+    <h1 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h1><p>##1、创建空目录</p>
+<pre><code>$ mkdir learngit
+$ cd learngit
+$ pwd
+/Users/michael/learngit</code></pre>
+
+<blockquote>
+<p>pwd用于显示当前目录</p>
+</blockquote>
+<p>##2、初始化仓库</p>
+<pre><code>git init 
+Initialized empty Git repository in /Users/michael/learngit/.git/</code></pre>
+
+<blockquote>
+<p>ls -ah 查看隐藏文件</p>
+</blockquote>
+<p>##3、添加文件至版本库<br>将新建的文件放置在新建的仓库learngit目录下</p>
+<p>###3.1 添加</p>
+<pre><code>$ git add readme.txt</code></pre>
+
+<p>###3.2 提交</p>
+<pre><code>$ $ git commit -m "wrote a readme file"
+[master (root-commit) eaadf4e] wrote a readme file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 readme.txt</code></pre>
+
+<p>###3.3 状态</p>
+<pre><code>$ git status</code></pre>
+
+<p>###3.4  修改的地方</p>
+<pre><code>$ git diff</code></pre>
+
+<p>###3.5 历史记录</p>
+<pre><code>$ git log</code></pre>
+或者
+<pre><code>$ git log --pretty=oneline</code></pre>
+
+<blockquote>
+<p>成行显示</p>
+</blockquote>
+<p>##4 版本回退</p>
+<pre><code>$ git reset --hard HEAD^</code></pre>
+
+<p>git 中HEAD表示当前版本， HEAD^^ 表示上一个版本，HEAD^^ 表示上上个版本，依次类推<br>当然若回退版本过多，写 ^^ 容易出错，可用 HEAD~100 ，往上100个版本。</p>
+<pre><code>git reset --hard c87d5c3</code></pre>
+
+<p>c87d5c3即为之前提交GPL时的ID， 可以不必写全，但也不能写一两位，避免重复</p>
+<p>##5 命令记录</p>
+<pre><code>$ git reflog</code></pre>
+
+
+<blockquote>
+<p>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset –hard commit_id。</p>
+</blockquote>
+<blockquote>
+<p>穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。</p>
+</blockquote>
+<blockquote>
+<p>要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。</p>
+</blockquote>
+<p>##6 工作区、暂存区</p>
+<p>git add 实际上是把当前所有修改都添加到暂存区<br>git commit 就可以一次性把暂存区的所有修改提交到分支</p>
+<p>##7 Git管理修改</p>
+<blockquote>
+<p>第一次修改 -&gt; git add -&gt; 第二次修改 -&gt; git commit</p>
+</blockquote>
+<p>上述操作最终只提交了 第一次修改，第二次并未提交，因为第二次修改并未add到暂存区</p>
+<blockquote>
+<p>第一次修改 -&gt; git add -&gt; 第二次修改 -&gt; git add -&gt; git commit</p>
+</blockquote>
+<p>此操作代表两次都已经提交</p>
+<p>##8 撤销修改</p>
+<p>丢弃工作区的修改</p>
+<pre><code>$ git checkout -- readme.txt</code></pre>
+暂存区修改撤销，放回工作区
+<pre><code>$ git reset HEAD readme.txt</code></pre>
+
+<p>##9 删除文件</p>
+<pre><code>$ git rv readme.txt</code></pre>
+
+<p>##10 添加远程仓库</p>
+<p>连接远程仓库，server-name即为Github账户名</p>
+<pre><code>$ git remote add origin git@server-name:path/repo-name.git</code></pre>
+
+<p>第一次推送</p>
+<pre><code>$ git push -u origin master</code></pre>
+
+<p>后续修改推送</p>
+<pre><code>$ git push origin master</code></pre>
+
+
+<p>##11 克隆远程仓库</p>
+<pre><code>$ git clone git@github.com:michaelliao/gitskills.git</code></pre>
+
+
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/08/01/Web前端之路/" class="link f-fl">⟵Web前端之路</a>
+    
+    
+      <a href="/2018/07/20/Http头域/" class="link f-fr">HTTP头域⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>世上本无坑，踩的人多了变有了坑 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、tableViewCell 分割线边距缩进-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {     // 设置分割线左右边距     if ([cell respondsToSelector:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="世上本无坑，踩的人多了变有了坑">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/踩坑笔记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1、tableViewCell 分割线边距缩进-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {     // 设置分割线左右边距     if ([cell respondsToSelector:">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-16T07:19:55.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="世上本无坑，踩的人多了变有了坑">
+<meta name="twitter:description" content="1、tableViewCell 分割线边距缩进-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {     // 设置分割线左右边距     if ([cell respondsToSelector:">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">世上本无坑，踩的人多了变有了坑</h2>
+  <p class="sub">May 21, 2018</p>
+  <article class="content">
+    <h1 id="1、tableViewCell-分割线边距缩进"><a href="#1、tableViewCell-分割线边距缩进" class="headerlink" title="1、tableViewCell 分割线边距缩进"></a>1、tableViewCell 分割线边距缩进</h1><pre><code>-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 设置分割线左右边距
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsMake(0,100, 0,8)];
+    }
+    //
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    // 设置cell左右边距
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsMake(0, 8, 0,8)];
+    }
+}</code></pre>
+
+<p>#2、cocoapods降级操作</p>
+<p> 1查看当前版本</p>
+<pre><code>pod --version</code></pre>
+ 2查看安装列表
+<pre><code>gem list</code></pre>
+3卸载
+<pre><code>sudo gem uninstall cocoapods -v 1.3.1</code></pre>
+4安装
+<pre><code>sudo gem install cocoapods -v 1.3.1</code></pre>
+
+<p>sudo gem uninstall cocoapods</p>
+<p>先查看本地安装过的cocopods相关东西，命令如下：<br>$ gem list –local | grep cocoapods<br>会显示如下：<br>cocoapods-core (0.39.0)<br>cocoapods-downloader (0.9.3)<br>cocoapods-plugins (0.4.2)<br>cocoapods-search (0.1.0)<br>cocoapods-stats (0.6.2)<br>cocoapods-trunk (0.6.4)<br>cocoapods-try (0.5.1)<br>然后逐个删除吧：<br>$ sudo gem uninstall cocoapods-core</p>
+<p>#2.1 安装RVM<br>curl -L get.rvm.io | bash -s stable</p>
+<p>source ~/.bashrc<br>source ~/.bash_profile<br>rvm -v<br>rvm list known<br>rvm install 2.3.0</p>
+<p>#3、Runtime之交换方法</p>
+<pre><code>+ (void)methodSwizzlingWithOriginalSelector:(SEL)originalSelector
+                         bySwizzledSelector:(SEL)swizzledSelector {
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = [self class];
+        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+        BOOL didAddMethod = class_addMethod(class,originalSelector,
+                                            method_getImplementation(swizzledMethod),
+                                            method_getTypeEncoding(swizzledMethod));
+        if (didAddMethod) {
+            class_replaceMethod(class,swizzledSelector,
+                                method_getImplementation(originalMethod),
+                                method_getTypeEncoding(originalMethod));
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        }
+    });
+
+}</code></pre>
+
+<p>#上架应用预览<br>    <a href="https://itunes.apple.com/cn/app/yan-yu/id1393900517" target="_blank" rel="noopener">https://itunes.apple.com/cn/app/yan-yu/id1393900517</a>    </p>
+<h1 id="系统相册界面上移"><a href="#系统相册界面上移" class="headerlink" title="系统相册界面上移"></a>系统相册界面上移</h1><p>是因为全局设置了ScrollView属性导致的.</p>
+ <pre><code>if (@available(iOS 11.0, *)){//避免滚动视图顶部出现20的空白以及push或者pop的时候页面有一个上移或者下移的异常动画的问题
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }</code></pre>  
+
+<p>  在调用相册前重置就好了<br>  <pre><code>if (@available(iOS 11, *)) {<br>        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;<br>    }</code></pre> </p>
+<h1 id="如何防止反编译"><a href="#如何防止反编译" class="headerlink" title="如何防止反编译"></a>如何防止反编译</h1><p>1、对本地数据存储NSUserDefault,sqlite进行加密处理，保护关键信息    （本地数据加密）<br>2、对程序中出现的URL进行加密处理，防止URL被静态分析                 (URL地址加密)<br>3、对客户端的网路请求数据进行加密，防止通过网络拦截获取数据           (请求数据加密)<br>4、代码混淆<br>5、第三方防护，网易云盾</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/06/28/AppStore经验之谈/" class="link f-fl">⟵AppStore经验之谈</a>
+    
+    
+      <a href="/2018/05/21/Runtime妙用/" class="link f-fr">iOS Runtime的妙用⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

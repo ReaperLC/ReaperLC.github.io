@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>常用宏定义 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="设备尺寸#if __IPHONE_OS_VERSION_MAX_ALLOWED &amp;gt;= 80000 // 当前Xcode支持iOS8及以上 #define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用宏定义">
+<meta property="og:url" content="http://yoursite.com/2018/04/08/设备尺寸/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="设备尺寸#if __IPHONE_OS_VERSION_MAX_ALLOWED &amp;gt;= 80000 // 当前Xcode支持iOS8及以上 #define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.wi">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-16T07:19:21.850Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用宏定义">
+<meta name="twitter:description" content="设备尺寸#if __IPHONE_OS_VERSION_MAX_ALLOWED &amp;gt;= 80000 // 当前Xcode支持iOS8及以上 #define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.wi">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">常用宏定义</h2>
+  <p class="sub">Apr 8, 2018</p>
+  <article class="content">
+    <h1 id="设备尺寸"><a href="#设备尺寸" class="headerlink" title="设备尺寸"></a>设备尺寸</h1><pre><code>#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000 // 当前Xcode支持iOS8及以上
+#define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)
+#define SCREENH_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)
+#define SCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)
+#else
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREEN_SIZE [UIScreen mainScreen].bounds.size
+#endif</code></pre>
+
+<p>#颜色设置</p>
+<pre><code>/** 随机颜色 */
+#define LNRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
+/** 不透明设置 */
+#define LNRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+/** 带透明设置 */
+#define LNRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]
+/** clear背景颜色 */
+#define LNClearColor [UIColor clearColor]</code></pre>
+
+
+<p>#视图设置</p>
+<pre><code>/** 设置视图圆角和边框 */
+#define LNViewBorderRadius(View, Radius, Width, Color)\
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES];\
+[View.layer setBorderWidth:(Width)];\
+[View.layer setBorderColor:[Color CGColor]]
+
+/** 由角度转换弧度 由弧度转换角度 */
+#define LNDegreesToRadian(x) (M_PI * (x) / 180.0)
+#define LNRadianToDegrees(radian) (radian*180.0)/(M_PI)
+
+/** 获取图片资源 */
+#define kLNImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]</code></pre>
+
+
+<p>#系统判断</p>
+<pre><code>/** 判断是否为iPhone */
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+/** 判断是否为iPad */
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+/** 判断是否为ipod */
+#define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])
+/** 判断是否为 iPhone 5SE */
+#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f && [[UIScreen mainScreen] bounds].size.height == 568.0f
+/** 判断是否为iPhone 6/6s */
+#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f && [[UIScreen mainScreen] bounds].size.height == 667.0f
+/** 判断是否为iPhone 6Plus/6sPlus */
+#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f && [[UIScreen mainScreen] bounds].size.height == 736.0f
+/** 判断是否iphone X **/
+#define KISIphoneX (CGSizeEqualToSize(CGSizeMake(375.f, 812.f), [UIScreen mainScreen].bounds.size) || CGSizeEqualToSize(CGSizeMake(812.f, 375.f), [UIScreen mainScreen].bounds.size))
+/** 获取系统版本 */
+#define IOS_SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+/** 判断 iOS 8 或更高的系统版本 */
+#define IOS_VERSION_8_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0)? (YES):(NO))
+/** 判断是真机还是模拟器 */
+#if TARGET_OS_IPHONE
+//iPhone Device
+#endif
+#if TARGET_IPHONE_SIMULATOR
+//iPhone Simulator
+#endif</code></pre>
+
+<p>#沙盒操作</p>
+<pre><code>/** 获取temp */
+#define kPathTemp NSTemporaryDirectory()
+/** 获取沙盒 Document */
+#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+/** 获取沙盒 Cache */
+#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+</code></pre>
+
+<p>#GCD常用</p>
+<pre><code>/** GCD - 一次性执行 */
+#define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);
+/** GCD - 在Main线程上运行 */
+#define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);
+/** GCD - 开启异步线程 */
+#define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);
+</code></pre>
+
+<p>#其他</p>
+<pre><code>
+#define LNWeakSelf(type)  __weak typeof(type) weaktype = type;
+#define LNStrongSelf(type)  __strong typeof(type) type = weaktype;
+/** 获取通知中心 */
+#define LNNotificationCenter [NSNotificationCenter defaultCenter]
+/** 自定义log */
+#ifdef DEBUG
+#define LNLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#else
+#define LNLog(...)
+#endif</code></pre>
+
+
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/05/21/Runtime妙用/" class="link f-fl">⟵iOS Runtime的妙用</a>
+    
+    
+      <a href="/2018/04/02/函数式、链式语法/" class="link f-fr">函数式、链式语法⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
