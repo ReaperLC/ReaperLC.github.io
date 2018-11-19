@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Weakself 与 Strongself的兄弟情 | ReaperLC的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Weakself 与 Strongself1、什么时候用weakself? 主要看block是否被self持有，并且有没有产生循环引用 ，倘若都没有就不需要用weakself 2、什么时候用strongself? 主要是防止block执行过程中 self提前被释放导致出现奇怪的逻辑甚至是crash 总结来说，解决循环引用问题主要有两个办法： 防止循环引用 第一个办法是「事前避免」，我们在会产生循环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weakself 与 Strongself的兄弟情">
+<meta property="og:url" content="http://yoursite.com/2018/10/16/iOS开发/WeakSelf与StrongSelf/index.html">
+<meta property="og:site_name" content="ReaperLC的博客">
+<meta property="og:description" content="Weakself 与 Strongself1、什么时候用weakself? 主要看block是否被self持有，并且有没有产生循环引用 ，倘若都没有就不需要用weakself 2、什么时候用strongself? 主要是防止block执行过程中 self提前被释放导致出现奇怪的逻辑甚至是crash 总结来说，解决循环引用问题主要有两个办法： 防止循环引用 第一个办法是「事前避免」，我们在会产生循环">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-16T07:23:11.195Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Weakself 与 Strongself的兄弟情">
+<meta name="twitter:description" content="Weakself 与 Strongself1、什么时候用weakself? 主要看block是否被self持有，并且有没有产生循环引用 ，倘若都没有就不需要用weakself 2、什么时候用strongself? 主要是防止block执行过程中 self提前被释放导致出现奇怪的逻辑甚至是crash 总结来说，解决循环引用问题主要有两个办法： 防止循环引用 第一个办法是「事前避免」，我们在会产生循环">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Weakself 与 Strongself的兄弟情</h2>
+  <p class="sub">Oct 16, 2018</p>
+  <article class="content">
+    <h1 id="Weakself-与-Strongself"><a href="#Weakself-与-Strongself" class="headerlink" title="Weakself 与 Strongself"></a>Weakself 与 Strongself</h1><p>1、什么时候用weakself?</p>
+<p>主要看block是否被self持有，并且有没有产生循环引用 ，倘若都没有就不需要用weakself</p>
+<p>2、什么时候用strongself?</p>
+<p>主要是防止block执行过程中 self提前被释放导致出现奇怪的逻辑甚至是crash</p>
+<p>总结来说，解决循环引用问题主要有两个办法：</p>
+<p>防止循环引用</p>
+<p>第一个办法是「事前避免」，我们在会产生循环引用的地方使用 weak 弱引用，以避免产生循环引用。<br>第二个办法是「事后补救」，我们明确知道会存在循环引用，但是我们在合理的位置主动断开环中的一个引用，使得对象得以回收。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/10/17/iOS开发/GCD线程/" class="link f-fl">⟵GCD的前世今生</a>
+    
+    
+      <a href="/2018/10/16/iOS开发/iOS中图片的自适应拉伸/" class="link f-fr">iOS中的图片自适应拉伸⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

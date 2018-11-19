@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>iOS动画-炫酷效果从此刻开始 | ReaperLC的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iOS动画##简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Anim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS动画-炫酷效果从此刻开始">
+<meta property="og:url" content="http://yoursite.com/2018/06/28/iOS开发/iOS动画/index.html">
+<meta property="og:site_name" content="ReaperLC的博客">
+<meta property="og:description" content="iOS动画##简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Anim">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542369566764&di=0a6b273f74b2c5fb5a217784c4c9d08f&imgtype=0&src=http%3A%2F%2Fstatic.open-open.com%2Flib%2FuploadImg%2F20170216%2F20170216103123_461.gif">
+<meta property="og:updated_time" content="2018-11-16T09:11:39.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS动画-炫酷效果从此刻开始">
+<meta name="twitter:description" content="iOS动画##简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Anim">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542369566764&di=0a6b273f74b2c5fb5a217784c4c9d08f&imgtype=0&src=http%3A%2F%2Fstatic.open-open.com%2Flib%2FuploadImg%2F20170216%2F20170216103123_461.gif">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Leocy-xmwl</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORY</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">iOS动画-炫酷效果从此刻开始</h2>
+  <p class="sub">Jun 28, 2018</p>
+  <article class="content">
+    <h1 id="iOS动画"><a href="#iOS动画" class="headerlink" title="iOS动画"></a>iOS动画</h1><p>##简介<br>IOS 动画主要是指Core Animation框架。官方使用文档地址为：<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html" target="_blank" rel="noopener">Core Animation Guide</a>。<br>Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Animation的动画效果。Core Animation将大部分实际的绘图任务交给了图形硬件来处理，图形硬件会加速图形渲染的速度。这种自动化的图形加速技术让动画拥有更高的帧率并且显示效果更加平滑，不会加重CPU的负担而影响程序的运行速度。</p>
+<p>那些酷炫的实现，其实进行步骤分解，你就会发现都是基础动画合理的搭配组合，对坐标尺寸、视图显示、形态变化一一进行了代码描述，就形成了你呈现在你眼前的动画效果。</p>
+<p>##结构<br><img src="https://camo.githubusercontent.com/9fe3e0f9f3a1a750292d80b899b395a5b20f85b0/687474703a2f2f696d672e6d792e6373646e2e6e65742f75706c6f6164732f3230313530372f32332f313433373631373536325f333139302e706e67" alt=""></p>
+<p>##常用属性<br>duration:动画持续时间<br>beginTime:动画开始时间<br>repeatCount:动画重复次数<br>autoreverses:执行的动画按照原动画返回执行<br>timingFunction:控制动画的显示节奏，系统主要提供了以下几种</p>
+<blockquote>
+<p>kCAMediaTimingFunctionLinear 线性动画<br>kCAMediaTimingFunctionEaseIn 先慢后快（慢进快出）<br>kCAMediaTimingFunctionEaseOut 先块后慢（快进慢出）<br>kCAMediaTimingFunctionEaseInEaseOut 先慢后快再慢<br>kCAMediaTimingFunctionDefault 默认，也属于中间比较快</p>
+</blockquote>
+<p>delegate ： 动画代理。能够检测动画的执行和结束。</p>
+<blockquote>
+<p>@interface NSObject (CAAnimationDelegate)</p>
+<ul>
+<li>(void)animationDidStart:(CAAnimation *)anim;</li>
+<li>(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;<br>@end</li>
+</ul>
+</blockquote>
+<p>path:关键帧动画中的执行路径<br>type:过渡动画的动画类型，系统提供了四种过渡动画。</p>
+<blockquote>
+<p>kCATransitionFade 渐变效果<br>kCATransitionMoveIn 进入覆盖效果<br>kCATransitionPush 推出效果<br>kCATransitionReveal 揭露离开效果 subtype : 过渡动画的动画方向<br>kCATransitionFromRight 从右侧进入<br>kCATransitionFromLeft 从左侧进入<br>kCATransitionFromTop 从顶部进入<br>kCATransitionFromBottom 从底部进入</p>
+</blockquote>
+<p>##动画的三种调用方式</p>
+<p>###使用block</p>
+<blockquote>
+<pre><code>[UIView animateWithDuration:1.0f animations:^{
+     self.animationView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50);
+} completion:^(BOOL finished) {
+
+}];
+</code></pre></blockquote>
+<p>###UIView [begin commit]</p>
+<blockquote>
+<pre><code>[UIView beginAnimations:nil context:nil];
+[UIView setAnimationDuration:1.0f];
+self.animationView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50);
+[UIView commitAnimations];
+</code></pre></blockquote>
+<p>###CABaseAnimation</p>
+<blockquote>
+<pre><code>CABasicAnimation *anima = [CABasicAnimation animationWithKeyPath:@&quot;position&quot;];
+anima.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, SCREEN_HEIGHT/2-100)];
+anima.toValue = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-75)];
+anima.duration = 2.0f;
+//fillMode=kCAFillModeForwards和removedOnComletion=NO
+anima.fillMode = kCAFillModeBackwards;
+anima.removedOnCompletion = YES;
+anima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+[self.animationView.layer addAnimation:anima forKey:@&quot;positionAnimation&quot;];
+</code></pre></blockquote>
+<p>##一、基础动画<br>重要属性</p>
+<blockquote>
+<p>fromValue：keyPath对应的初始值<br>toValue：keyPath对应的结束值</p>
+</blockquote>
+<p>基础动画主要提供了对于CALayer对象中的可变属性进行简单动画的操作。比如：位移(position)、透明度(opacity)、缩放(scale)、旋转(rotate)、背景色(backgroundColor)等等。<br>具体效果实例演示</p>
+<p>##二、关键帧动画(keyAnimation)<br>具体效果实例演示</p>
+<p>##三、动画组(animationGroup)<br>具体效果实例演示</p>
+<p>##三、转场动画 (transition)<br>iOS7开始，苹果就提供了自定义转场的API，模态推送present和dismiss、导航控制器push和pop、标签控制器的控制器切换都可以自定义转场，具体效果实例演示</p>
+<p>###1、转场协议<uiviewcontrolleranimatedtransitioning><br>转场动画的实现 遵从上面这个协议以及实现协议中的两个方法，如下：</uiviewcontrolleranimatedtransitioning></p>
+<blockquote>
+<p> //返回动画事件  </p>
+<ul>
+<li>(NSTimeInterval)transitionDuration:(nullable id <uiviewcontrollercontexttransitioning>)transitionContext;<br>//所有的过渡动画事务都在这个方法里面完成</uiviewcontrollercontexttransitioning></li>
+<li>(void)animateTransition:(id <uiviewcontrollercontexttransitioning>)transitionContext;</uiviewcontrollercontexttransitioning></li>
+</ul>
+</blockquote>
+<p>##四、动画扩展 </p>
+<p>###1、Lottie动画库</p>
+<p>####1.1、简介</p>
+<p>Easily add high-quality animation to any native app.<br>Lottie is an iOS, Android, and React Native library that renders After Effects animations in real time, allowing apps to use animations as easily as they use static images.</p>
+<p>简单的为任何原生APP添加高质量动画<br>Lottie是一个iOS，Android和React Native库，可以实时渲染After Effects动画，并且允许本地app像静态资源那样轻松地使用动画。<br><img src="https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example1.gif" alt=""><br><img src="https://raw.githubusercontent.com/airbnb/lottie-ios/master/_Gifs/Examples2.gif" alt=""></p>
+<p>####1.2、使用（以OC为例）</p>
+<p>###2、facebook开源动画库</p>
+<p>####2.1、开源地址 <a href="https://github.com/facebook/pop" target="_blank" rel="noopener">https://github.com/facebook/pop</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/07/05/iOS开发/iOS数据加密/" class="link f-fl">⟵iOS 数据加密</a>
+    
+    
+      <a href="/2018/06/28/iOS开发/AppDelegate瘦身之路/" class="link f-fr">AppDelegate的瘦身之路⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
