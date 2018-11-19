@@ -5,18 +5,18 @@
   
   <title>GCD的前世今生 | ReaperLC的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="GCD串行 (DISPATCH_QUEUE_SERIAL)并发 (DISPATCH_QUEUE_CONCURRENT) 四种组合方式： 同步执行 + 并发队列     没开启新线程，串行执行异步执行 + 并发队列     开启新线程，并发执行同步执行 + 串行队列     没开启新线程，串行执行异步执行 + 串行队列     开启一条新线程，串行执行 特殊情况： 同步执行 + 主队列   主线程调">
+  <meta name="description" content="GCD串行 (DISPATCH_QUEUE_SERIAL)并发 (DISPATCH_QUEUE_CONCURRENT) 四种组合方式： ##同步执行 + 并发队列      没开启新线程，串行执行 ##异步执行 + 并发队列      开启新线程，并发执行 ##同步执行 + 串行队列      没开启新线程，串行执行 ##异步执行 + 串行队列      开启一条新线程，串行执行 特殊情况： 同步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GCD的前世今生">
 <meta property="og:url" content="http://yoursite.com/2018/10/17/GCD线程/index.html">
 <meta property="og:site_name" content="ReaperLC的博客">
-<meta property="og:description" content="GCD串行 (DISPATCH_QUEUE_SERIAL)并发 (DISPATCH_QUEUE_CONCURRENT) 四种组合方式： 同步执行 + 并发队列     没开启新线程，串行执行异步执行 + 并发队列     开启新线程，并发执行同步执行 + 串行队列     没开启新线程，串行执行异步执行 + 串行队列     开启一条新线程，串行执行 特殊情况： 同步执行 + 主队列   主线程调">
+<meta property="og:description" content="GCD串行 (DISPATCH_QUEUE_SERIAL)并发 (DISPATCH_QUEUE_CONCURRENT) 四种组合方式： ##同步执行 + 并发队列      没开启新线程，串行执行 ##异步执行 + 并发队列      开启新线程，并发执行 ##同步执行 + 串行队列      没开启新线程，串行执行 ##异步执行 + 串行队列      开启一条新线程，串行执行 特殊情况： 同步">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542369980903&di=cd3cc92e5711f44cece603e199385033&imgtype=0&src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F10401961-fc9a9e91b39ecbb0.png">
-<meta property="og:updated_time" content="2018-11-16T09:21:19.692Z">
+<meta property="og:updated_time" content="2018-11-19T06:25:55.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GCD的前世今生">
-<meta name="twitter:description" content="GCD串行 (DISPATCH_QUEUE_SERIAL)并发 (DISPATCH_QUEUE_CONCURRENT) 四种组合方式： 同步执行 + 并发队列     没开启新线程，串行执行异步执行 + 并发队列     开启新线程，并发执行同步执行 + 串行队列     没开启新线程，串行执行异步执行 + 串行队列     开启一条新线程，串行执行 特殊情况： 同步执行 + 主队列   主线程调">
+<meta name="twitter:description" content="GCD串行 (DISPATCH_QUEUE_SERIAL)并发 (DISPATCH_QUEUE_CONCURRENT) 四种组合方式： ##同步执行 + 并发队列      没开启新线程，串行执行 ##异步执行 + 并发队列      开启新线程，并发执行 ##同步执行 + 串行队列      没开启新线程，串行执行 ##异步执行 + 串行队列      开启一条新线程，串行执行 特殊情况： 同步">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542369980903&di=cd3cc92e5711f44cece603e199385033&imgtype=0&src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F10401961-fc9a9e91b39ecbb0.png">
   
   <link rel="stylesheet" href="/css/index.css">
@@ -84,7 +84,14 @@
   <article class="content">
     <h1 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h1><p>串行 (DISPATCH_QUEUE_SERIAL)<br>并发 (DISPATCH_QUEUE_CONCURRENT)</p>
 <p>四种组合方式：</p>
-<p>同步执行 + 并发队列     没开启新线程，串行执行<br>异步执行 + 并发队列     开启新线程，并发执行<br>同步执行 + 串行队列     没开启新线程，串行执行<br>异步执行 + 串行队列     开启一条新线程，串行执行</p>
+<p>##同步执行 + 并发队列     </p>
+<p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p>
+<p>##异步执行 + 并发队列     </p>
+<p>开启新线程，并发执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p>
+<p>##同步执行 + 串行队列     </p>
+<p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5%20+%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p>
+<p>##异步执行 + 串行队列    </p>
+<p> 开启一条新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5%2B%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p>
 <p>特殊情况：</p>
 <p>同步执行 + 主队列   主线程调用：死锁卡住不执行 其他线程调用：没有开启新线程，串行执行任务<br>异步执行 + 主队列   没开启新线程，串行执行</p>
 <p>栅栏  dispatch_barrier_async<br>延时  dispatch_after<br>一次  dispatch_once  （单例）<br>对列组dispatch_group<br>监听  dispatch_group_notify<br>阻塞线程 dispatch_group_wait</p>
