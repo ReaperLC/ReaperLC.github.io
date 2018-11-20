@@ -19,6 +19,8 @@
 <meta name="twitter:description" content="GCD串行 (DISPATCH_QUEUE_SERIAL)并发 (DISPATCH_QUEUE_CONCURRENT) 四种组合方式： ##同步执行 + 并发队列      没开启新线程，串行执行 ##异步执行 + 并发队列      开启新线程，并发执行 ##同步执行 + 串行队列      没开启新线程，串行执行 ##异步执行 + 串行队列      开启一条新线程，串行执行 特殊情况： 同步">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542369980903&di=cd3cc92e5711f44cece603e199385033&imgtype=0&src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F10401961-fc9a9e91b39ecbb0.png">
   
+    <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3317385648,2776165661&fm=11&gp=0.jpg">
+  
   <link rel="stylesheet" href="/css/index.css">
 </head>
 </html>
@@ -31,27 +33,12 @@
   <div id="container">
     <nav id="nav">
   <header class="header">
-    <a href="/" class="title">Leocy-xmwl</a>
+    <a href="/" class="title">Leocy-xmwl</a><br>
+    <!-- <a class="subtitle"></a> -->
   </header>
   <div class="ctnWrap">
     <div class="icons">
       
-        
-          
-            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
-          
-        
-          
-            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
-          
-        
-          
-            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
-          
-        
-          
-            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
-          
         
           
             <a href="https://github.com/ReaperLC" target="_blank" class="nav-icn iconfont icon-github"></a>
@@ -78,6 +65,7 @@
     </div>
   </div>
 </nav>
+
     <div id="main"><section class="article">
   <h2 class="title">GCD的前世今生</h2>
   <p class="sub">Oct 17, 2018</p>
@@ -112,22 +100,6 @@
     <footer id="footer" class="f-cf">
   1358955863@qq.com
   
-    
-      
-        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
-      
-    
-      
-        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
-      
-    
-      
-        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
-      
-    
-      
-        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
-      
     
       
         · <a href="https://github.com/ReaperLC" target="_blank" class="nav-icn">GitHub</a>
