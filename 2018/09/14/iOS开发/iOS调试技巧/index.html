@@ -5,18 +5,18 @@
   
   <title>iOS调试技巧大全 | ReaperLC的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS调试技巧 ##NSLog //保证 ifdef 中的宏定义只会在 OC 代码中被引用; //否则一旦引入 C 或者 C++ 代码或者框架就会出错! #ifdef __OBJC__  //只在开发中用: #ifdef DEBUG  //定义 NSLog(__VA_AGRS__): //#define NSLog(...)  NSLog(__VA_ARGS__) #define NSLog(fm">
+  <meta name="description" content="iOS调试技巧 NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用; //否则一旦引入 C 或者 C++ 代码或者框架就会出错! #ifdef __OBJC__  //只在开发中用: #ifdef DEBUG  //定义 NSLog(__VA_AGRS__): //#define NSLog(...)  NSLog(__VA_ARGS__) #define NSLog(fmt,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS调试技巧大全">
 <meta property="og:url" content="http://yoursite.com/2018/09/14/iOS开发/iOS调试技巧/index.html">
 <meta property="og:site_name" content="ReaperLC的博客">
-<meta property="og:description" content="iOS调试技巧 ##NSLog //保证 ifdef 中的宏定义只会在 OC 代码中被引用; //否则一旦引入 C 或者 C++ 代码或者框架就会出错! #ifdef __OBJC__  //只在开发中用: #ifdef DEBUG  //定义 NSLog(__VA_AGRS__): //#define NSLog(...)  NSLog(__VA_ARGS__) #define NSLog(fm">
+<meta property="og:description" content="iOS调试技巧 NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用; //否则一旦引入 C 或者 C++ 代码或者框架就会出错! #ifdef __OBJC__  //只在开发中用: #ifdef DEBUG  //定义 NSLog(__VA_AGRS__): //#define NSLog(...)  NSLog(__VA_ARGS__) #define NSLog(fmt,">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://images0.cnblogs.com/blog2015/680363/201504/130922309011914.jpg">
-<meta property="og:updated_time" content="2018-11-16T09:28:59.985Z">
+<meta property="og:updated_time" content="2018-11-23T03:54:56.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS调试技巧大全">
-<meta name="twitter:description" content="iOS调试技巧 ##NSLog //保证 ifdef 中的宏定义只会在 OC 代码中被引用; //否则一旦引入 C 或者 C++ 代码或者框架就会出错! #ifdef __OBJC__  //只在开发中用: #ifdef DEBUG  //定义 NSLog(__VA_AGRS__): //#define NSLog(...)  NSLog(__VA_ARGS__) #define NSLog(fm">
+<meta name="twitter:description" content="iOS调试技巧 NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用; //否则一旦引入 C 或者 C++ 代码或者框架就会出错! #ifdef __OBJC__  //只在开发中用: #ifdef DEBUG  //定义 NSLog(__VA_AGRS__): //#define NSLog(...)  NSLog(__VA_ARGS__) #define NSLog(fmt,">
 <meta name="twitter:image" content="https://images0.cnblogs.com/blog2015/680363/201504/130922309011914.jpg">
   
     <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3317385648,2776165661&fm=11&gp=0.jpg">
@@ -71,8 +71,7 @@
   <p class="sub">Sep 14, 2018</p>
   <article class="content">
     <h1 id="iOS调试技巧"><a href="#iOS调试技巧" class="headerlink" title="iOS调试技巧"></a>iOS调试技巧</h1><p><img src="https://images-cdn.shimo.im/Z480axvu1FgK6Voq/%E4%B8%8B%E8%BD%BD.png!thumbnail" alt=""></p>
-<p>##NSLog</p>
-<pre><code>//保证 ifdef 中的宏定义只会在 OC 代码中被引用;
+<h2 id="NSLog"><a href="#NSLog" class="headerlink" title="NSLog"></a>NSLog</h2><pre><code>//保证 ifdef 中的宏定义只会在 OC 代码中被引用;
 //否则一旦引入 C 或者 C++ 代码或者框架就会出错!
 #ifdef __OBJC__
 
@@ -98,13 +97,11 @@
 
 <p>控制台打印结果如下：</p>
 <p><img src="https://images-cdn.shimo.im/Uf0XLUvibq4sU5vD/%E6%89%93%E5%8D%B0%E6%95%B0%E6%8D%AE.png!thumbnail" alt=""></p>
-<p>##断点调试</p>
-<p>###普通断点<br>1、快捷键添加方式 光标移动到需要断点的代码处： command + \<br>2、代码行旁边点击添加</p>
+<h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><h3 id="普通断点"><a href="#普通断点" class="headerlink" title="普通断点"></a>普通断点</h3><p>1、快捷键添加方式 光标移动到需要断点的代码处： command + \<br>2、代码行旁边点击添加</p>
 <p><img src="https://images-cdn.shimo.im/PiYSJXQH0dkvytqj/bug.png!thumbnail" alt=""></p>
 <p>再点击取消断点</p>
 <p><img src="https://images-cdn.shimo.im/FgAiNXkHnuQs8845/bug1.png!thumbnail" alt=""></p>
-<p>###条件断点</p>
-<p>以上的断点只是最普通的，我们还能对断点的属性进行配置，设置条件，使断点更加智能化，右键断点进入编辑对话框：</p>
+<h3 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h3><p>以上的断点只是最普通的，我们还能对断点的属性进行配置，设置条件，使断点更加智能化，右键断点进入编辑对话框：</p>
 <p>1、右键断点，选择 Edit Breakpoint…</p>
 <p><img src="https://images-cdn.shimo.im/xRZQFRR8WZg9yXBB/tianjia.png!thumbnail" alt=""></p>
 <p>2、添加条件语句，此处OC怎么判断，条件语句就怎么写</p>
@@ -119,13 +116,11 @@
 <p> 如上图 ，4次之后才会单步执行后面的遍历，前4次是不会终止程序的。</p>
 <p>4、查看函数调用次数</p>
 <p><img src="https://images-cdn.shimo.im/mhoOaSpVmusxQR0F/%E6%AC%A1%E6%95%B0.png!thumbnail" alt=""></p>
-<p>##异常断点</p>
-<p>断点的功能不限于上面所述,实际开发过程中，经常会遇见崩溃直接走到main函数，此时异常断点就派上用场了，点击 + 号选择 Exception Breakpoint…</p>
+<h2 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h2><p>断点的功能不限于上面所述,实际开发过程中，经常会遇见崩溃直接走到main函数，此时异常断点就派上用场了，点击 + 号选择 Exception Breakpoint…</p>
 <p><img src="https://images-cdn.shimo.im/VMJXnPvIiispSceB/break.png!thumbnail" alt=""></p>
 <p>如下即可，编辑断点，也还有相关详细设置，此处不做赘述</p>
 <p><img src="https://images-cdn.shimo.im/3R6fTXmtxwIwsUck/yichang.png!thumbnail" alt=""></p>
-<p>##符号断点</p>
-<p>符号断点创建同于异常断点，只不过点击 +  选择 Symbolic Breakpoint…即可<br>一般符号断点可以在你指定的[类名 方法名]时中断执行。比如指定</p>
+<h2 id="符号断点"><a href="#符号断点" class="headerlink" title="符号断点"></a>符号断点</h2><p>符号断点创建同于异常断点，只不过点击 +  选择 Symbolic Breakpoint…即可<br>一般符号断点可以在你指定的[类名 方法名]时中断执行。比如指定</p>
 <pre><code>[ViewController viewDidLoad]</code></pre>
 
 <p><img src="https://images-cdn.shimo.im/dIYL0DLRumQfbB5x/fuhao.png!thumbnail" alt=""></p>
@@ -134,11 +129,9 @@
 <p><img src="https://images-cdn.shimo.im/9ypANLnnpxon2JfL/dosomething.png!thumbnail" alt=""></p>
 <p>那么程序会执行到doSomething这个方法时断点调试，如下：</p>
 <p><img src="https://images-cdn.shimo.im/491kCRts9sUei5wX/do.png!thumbnail" alt=""></p>
-<p>##Console(LLDB命令)</p>
-<p> LLDB 绑定在 Xcode 内部，存在于主窗口底部的控制台中。<a href="http://lldb.llvm.org/lldb-gdb.html" target="_blank" rel="noopener">http://lldb.llvm.org/lldb-gdb.html</a> 这里是一份lldb命令清单，列出了lldb可用的命令。</p>
+<h2 id="Console-LLDB命令"><a href="#Console-LLDB命令" class="headerlink" title="Console(LLDB命令)"></a>Console(LLDB命令)</h2><p> LLDB 绑定在 Xcode 内部，存在于主窗口底部的控制台中。<a href="http://lldb.llvm.org/lldb-gdb.html" target="_blank" rel="noopener">http://lldb.llvm.org/lldb-gdb.html</a> 这里是一份lldb命令清单，列出了lldb可用的命令。</p>
 <p>常用的help命令，它会帮你罗列处命令列表供你选择</p>
-<p>###<pre><code>help</code></pre></p>
-<p> 罗列出的所有方法中呢，就挑最常用的几种，比如：po/p/expression等，下面详细描述下：</p>
+<h3 id="help"><a href="#help" class="headerlink" title="help"></a><pre><code>help</code></pre></h3><p> 罗列出的所有方法中呢，就挑最常用的几种，比如：po/p/expression等，下面详细描述下：</p>
 <p> <img src="https://images-cdn.shimo.im/wCTIyZBzkkUern0g/hellp.png!thumbnail" alt="">  </p>
 <h3 id="print-obj"><a href="#print-obj" class="headerlink" title="print obj"></a><pre><code>print obj</code></pre></h3><p>   使用中用 p 代替即可，很明显这个是个打印命令</p>
 <p>   <img src="https://images-cdn.shimo.im/D09mVI0vlbY4ZRKL/p.png!thumbnail" alt=""></p>
@@ -156,20 +149,15 @@
 
 <p>   <img src="https://images-cdn.shimo.im/IOptiQU3BdMeFoOx/call.png!thumbnail" alt=""></p>
 <p>   可见虽然函数还未运行，但是call命令却是可以提前调用的。</p>
-<p>##NSZoombieEnabled</p>
-<p>僵尸对象调试开启：</p>
+<h2 id="NSZoombieEnabled"><a href="#NSZoombieEnabled" class="headerlink" title="NSZoombieEnabled"></a>NSZoombieEnabled</h2><p>僵尸对象调试开启：</p>
 <p><img src="https://images-cdn.shimo.im/znk7s1gFIPIVBoH1/%E5%83%B5%E5%B0%B8%E5%AF%B9%E8%B1%A1.png!thumbnail" alt=""></p>
-<p>##视图调试</p>
-<p>###View Debug（Xcode6往后）</p>
-<p>Xcode6以后，苹果就已经推出了Debug View Hierarchy,也就是 视图层级调试， Xcode6之前还得去找第三方软件去查看视图层级</p>
+<h2 id="视图调试"><a href="#视图调试" class="headerlink" title="视图调试"></a>视图调试</h2><h3 id="View-Debug（Xcode6往后）"><a href="#View-Debug（Xcode6往后）" class="headerlink" title="View Debug（Xcode6往后）"></a>View Debug（Xcode6往后）</h3><p>Xcode6以后，苹果就已经推出了Debug View Hierarchy,也就是 视图层级调试， Xcode6之前还得去找第三方软件去查看视图层级</p>
 <p><img src="https://images-cdn.shimo.im/77IIQB48k90E1yEt/viewdebug.png!thumbnail" alt=""></p>
 <h3 id="po-打印视图层级"><a href="#po-打印视图层级" class="headerlink" title="po 打印视图层级"></a>po 打印视图层级</h3><h3 id="po-view-rescursiveDescription"><a href="#po-view-rescursiveDescription" class="headerlink" title="po [view rescursiveDescription]"></a><pre><code>po [view rescursiveDescription]</code></pre></h3><p><img src="https://images-cdn.shimo.im/toZVqt6hPog9YYxs/po_view.png!thumbnail" alt=""></p>
 <p>由上打印结果也能看出当前视图层级，只是没有View Debug来的直观</p>
 <h4 id="po-UIApplication-sharedApplication-keyWindow-recursiveDescription"><a href="#po-UIApplication-sharedApplication-keyWindow-recursiveDescription" class="headerlink" title="po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]"></a><pre><code>po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]</code></pre></h4><p>上面这段无需打断点 ，只要暂停，然后就可以输出当前窗口上的层级树。</p>
-<p>###Reveal</p>
-<p>第三方 视图层级查看软件， </p>
-<p>##Analyze静态分析</p>
-<p>静态分析工具 Product-&gt;Analyze(快捷键command+shift+B)可以找出代码潜在错误,如内存泄露,未使用函数和变量,循环引用等，但是友情提醒一句： <strong>Analyze静态分析不可全信，但也不能不信。</strong></p>
+<h3 id="Reveal"><a href="#Reveal" class="headerlink" title="Reveal"></a>Reveal</h3><p>第三方 视图层级查看软件， </p>
+<h2 id="Analyze静态分析"><a href="#Analyze静态分析" class="headerlink" title="Analyze静态分析"></a>Analyze静态分析</h2><p>静态分析工具 Product-&gt;Analyze(快捷键command+shift+B)可以找出代码潜在错误,如内存泄露,未使用函数和变量,循环引用等，但是友情提醒一句： <strong>Analyze静态分析不可全信，但也不能不信。</strong></p>
 <p>Analyze主要的作用有：</p>
 <ul>
 <li>本地化问题 Localizability Issue (Apple)</li>
@@ -181,20 +169,17 @@
 <p><img src="https://images-cdn.shimo.im/ZQXabstnf1UWhlL8/analyze.png!thumbnail" alt=""></p>
 <p>通过镜头分析，最后的结果会分门别类的列好如下图：</p>
 <p><img src="https://images-cdn.shimo.im/gkZQpTMgozoBK6eG/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90.png!thumbnail" alt=""></p>
-<p>###本地化问题<br>诸如此类，提示 User-facing text should use localized string macro…,  意思是面向用户的文本应该使用本地化的字符串宏.</p>
+<h3 id="本地化问题"><a href="#本地化问题" class="headerlink" title="本地化问题"></a>本地化问题</h3><p>诸如此类，提示 User-facing text should use localized string macro…,  意思是面向用户的文本应该使用本地化的字符串宏.</p>
 <p><img src="https://images-cdn.shimo.im/I5aWSPm9wjMSDudk/%E6%9C%AC%E5%9C%B0%E5%8C%96.png!thumbnail" alt=""></p>
 <p>这种情况一般是因为代码中配置了本地化,面向用户的应该用字符串宏,而我们直接赋值为汉字.如下：</p>
 <p><img src="https://images-cdn.shimo.im/yStYvFBnV3UETWDV/local.png!thumbnail" alt=""></p>
 <p>所以解决方法：<br>1、直接将此处配置关闭，设置为NO<br>2、将项目中直接赋值的文本提出来，本地化</p>
-<p>###声明错误检查</p>
-<p>无效数据如：Unused、Never read…. ，大致是那一类创建了但从未使用的变量</p>
+<h3 id="声明错误检查"><a href="#声明错误检查" class="headerlink" title="声明错误检查"></a>声明错误检查</h3><p>无效数据如：Unused、Never read…. ，大致是那一类创建了但从未使用的变量</p>
 <p><img src="https://images-cdn.shimo.im/zJDdDSVF0L0HAwm0/unuser.png!thumbnail" alt=""></p>
 <p>一般情况删除这些变量即可</p>
-<p>###内存泄露检查</p>
-<p>1、一般来说都是由于使用的CoreFoundation后没有release造成的。 在RAC下Foundation框架下的不需要进行release，由于Core Foundation不在ARC管理范围内,所以需要主动release。</p>
+<h3 id="内存泄露检查"><a href="#内存泄露检查" class="headerlink" title="内存泄露检查"></a>内存泄露检查</h3><p>1、一般来说都是由于使用的CoreFoundation后没有release造成的。 在RAC下Foundation框架下的不需要进行release，由于Core Foundation不在ARC管理范围内,所以需要主动release。</p>
 <p>2、另外一些就是需要返回非空，却return nil;<br>3、空引用</p>
-<p>##instruments动态分析</p>
-
+<h2 id="instruments动态分析"><a href="#instruments动态分析" class="headerlink" title="instruments动态分析"></a>instruments动态分析</h2>
   </article>
   <footer class="f-cf">
     
