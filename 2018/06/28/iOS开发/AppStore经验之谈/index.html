@@ -13,7 +13,7 @@
 <meta property="og:description" content="前言作为一个iOS开发来说，头疼的不是提出的需求有多么难实现，也不是出现的bug有多么难解决，而是app开发完成，测试完美ending,你以为这样就万事大吉了？错❌，最后一个可大可小的 坑，也许会让你一两个月都爬不出来，那就是 AppStore上架审核。 相对于安卓应用，iOS版本的发布，乔布斯真的没给你太多选择，果断还是有钱人说了算，那么只能听他安排，乖乖的去App Store 填写一大串基本信">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542946116683&di=accd0c0e5799c6ac0e3c7e0aa002151b&imgtype=0&src=http%3A%2F%2Fww1.sinaimg.cn%2Fcrop.0.0.889.499.1000.562%2Fe9475adegw1f8myfsfftqj20p00dwaa7.jpg">
-<meta property="og:updated_time" content="2018-11-26T03:03:49.685Z">
+<meta property="og:updated_time" content="2018-11-26T09:22:28.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AppStore审核之路-登天之路">
 <meta name="twitter:description" content="前言作为一个iOS开发来说，头疼的不是提出的需求有多么难实现，也不是出现的bug有多么难解决，而是app开发完成，测试完美ending,你以为这样就万事大吉了？错❌，最后一个可大可小的 坑，也许会让你一两个月都爬不出来，那就是 AppStore上架审核。 相对于安卓应用，iOS版本的发布，乔布斯真的没给你太多选择，果断还是有钱人说了算，那么只能听他安排，乖乖的去App Store 填写一大串基本信">
@@ -86,7 +86,8 @@ Next Steps
 
 Please remove the update feature from your app. To distribute a new version of your app, upload the new app binary version into the same iTunes Connect record you created for the app’s previous version. Updated versions keep the same Apple ID, iTunes Connect ID (SKU), and bundle ID as the original version, and are available free to customers who purchased a previous version.
 </code></pre><blockquote>
-<p><strong>解析：从2015年3月起，所有包含检查更新功能的 App 都会被拒绝上架。所以应用中不允许出现检查更新的字样，而且设计版本号的地方也不能有点击效果，否则苹果会误以为这是更新版本。</strong></p>
+<font color="#2E8B57"> <strong>解析：从2015年3月起，所有包含检查更新功能的 App 都会被拒绝上架。所以应用中不允许出现检查更新的字样，而且设计版本号的地方也不能有点击效果，否则苹果会误以为这是更新版本。</strong></font>
+
 </blockquote>
 <h4 id="2、iPhone-应用在-iPad-上不能正常显示"><a href="#2、iPhone-应用在-iPad-上不能正常显示" class="headerlink" title="2、iPhone 应用在 iPad 上不能正常显示"></a>2、iPhone 应用在 iPad 上不能正常显示</h4><pre><code>We noticed that your app did not run at iPhone resolution when reviewed on iPad running iOS 9.1, which is a violation of the App Store Review Guidelines. We’ve attached screenshot(s) for your reference.
 Specifically, the buttons at the bottom of the app are inaccessible when running on iPad.
@@ -94,7 +95,7 @@ Next Steps
 
 Please revise your app to ensure it runs at iPhone resolution on iPad.
 </code></pre><blockquote>
-<p><strong>解析：iPhone程序必须不经修改就能以iPhone分辨率和2倍iPhone 3GS的分辨率在iPad上运行。即使你的App 只为 iPhone 用户提供，在 iPad 上也必须能够正常显示，否则审核会被拒绝。开发人员做好适配。</strong></p>
+<font color="#2E8B57"><strong>解析：iPhone程序必须不经修改就能以iPhone分辨率和2倍iPhone 3GS的分辨率在iPad上运行。即使你的App 只为 iPhone 用户提供，在 iPad 上也必须能够正常显示，否则审核会被拒绝。开发人员做好适配。</strong></font>
 </blockquote>
 <h4 id="3、使用第三方登录问题"><a href="#3、使用第三方登录问题" class="headerlink" title="3、使用第三方登录问题"></a>3、使用第三方登录问题</h4><pre><code>Additionally, we found that your app requires the installation of another app before it can be used, which is not in compliance with the App Store Review Guidelines. Apps should be able to run on launch, without requiring additional applications to be installed.
 
@@ -102,7 +103,7 @@ Please revise your app to ensure it runs at iPhone resolution on iPad.
 
     Please revise your app so that a user can use it upon launch. If your app requires authentication before use, please use a method that can authenticate users from within your app.
 </code></pre><blockquote>
-<p><strong>解析：接入第三方登录要检测是否安装了第三方客户端，未安装时不要显示对应按钮。2015年9月之前，通常可以采用判断未安装则隐藏登录按钮的方式。但目前隐藏按钮的方式也可能被审核拒绝，QQ 和微博提供了 web 登录的方式，如果判断未安装，需要允许用户使用 webview 的登录方式。苹果在条款中有声明不允许 iOS 应用的正常使用需要依赖另外一个 App。</strong></p>
+<font color="#2E8B57"><strong>解析：接入第三方登录要检测是否安装了第三方客户端，未安装时不要显示对应按钮。2015年9月之前，通常可以采用判断未安装则隐藏登录按钮的方式。但目前隐藏按钮的方式也可能被审核拒绝，QQ 和微博提供了 web 登录的方式，如果判断未安装，需要允许用户使用 webview 的登录方式。苹果在条款中有声明不允许 iOS 应用的正常使用需要依赖另外一个 App。</strong></font>
 </blockquote>
 <p><strong><em>以上这三点是开发人员开发过程中需要注意，并且可以主动去避免的。</em></strong></p>
 <h4 id="4、Guideline-2-1-Information-Needed"><a href="#4、Guideline-2-1-Information-Needed" class="headerlink" title="4、Guideline 2.1 - Information Needed"></a>4、Guideline 2.1 - Information Needed</h4><pre><code>We have started the review of your app, but we were unable to successfully register for an in-app account. In order for us to review your app, please provide a demo account so that we may fully assess your app&apos;s features.
@@ -124,7 +125,7 @@ To provide demo account information:
 
 If your iTunes Connect status shows as Metadata Rejected, we do not require a new binary to correct this issue. Please reply to this message in Resolution Center to confirm the availability of a valid demo account, and we will continue with the review.
 </code></pre><blockquote>
-<p><strong>解析：根据描述，是提供的app登录帐号，苹果审核时输入并不能成功登录导致。所以这种情况<br>     第一，要确保服务器状态稳定，保证苹果审核期间接口都能正常请求<br>     第二，确保提供的帐号的确能够登录，并且后台数据库需要长期保留该帐号信息，勿删。</strong></p>
+<font color="#2E8B57"><strong>解析：根据描述，是提供的app登录帐号，苹果审核时输入并不能成功登录导致。所以这种情况<br>     第一，要确保服务器状态稳定，保证苹果审核期间接口都能正常请求<br>     第二，确保提供的帐号的确能够登录，并且后台数据库需要长期保留该帐号信息，勿删。</strong></font>
 </blockquote>
 <h4 id="5、Guideline-2-3-3-Performance-Accurate-Metadata"><a href="#5、Guideline-2-3-3-Performance-Accurate-Metadata" class="headerlink" title="5、Guideline 2.3.3 - Performance - Accurate Metadata"></a>5、Guideline 2.3.3 - Performance - Accurate Metadata</h4><pre><code>We noticed that your screenshots do not sufficiently reflect your app in use.
 
@@ -144,7 +145,7 @@ Since your iTunes Connect status is Metadata Rejected, we do NOT require a new b
 
 NOTE: Please be sure to make any metadata changes to all app localizations by selecting each specific localization and making appropriate changes.
 </code></pre><blockquote>
-<p><strong>解析：简单点说就是自己的应用截图不能反应自己App的主要功能，然后重新换了截图，能展示主要功能的截图即可。</strong></p>
+<font color="#2E8B57"><strong>解析：简单点说就是自己的应用截图不能反应自己App的主要功能，然后重新换了截图，能展示主要功能的截图即可。</strong></font>
 </blockquote>
 <h4 id="6、Guideline-2-1-Performance-App-Completeness"><a href="#6、Guideline-2-1-Performance-App-Completeness" class="headerlink" title="6、Guideline 2.1 - Performance - App Completeness"></a>6、Guideline 2.1 - Performance - App Completeness</h4><pre><code>We discovered one or more bugs in your app when reviewed on iPad running iOS 11.4.1 on Wi-Fi connected to an IPv6 network.
 
@@ -166,7 +167,7 @@ For a networking overview, please review About Networking. For a more specific o
 
 Please see attached screenshot for details.
 </code></pre><blockquote>
-<p><strong>解析：ipv6的问题，具体参考以下地址 <a href="https://shimo.im/docs/r4WRJroUsdMJHPoa/" target="_blank" rel="noopener">https://shimo.im/docs/r4WRJroUsdMJHPoa/</a> 《iOS上架iPV6被拒问题》，可复制链接后用石墨文档 App 打开</strong>  </p>
+<font color="#2E8B57"><strong>解析：ipv6的问题，具体参考以下地址 <a href="https://shimo.im/docs/r4WRJroUsdMJHPoa/" target="_blank" rel="noopener">https://shimo.im/docs/r4WRJroUsdMJHPoa/</a> 《iOS上架iPV6被拒问题》，可复制链接后用石墨文档 App 打开</strong></font>  
 </blockquote>
 <h4 id="7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage"><a href="#7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage" class="headerlink" title="7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage"></a>7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage</h4><pre><code>We noticed that your app requests the user’s consent to access their camera but does not clarify the use of this feature in the permission modal alert.
 
@@ -185,7 +186,7 @@ Learn more about Protecting the User’s Privacy.
 Please see attached screenshots for details.
 </code></pre><p>一般苹果会配备以下类似截图<br>    <img src="https://uploader.shimo.im/f/KH6EXA2dCQkfleuI.png!thumbnail" alt=""></p>
 <blockquote>
-<p><strong>解析：自从iOS10之后加入了各种权限问题，比如相机、相册、网络、定位等等权限，应用中使用这些权限的过程中必须配备详细描述，使用这项权限干什么，比如请求使用您的定位权限，便于为您提供周边景区服务。所以描述完整很重要。</strong></p>
+<font color="#2E8B57"><strong>解析：自从iOS10之后加入了各种权限问题，比如相机、相册、网络、定位等等权限，应用中使用这些权限的过程中必须配备详细描述，使用这项权限干什么，比如请求使用您的定位权限，便于为您提供周边景区服务。所以描述完整很重要。</strong></font>
 </blockquote>
 <h4 id="8、Guideline-5-2-1-Legal-Intellectual-Property"><a href="#8、Guideline-5-2-1-Legal-Intellectual-Property" class="headerlink" title="8、Guideline 5.2.1 - Legal - Intellectual Property"></a>8、Guideline 5.2.1 - Legal - Intellectual Property</h4><pre><code>The seller and company names associated with your app do not reflect the name “西安市人民政府” in the app or its metadata, as required by Guideline 5.2.1 of the App Store Review Guidelines.
 
@@ -195,14 +196,14 @@ Your app must be published under a seller name and company name that reflects th
 
 Once created, you cannot change your seller name or company name in iTunes Connect. For assistance with changing your company name or seller name, you will need to contact iTunes Connect through the Contact Us page. Select Getting Started from the first dropdown menu, then select General iTunes Connect Inquiry to contact the appropriate iTunes Connect team.
 </code></pre><blockquote>
-<p><strong>解析：涉及到一个资质问题，大致就是说该帐号并不能代表某机构或者某组织去发布销售该应用，<br>       一般情况都是其他项目想用我们公司帐号上架，出现这种问题，也就是说我们公司暂时无法代表政<br>       府去发布某政务服务应用。一般解决方案去除应用中明显的字眼：比如xxx市人民政务，xxx市政<br>       务服务中心，或者直接客户自己提供开发者帐号，不用我们公司帐号上架</strong></p>
+<font color="#2E8B57"><strong>解析：涉及到一个资质问题，大致就是说该帐号并不能代表某机构或者某组织去发布销售该应用，<br>       一般情况都是其他项目想用我们公司帐号上架，出现这种问题，也就是说我们公司暂时无法代表政<br>       府去发布某政务服务应用。一般解决方案去除应用中明显的字眼：比如xxx市人民政务，xxx市政<br>       务服务中心，或者直接客户自己提供开发者帐号，不用我们公司帐号上架</strong></font>
 </blockquote>
 <h4 id="9、应用出现-beta版、测试版字样"><a href="#9、应用出现-beta版、测试版字样" class="headerlink" title="9、应用出现 beta版、测试版字样"></a>9、应用出现 beta版、测试版字样</h4><pre><code>Your app appears to be a pre-release, test, or trial version with a limited feature set. Apps that are created for demonstration or trial purposes are not appropriate for the App Store and do not comply with the App Store Review Guidelines.
 To ensure compliance with the App Store Review Guidelines, it would be appropriate to revise your app to complete, remove, or fully configure any partially implemented feature(s).
 
 If you would like to conduct beta trial for your app, you may wish to review the TestFlight Beta Testing Guide.
 </code></pre><blockquote>
-<p><strong>解析：不要过度谦虚地在启动画面或者应用名称上加上”beta”字样，苹果不允许测试版产品上架。也就是整个应用无论从启动到细枝末节的某个页面上都不要出现测试、beta字样，一经苹果审核到，基本都是被打回。</strong></p>
+<font color="#2E8B57"><strong>解析：不要过度谦虚地在启动画面或者应用名称上加上”beta”字样，苹果不允许测试版产品上架。也就是整个应用无论从启动到细枝末节的某个页面上都不要出现测试、beta字样，一经苹果审核到，基本都是被打回。</strong></font>
 </blockquote>
 
   </article>
