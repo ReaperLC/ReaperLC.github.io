@@ -5,17 +5,17 @@
   
   <title>iOS音视频开发 | ReaperLC的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Audio:1、iOS 框架MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。2、第三方库FFmpeg 、 FAAC">
+  <meta name="description" content="Audio1、iOS 框架MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。 2、第三方库FFmpeg 、 FAAC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS音视频开发">
 <meta property="og:url" content="http://yoursite.com/2018/08/06/iOS开发/音视频/index.html">
 <meta property="og:site_name" content="ReaperLC的博客">
-<meta property="og:description" content="Audio:1、iOS 框架MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。2、第三方库FFmpeg 、 FAAC">
+<meta property="og:description" content="Audio1、iOS 框架MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。 2、第三方库FFmpeg 、 FAAC">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-16T07:19:08.035Z">
+<meta property="og:updated_time" content="2018-11-27T07:33:40.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS音视频开发">
-<meta name="twitter:description" content="Audio:1、iOS 框架MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。2、第三方库FFmpeg 、 FAAC">
+<meta name="twitter:description" content="Audio1、iOS 框架MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。 2、第三方库FFmpeg 、 FAAC">
   
     <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3317385648,2776165661&fm=11&gp=0.jpg">
   
@@ -68,9 +68,11 @@
   <h2 class="title">iOS音视频开发</h2>
   <p class="sub">Aug 6, 2018</p>
   <article class="content">
-    <p>Audio:<br>1、iOS 框架<br>MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。<br>2、第三方库<br>FFmpeg 、 FAAC 、 FAAD2。</p>
+    <h1 id="Audio"><a href="#Audio" class="headerlink" title="Audio"></a>Audio</h1><h4 id="1、iOS-框架"><a href="#1、iOS-框架" class="headerlink" title="1、iOS 框架"></a>1、iOS 框架</h4><p>MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。</p>
+<h4 id="2、第三方库"><a href="#2、第三方库" class="headerlink" title="2、第三方库"></a>2、第三方库</h4><p>FFmpeg 、 FAAC 、 FAAD2。</p>
 <p>使用 MediaPlayer 框架的 MPMusicPlayerController 播放音频文件。<br>使用 AudioToolbox 框架的 System Sound Services 播放音频文件、 Audio Queue Services 录制和播放音频数据、 Audio Converter Services 进行音频转码(格式、 bit-depth 和采样率)、 Audio File Services 和 AudioFileStream 读写音频文件。<br>使用 AudioUnit 框架进行回音消除、音频数据录制和播放等。<br>使用 AVFoundation 框架的 AVAudioSession 操作音频会话、 AVAudioFile(iOS8) 读写音频文件、 AVAudioRecorder 录制音频文件、 AVAudioPlayer 和 AVPlayer 播放音频文件、 AVCaptureSession 录制音频和视频数据。<br>在 iOS 8 之前使用 AVFoundation 框架的 AVAssetWritter 将 PCM 音频写入 AAC LC 编码格式的音频文件，而且使用的是硬编码。<br>在 iOS 8 及以后可以使用 AVFoundation 框架的 AVAudioEngine 进行均衡器、混响和混音等操作，其基于底层的 AudioUnit ，但比后者更易用。<br>在 iOS 8 及以后可以使用 AVKit 框架的 AVPlayerController 播放音频文件或流。<br>使用 FAAC 将 PCM 软编码为 AAC LC。<br>使用 FFmpeg 或 FAAD2 将 AAC LC 软解码为 PCM 、 PCM 重采样(Resample)。</p>
-<p>Video:<br>1、iOS 框架<br>UIKit 、 MediaPlayer 、 AVFoundation 、 AVKit 、 VideoToolBox 、 GLKit(OpenGL ES) 。其中 UIKit 、 MediaPlayer 、 AVFoundation 和 AVKit 基于 Objective-C ； VideoToolBox 和 GLKit 基于 C 的。当然， GLKit 远远不只是可以渲染视频。<br>2、第三方库<br>FFmpeg 、 x264。</p>
+<h1 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h1><h4 id="1、iOS-框架-1"><a href="#1、iOS-框架-1" class="headerlink" title="1、iOS 框架"></a>1、iOS 框架</h4><p>UIKit 、 MediaPlayer 、 AVFoundation 、 AVKit 、 VideoToolBox 、 GLKit(OpenGL ES) 。其中 UIKit 、 MediaPlayer 、 AVFoundation 和 AVKit 基于 Objective-C ； VideoToolBox 和 GLKit 基于 C 的。当然， GLKit 远远不只是可以渲染视频。</p>
+<h4 id="2、第三方库-1"><a href="#2、第三方库-1" class="headerlink" title="2、第三方库"></a>2、第三方库</h4><p>FFmpeg 、 x264。</p>
 <p>使用 UIKit 框架的 UIImagePickerController 录制包含音频的视频文件、 UIVideoEditorController 可对视频进行简单编辑。<br>使用 MediaPlayer 框架的 MPMoviePlayerViewController(MPMoviePlayerController/MPMoviePlayer) 播放视频文件或流。<br>使用 AVFoundation 框架的 AVPlayer 播放视频文件或流、 AVCaptureSession 录制视频帧。<br>在 iOS 8 之前使用 AVFoundation 框架的 AVAssetWritter 将 YUV 数据写入 H.264 编码格式的视频文件，而且使用的是硬编码。<br>在 iOS 8 及以后使用 VideoToolBox 框架将 YUV 视频数据硬编码为 H.264 ，以及将 H.264 硬解码为 YUV 视频数据。<br>在 iOS 8 及以后可以使用 AVKit 框架的 AVPlayerController 播放视频文件或流。<br>使用 GLKit 将 sRGB 或 YUV 视频数据渲染输出到屏幕。<br>使用 FFmpeg 将 H.264 软解码为 YUV 。<br>使用 x264 将 YUV 视频软编码为 H.264 。</p>
 <p>1、官方资料<br>a:综合<br>Audio &amp; Video Starting Point<br>Multimedia Programming Guide<br>Core Audio Overview<br>Audio Session Programming Guide<br>b.MediaPlayer<br>Media Player Framework Reference<br>iPod Library Access Programming Guide<br>c.Audio Toolbox<br>Audio Toolbox Framework Reference<br>Audio Queue Programming Guide<br>d.Audio Unit<br>Audio Unit Programming Guide<br>Audio Unit Hosting Guide For iOS<br>e.AV Foundation<br>AV Foundation Framework Reference<br>AV Foundation Programming Guide<br>f.编解码及文件格式<br>CAF File Overview<br>Core Audio Format Specification<br>Apple Core Audio Format Specification 1.0<br>g.WWDC<br>WWDC 2013 606 : Moving to AVKit and AVFoundation<br>WWDC 2014 503 : Direct access to media encoding and decoding</p>
 <p>2、第三方资料<br>Learning Core Audio<br>Audio file format<br>Comparison of audio coding formats<br>List of codecs<br>List of open-source codecs<br>Comparison of video codecs<br>Comparison of video container formats<br>Color space (YUV、sRGB)<br>objc.io #12 相机与照片<br>objc.io #23 视频<br>objc.io #24 音频<br><a href="http://msching.github.io/blog/2014/07/07/audio-in-ios/" target="_blank" rel="noopener">http://msching.github.io/blog/2014/07/07/audio-in-ios/</a></p>
