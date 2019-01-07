@@ -5,17 +5,19 @@
   
   <title>iOS Runtime的妙用 | ReaperLC的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#消息机制 #方法交换拦截系统自带方法的调用(Swizzle黑魔法),也可以理解为替换系统方法 #动态加载方法 #消息转发 #动态关联属性分类不能增加方法,Extension 可以 #实现自动归解档遍历属性 #字典模型互转遍历属性">
+  <meta name="description" content="消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例 Person *p = [[Person alloc] init]; 对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下: //通过类名获取类 Class class = objc_getClass(&quot;Person&quot;); //">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS Runtime的妙用">
 <meta property="og:url" content="http://yoursite.com/2018/05/21/iOS开发/Runtime妙用/index.html">
 <meta property="og:site_name" content="ReaperLC的博客">
-<meta property="og:description" content="#消息机制 #方法交换拦截系统自带方法的调用(Swizzle黑魔法),也可以理解为替换系统方法 #动态加载方法 #消息转发 #动态关联属性分类不能增加方法,Extension 可以 #实现自动归解档遍历属性 #字典模型互转遍历属性">
+<meta property="og:description" content="消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例 Person *p = [[Person alloc] init]; 对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下: //通过类名获取类 Class class = objc_getClass(&quot;Person&quot;); //">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-16T07:22:42.924Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/301129-0effb1540c867185.jpg">
+<meta property="og:updated_time" content="2019-01-07T03:46:27.652Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS Runtime的妙用">
-<meta name="twitter:description" content="#消息机制 #方法交换拦截系统自带方法的调用(Swizzle黑魔法),也可以理解为替换系统方法 #动态加载方法 #消息转发 #动态关联属性分类不能增加方法,Extension 可以 #实现自动归解档遍历属性 #字典模型互转遍历属性">
+<meta name="twitter:description" content="消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例 Person *p = [[Person alloc] init]; 对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下: //通过类名获取类 Class class = objc_getClass(&quot;Person&quot;); //">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/301129-0effb1540c867185.jpg">
   
     <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3317385648,2776165661&fm=11&gp=0.jpg">
   
@@ -68,14 +70,166 @@
   <h2 class="title">iOS Runtime的妙用</h2>
   <p class="sub">May 21, 2018</p>
   <article class="content">
-    <p>#消息机制</p>
-<p>#方法交换<br>拦截系统自带方法的调用(Swizzle黑魔法),也可以理解为替换系统方法</p>
-<p>#动态加载方法</p>
-<p>#消息转发</p>
-<p>#动态关联属性<br>分类不能增加方法,Extension 可以</p>
-<p>#实现自动归解档<br>遍历属性</p>
-<p>#字典模型互转<br>遍历属性</p>
+    <h1 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h1><p>Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例</p>
+<pre><code>Person *p = [[Person alloc] init];</code></pre>
+对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下:
+<pre><code>//通过类名获取类
+Class class = objc_getClass("Person");
+//注意Class实际上也是对象，所以同样能够接受消息，向Class发送alloc消息
+Person *p = objc_msgSend(class,@selector(alloc));
+//发送init消息给Person实例p
+p = objc_msgSend(p,@selector(init));
+//发送run消息给p 即调用run实例方法
+objc_msgSend(p, @selector(run));
+//汇总传递消息链
+objc_msgSend(objc_msgSend(objc_msgSend(objc_getClass("Person"), @selector(alloc)), @selector(init)), @selector(run));</code></pre>
 
+
+
+<h1 id="动态修改变量"><a href="#动态修改变量" class="headerlink" title="动态修改变量"></a>动态修改变量</h1><pre><code>/** 1.动态修改变量（私有变量也可修改)*/
+- (void)dynamicModifyVariable {
+    NSLog(@"修改前姓名为:%@", [p valueForKey:@"age"]);
+    unsigned int count = 0;
+    // 获取类的成员变量列表(包括私有) 获取属性，方法，协议列表 类似
+    Ivar *varList = class_copyIvarList([Person class], &count);
+    for (int i = 0; i < count; i++) {
+        Ivar var = varList[i];
+        const char *varName = ivar_getName(var);
+        NSString *proname = [NSString stringWithUTF8String:varName];
+        NSLog(@"查看成员变量:%@",proname);
+        if ([proname isEqualToString:@"_age"]) {
+            object_setIvar(p, var, @"22");
+//            [p setValue:@"22" forKey:@"age"];
+        }
+    }
+    NSLog(@"修改后姓名为:%@", [p valueForKey:@"age"]);
+}</code></pre>
+
+
+<h1 id="动态添加方法"><a href="#动态添加方法" class="headerlink" title="动态添加方法"></a>动态添加方法</h1><p>分类不能增加方法,Extension 可以</p>
+<pre><code>//1、注册方法
+SEL getInformationSelector = sel_registerName("getPersonAllInfo"); 
+//2、添加方法
+class_addMethod([Person class], getInformationSelector, (IMP)getInformation, "v@");</code></pre>
+
+<h1 id="动态拦截与替换方法"><a href="#动态拦截与替换方法" class="headerlink" title="动态拦截与替换方法"></a>动态拦截与替换方法</h1><p>拦截系统自带方法的调用(Swizzle黑魔法),也可以理解为替换系统方法<br>使用场景:比如数据埋点,搜集某些页面进入次数,或者按钮点击次数,在不改变原有结构的前提下,使用拦截方法可以实现无侵入式埋点或者其他功能, 但是方法拦截需要慎重使用,可能牵一发而动全身.</p>
+<pre><code>+(void)load {
+    [super load];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //获取方法名
+        SEL origSel = @selector(sendAction:to:forEvent:);
+        SEL swizSel = @selector(ept_sendAction:to:forEvent:);
+        Method origMethod = class_getInstanceMethod([self class], origSel);
+        Method swizMethod = class_getInstanceMethod([self class], swizSel);
+        //判断方法是否添加成功 
+        BOOL addMethod = class_addMethod([self class], origSel, method_getImplementation(swizMethod), method_getTypeEncoding(swizMethod));
+        if (addMethod) {
+            //替换类中已有方法的实现,如果该方法不存在添加该方法
+            class_replaceMethod([self class], swizSel, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+        }else{
+            //替换Method
+            method_exchangeImplementations(origMethod, swizMethod);
+        }
+    });
+}
+- (void)ept_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event{
+    [self ept_sendAction:action to:target forEvent:event];
+    NSLog(@"拦截系统点击方法成功,调用ept_sendAction");
+}
+</code></pre>
+动态拦截替换方法常用函数:
+> **<font color="#2E8B57">1、class_getInstanceMethod 获取方法名
+> 2、class_addMethod 判断方法是否添加成功
+> 3、class_replaceMethod 替换类中已有方法的实现,如果该方法不存在添加该方法
+> 4、method_exchangeImplementations 替换Method</font>**
+
+
+# 动态添加属性
+
+ <pre><code>// 重写set和get方法 设置关联
+- (NSString *)mobile {
+    return objc_getAssociatedObject(self, "mobile");
+}
+- (void)setMobile:(NSString *)mobile {
+    objc_setAssociatedObject(self, "mobile", mobile, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+} </code></pre>
+
+<p>重写set和get方法,设置关联属性</p>
+<blockquote>
+<p>/*<em><br> 第一个参数:当前对象<br> 第二个参数:新增属性键值
+ </em>/</p>
+</blockquote>
+ <pre><code>objc_getAssociatedObject(id _Nonnull object, const void * _Nonnull key)</code></pre>
+
+
+
+<blockquote>
+<p>/*<em><br> 第一个参数id object, 当前对象<br> 第二个参数const void </em>key, 关联的key，是c字符串<br> 第三个参数id value, 被关联的对象的值<br> 第四个参数objc_AssociationPolicy policy关联引用的规则<br> */</p>
+</blockquote>
+ <pre><code>objc_setAssociatedObject(id _Nonnull object, const void * _Nonnull key,id _Nullable value, objc_AssociationPolicy policy)</code></pre>
+
+<h1 id="自动化归解档"><a href="#自动化归解档" class="headerlink" title="自动化归解档"></a>自动化归解档</h1><p>归解档遵循<font color="#2E8B57">NSCoding</font>协议即可,实现归档和解档即可</p>
+<pre><code>#pragma mark - coding
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;</code></pre>
+
+<p>对于自定义类型的归解档,最原始的方法就是挨个属性去归档、解档,但是当你要归档的对象永远数亿属性资产的时候,很显然最原始的方法已经无法满足我们对于效率的诉求,从而就有了自动化归解档的诞生</p>
+<p>分别在两个方法去遍历成员变量,取值、设值</p>
+<pre><code>#pragma mark - coding
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+
+    /**
+     传统做法:挨个属性去归档
+     但是当遇到n多属性的时候 显然一个个去归档就很繁琐了
+     */
+//    [aCoder encodeObject:self.name forKey:@"name"];
+//    [aCoder encodeObject:self.sex forKey:@"sex"];
+//    [aCoder encodeObject:self.friends forKey:@"friends"];
+
+
+    unsigned int count = 0;
+
+    Ivar *ivarList = class_copyIvarList([Person class], &count);
+    for (int i = 0; i < count; i ++) {
+        Ivar ivar = ivarList[i];                     // 从成员列表中取出成员变量
+        const char *name = ivar_getName(ivar);       // 获取成员变量名
+        // 进行归档
+        NSString *key = [NSString stringWithUTF8String:name];
+        id value = [self valueForKey:key];
+        [aCoder encodeObject:value forKey:key];
+    }
+    free(ivarList);
+}</code></pre>
+
+<p>获取成员变量,赋值成员变量</p>
+<pre><code>- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self) {
+
+//        _name = [aDecoder decodeObjectForKey:@"name"];
+//        _sex = [aDecoder decodeObjectForKey:@"sex"];
+//        _friends = [aDecoder decodeObjectForKey:@"friends"];
+
+        unsigned int count = 0;
+        Ivar *ivarList = class_copyIvarList([Person class], &count);
+        for (int i = 0; i < count; i++) {
+            Ivar ivar = ivarList[i];                        // 从成员列表中取出成员变量
+            const char *name = ivar_getName(ivar);       // 获取成员变量名
+            // 进行解档
+            NSString *key = [NSString stringWithUTF8String:name];
+            id value = [aDecoder decodeObjectForKey:key];
+            // 将值赋值给成员变量
+            [self setValue:value forKey:key];
+        }
+        free(ivarList);
+    }
+    return self;
+}</code></pre>
+
+
+
+<h1 id="字典转模型"><a href="#字典转模型" class="headerlink" title="字典转模型"></a>字典转模型</h1>
   </article>
   <footer class="f-cf">
     
