@@ -13,7 +13,7 @@
 <meta property="og:description" content="消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例 Person *p = [[Person alloc] init]; 对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下: //通过类名获取类 Class class = objc_getClass(&quot;Person&quot;); //">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/301129-0effb1540c867185.jpg">
-<meta property="og:updated_time" content="2019-01-14T08:18:53.994Z">
+<meta property="og:updated_time" content="2019-01-14T08:20:44.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS Runtime的妙用">
 <meta name="twitter:description" content="消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例 Person *p = [[Person alloc] init]; 对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下: //通过类名获取类 Class class = objc_getClass(&quot;Person&quot;); //">
@@ -73,7 +73,7 @@
     <h1 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h1><p>Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例</p>
 <pre style="background-color:#1E2128"><code style="color: #9BA2B1">Person *p = [[Person alloc] init];</code></pre>
 对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下:
-<pre style="background-color:#1E2128"><code style="color: white">//通过类名获取类
+<pre style="background-color:#1E2128"><code style="color: #9BA2B1">//通过类名获取类
 Class class = objc_getClass("Person");
 //注意Class实际上也是对象，所以同样能够接受消息，向Class发送alloc消息
 Person *p = objc_msgSend(class,@selector(alloc));
