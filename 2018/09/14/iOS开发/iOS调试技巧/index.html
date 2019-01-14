@@ -180,6 +180,7 @@
 <h3 id="内存泄露检查"><a href="#内存泄露检查" class="headerlink" title="内存泄露检查"></a>内存泄露检查</h3><p>1、一般来说都是由于使用的CoreFoundation后没有release造成的。 在RAC下Foundation框架下的不需要进行release，由于Core Foundation不在ARC管理范围内,所以需要主动release。</p>
 <p>2、另外一些就是需要返回非空，却return nil;<br>3、空引用</p>
 <h2 id="instruments动态分析"><a href="#instruments动态分析" class="headerlink" title="instruments动态分析"></a>instruments动态分析</h2>
+
   </article>
   <footer class="f-cf">
     
