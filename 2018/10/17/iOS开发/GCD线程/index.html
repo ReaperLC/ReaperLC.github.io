@@ -397,12 +397,12 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h1><p>串行 (DISPATCH_QUEUE_SERIAL)<br>并发 (DISPATCH_QUEUE_CONCURRENT)</p>
+                <h2 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h2><p>串行 (DISPATCH_QUEUE_SERIAL)<br>并发 (DISPATCH_QUEUE_CONCURRENT)</p>
 <p>四种组合方式：</p>
-<h2 id="同步执行-并发队列"><a href="#同步执行-并发队列" class="headerlink" title="同步执行 + 并发队列"></a>同步执行 + 并发队列</h2><p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p>
-<h2 id="异步执行-并发队列"><a href="#异步执行-并发队列" class="headerlink" title="异步执行 + 并发队列"></a>异步执行 + 并发队列</h2><p>开启新线程，并发执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p>
-<h2 id="同步执行-串行队列"><a href="#同步执行-串行队列" class="headerlink" title="同步执行 + 串行队列"></a>同步执行 + 串行队列</h2><p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5%20+%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p>
-<h2 id="异步执行-串行队列"><a href="#异步执行-串行队列" class="headerlink" title="异步执行 + 串行队列"></a>异步执行 + 串行队列</h2><p> 开启一条新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5%2B%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p>
+<h3 id="同步执行-并发队列"><a href="#同步执行-并发队列" class="headerlink" title="同步执行 + 并发队列"></a>同步执行 + 并发队列</h3><p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p>
+<h3 id="异步执行-并发队列"><a href="#异步执行-并发队列" class="headerlink" title="异步执行 + 并发队列"></a>异步执行 + 并发队列</h3><p>开启新线程，并发执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p>
+<h3 id="同步执行-串行队列"><a href="#同步执行-串行队列" class="headerlink" title="同步执行 + 串行队列"></a>同步执行 + 串行队列</h3><p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5%20+%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p>
+<h3 id="异步执行-串行队列"><a href="#异步执行-串行队列" class="headerlink" title="异步执行 + 串行队列"></a>异步执行 + 串行队列</h3><p> 开启一条新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5%2B%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p>
 <p>特殊情况：</p>
 <p>同步执行 + 主队列   主线程调用：死锁卡住不执行 其他线程调用：没有开启新线程，串行执行任务<br>异步执行 + 主队列   没开启新线程，串行执行</p>
 <p>栅栏  dispatch_barrier_async<br>延时  dispatch_after<br>一次  dispatch_once  （单例）<br>对列组dispatch_group<br>监听  dispatch_group_notify<br>阻塞线程 dispatch_group_wait</p>
@@ -692,7 +692,7 @@
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -704,7 +704,7 @@
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

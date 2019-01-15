@@ -601,7 +601,7 @@ if-None-Match：可提高性能（在Response中添加ETag信息，客户端再�
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">iOS动画##简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animati</div>
+                    <div class="summary">简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-06-28
@@ -661,7 +661,7 @@ if-None-Match：可提高性能（在Response中添加ETag信息，客户端再�
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -673,7 +673,7 @@ if-None-Match：可提高性能（在Response中添加ETag信息，客户端再�
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

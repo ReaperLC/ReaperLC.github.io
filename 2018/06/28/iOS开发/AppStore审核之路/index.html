@@ -422,31 +422,35 @@
 <p>苹果官方提供审核指南文档以及常见被拒总结：</p>
 <p><a href="https://developer.apple.com/cn/app-store/launch/" target="_blank" rel="noopener">https://developer.apple.com/cn/app-store/launch/</a></p>
 <p>那么下面就记录一下项目上线过程中那些层出不穷的拒绝理由</p>
-<h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h4 id="1、应用内带检查更新功能"><a href="#1、应用内带检查更新功能" class="headerlink" title="1、应用内带检查更新功能"></a>1、应用内带检查更新功能</h4><pre><code> Your app includes an update button or alerts the user to update the app. To avoid user confusion, app version updates must utilize the iOS built-in update mechanism. We’ve attached screenshot(s) for your reference.
+<h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h4 id="1、应用内带检查更新功能"><a href="#1、应用内带检查更新功能" class="headerlink" title="1、应用内带检查更新功能"></a>1、应用内带检查更新功能</h4><pre class=" language-bash"><code class="language-bash">Your app includes an update button or alerts the user to update the app. To avoid user confusion, app version updates must utilize the iOS built-in update mechanism. We’ve attached screenshot<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">for</span> your reference.
 Next Steps
 
-Please remove the update feature from your app. To distribute a new version of your app, upload the new app binary version into the same iTunes Connect record you created for the app’s previous version. Updated versions keep the same Apple ID, iTunes Connect ID (SKU), and bundle ID as the original version, and are available free to customers who purchased a previous version.
-</code></pre><blockquote>
+Please remove the update feature from your app. To distribute a new version of your app, upload the new app binary version into the same iTunes Connect record you created <span class="token keyword">for</span> the app’s previous version. Updated versions keep the same Apple ID, iTunes Connect ID <span class="token punctuation">(</span>SKU<span class="token punctuation">)</span>, and bundle ID as the original version, and are available <span class="token function">free</span> to customers <span class="token function">who</span> purchased a previous version.
+</code></pre>
+<blockquote>
 <font color="#2E8B57"> <strong>解析：从2015年3月起，所有包含检查更新功能的 App 都会被拒绝上架。所以应用中不允许出现检查更新的字样，而且设计版本号的地方也不能有点击效果，否则苹果会误以为这是更新版本。</strong></font>
 </blockquote>
-<h4 id="2、iPhone-应用在-iPad-上不能正常显示"><a href="#2、iPhone-应用在-iPad-上不能正常显示" class="headerlink" title="2、iPhone 应用在 iPad 上不能正常显示"></a>2、iPhone 应用在 iPad 上不能正常显示</h4><pre><code>We noticed that your app did not run at iPhone resolution when reviewed on iPad running iOS 9.1, which is a violation of the App Store Review Guidelines. We’ve attached screenshot(s) for your reference.
+<h4 id="2、iPhone-应用在-iPad-上不能正常显示"><a href="#2、iPhone-应用在-iPad-上不能正常显示" class="headerlink" title="2、iPhone 应用在 iPad 上不能正常显示"></a>2、iPhone 应用在 iPad 上不能正常显示</h4><pre class=" language-bash"><code class="language-bash">We noticed that your app did not run at iPhone resolution when reviewed on iPad running iOS 9.1, <span class="token function">which</span> is a violation of the App Store Review Guidelines. We’ve attached screenshot<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">for</span> your reference.
 Specifically, the buttons at the bottom of the app are inaccessible when running on iPad.
 Next Steps
 
 Please revise your app to ensure it runs at iPhone resolution on iPad.
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <font color="#2E8B57"><strong>解析：iPhone程序必须不经修改就能以iPhone分辨率和2倍iPhone 3GS的分辨率在iPad上运行。即使你的App 只为 iPhone 用户提供，在 iPad 上也必须能够正常显示，否则审核会被拒绝。开发人员做好适配。</strong></font>
 </blockquote>
-<h4 id="3、使用第三方登录问题"><a href="#3、使用第三方登录问题" class="headerlink" title="3、使用第三方登录问题"></a>3、使用第三方登录问题</h4><pre><code>Additionally, we found that your app requires the installation of another app before it can be used, which is not in compliance with the App Store Review Guidelines. Apps should be able to run on launch, without requiring additional applications to be installed.
+<h4 id="3、使用第三方登录问题"><a href="#3、使用第三方登录问题" class="headerlink" title="3、使用第三方登录问题"></a>3、使用第三方登录问题</h4><pre class=" language-bash"><code class="language-bash">Additionally, we found that your app requires the installation of another app before it can be used, <span class="token function">which</span> is not <span class="token keyword">in</span> compliance with the App Store Review Guidelines. Apps should be able to run on launch, without requiring additional applications to be installed.
 
-    Specifically, we were required to install WeChat/QQ before we could use the sharing features in your app.
+    Specifically, we were required to <span class="token function">install</span> WeChat/QQ before we could use the sharing features <span class="token keyword">in</span> your app.
 
-    Please revise your app so that a user can use it upon launch. If your app requires authentication before use, please use a method that can authenticate users from within your app.
-</code></pre><blockquote>
+    Please revise your app so that a user can use it upon launch. If your app requires authentication before use, please use a method that can authenticate <span class="token function">users</span> from within your app.
+
+</code></pre>
+<blockquote>
 <font color="#2E8B57"><strong>解析：接入第三方登录要检测是否安装了第三方客户端，未安装时不要显示对应按钮。2015年9月之前，通常可以采用判断未安装则隐藏登录按钮的方式。但目前隐藏按钮的方式也可能被审核拒绝，QQ 和微博提供了 web 登录的方式，如果判断未安装，需要允许用户使用 webview 的登录方式。苹果在条款中有声明不允许 iOS 应用的正常使用需要依赖另外一个 App。</strong></font>
 </blockquote>
 <p><strong><em><font color="#DC143C">以上这三点是开发人员开发过程中需要注意，并且可以主动去避免的。</font></em></strong></p>
-<h4 id="4、Guideline-2-1-Information-Needed"><a href="#4、Guideline-2-1-Information-Needed" class="headerlink" title="4、Guideline 2.1 - Information Needed"></a>4、Guideline 2.1 - Information Needed</h4><pre><code>We have started the review of your app, but we were unable to successfully register for an in-app account. In order for us to review your app, please provide a demo account so that we may fully assess your app&#39;s features.
+<h4 id="4、Guideline-2-1-Information-Needed"><a href="#4、Guideline-2-1-Information-Needed" class="headerlink" title="4、Guideline 2.1 - Information Needed"></a>4、Guideline 2.1 - Information Needed</h4><pre class=" language-bash"><code class="language-bash">We have started the review of your app, but we were unable to successfully register <span class="token keyword">for</span> an in-app account. In order <span class="token keyword">for</span> us to review your app, please provide a demo account so that we may fully assess your app<span class="token string">'s features.
 
 Next Steps
 
@@ -455,94 +459,100 @@ To help us proceed with the review of your app, please provide a user name and p
 To provide demo account information:
 
 - Log in to iTunes Connect
-- Click &quot;My Apps&quot;
+- Click "My Apps"
 - Select your app
 - Click on the app version on the left side of the screen
-- Scroll down to &quot;App Review Information&quot;
-- Select the &quot;Sign-in required&quot; box
-- Enter demo credentials in the &quot;User name&quot; and &quot;Password&quot; fields
-- Once you&#39;ve completed all changes, click the &quot;Save&quot; button at the top of the Version Information page.
+- Scroll down to "App Review Information"
+- Select the "Sign-in required" box
+- Enter demo credentials in the "User name" and "Password" fields
+- Once you'</span>ve completed all changes, click the <span class="token string">"Save"</span> button at the <span class="token function">top</span> of the Version Information page.
 
-If your iTunes Connect status shows as Metadata Rejected, we do not require a new binary to correct this issue. Please reply to this message in Resolution Center to confirm the availability of a valid demo account, and we will continue with the review.
-</code></pre><blockquote>
+If your iTunes Connect status shows as Metadata Rejected, we <span class="token keyword">do</span> not require a new binary to correct this issue. Please reply to this message <span class="token keyword">in</span> Resolution Center to confirm the availability of a valid demo account, and we will <span class="token keyword">continue</span> with the review.
+</code></pre>
+<blockquote>
 <font color="#2E8B57"><strong>解析：根据描述，是提供的app登录帐号，苹果审核时输入并不能成功登录导致。所以这种情况<br>     第一，要确保服务器状态稳定，保证苹果审核期间接口都能正常请求<br>     第二，确保提供的帐号的确能够登录，并且后台数据库需要长期保留该帐号信息，勿删。</strong></font>
 </blockquote>
-<h4 id="5、Guideline-2-3-3-Performance-Accurate-Metadata"><a href="#5、Guideline-2-3-3-Performance-Accurate-Metadata" class="headerlink" title="5、Guideline 2.3.3 - Performance - Accurate Metadata"></a>5、Guideline 2.3.3 - Performance - Accurate Metadata</h4><pre><code>We noticed that your screenshots do not sufficiently reflect your app in use.
+<h4 id="5、Guideline-2-3-3-Performance-Accurate-Metadata"><a href="#5、Guideline-2-3-3-Performance-Accurate-Metadata" class="headerlink" title="5、Guideline 2.3.3 - Performance - Accurate Metadata"></a>5、Guideline 2.3.3 - Performance - Accurate Metadata</h4><pre class=" language-bash"><code class="language-bash">We noticed that your screenshots <span class="token keyword">do</span> not sufficiently reflect your app <span class="token keyword">in</span> use.
 
-Please see attached screenshots for details.
+Please see attached screenshots <span class="token keyword">for</span> details.
 
 Next Steps
 
-To resolve this issue, please revise your screenshots to ensure that they accurately reflect the app in use on the supported devices. For iPhone, you need a set of 5.5-inch display screenshots and for iPad, you need a set for 12.9-inch display. This set will be scaled appropriately down to other device sizes when viewed on the App Store in each territory.
+To resolve this issue, please revise your screenshots to ensure that they accurately reflect the app <span class="token keyword">in</span> use on the supported devices. For iPhone, you need a <span class="token keyword">set</span> of 5.5-inch display screenshots and <span class="token keyword">for</span> iPad, you need a <span class="token keyword">set</span> <span class="token keyword">for</span> 12.9-inch display. This <span class="token keyword">set</span> will be scaled appropriately down to other device sizes when viewed on the App Store <span class="token keyword">in</span> each territory.
 
 Resources
 
-For resources on creating great screenshots for the App Store, you may want to review the App Store Product Page information available on the Apple developer portal.
+For resources on creating great screenshots <span class="token keyword">for</span> the App Store, you may want to review the App Store Product Page information available on the Apple developer portal.
 
-Please ensure you have made any screenshot modifications using Media Manager. You should confirm your app looks and behaves identically in all languages and on all supported devices. Learn how to use Media Manager to add custom screenshots for each display size and localization.
+Please ensure you have made any screenshot modifications using Media Manager. You should confirm your app looks and behaves identically <span class="token keyword">in</span> all languages and on all supported devices. Learn how to use Media Manager to add custom screenshots <span class="token keyword">for</span> each display size and localization.
 
-Since your iTunes Connect status is Metadata Rejected, we do NOT require a new binary. To revise the metadata, visit iTunes Connect to select your app and revise the desired metadata values. Once you’ve completed all changes, reply to this message in Resolution Center and we will continue the review.
+Since your iTunes Connect status is Metadata Rejected, we <span class="token keyword">do</span> NOT require a new binary. To revise the metadata, visit iTunes Connect to <span class="token keyword">select</span> your app and revise the desired metadata values. Once you’ve completed all changes, reply to this message <span class="token keyword">in</span> Resolution Center and we will <span class="token keyword">continue</span> the review.
 
-NOTE: Please be sure to make any metadata changes to all app localizations by selecting each specific localization and making appropriate changes.
-</code></pre><blockquote>
+NOTE: Please be sure to <span class="token function">make</span> any metadata changes to all app localizations by selecting each specific localization and making appropriate changes.
+</code></pre>
+<blockquote>
 <font color="#2E8B57"><strong>解析：简单点说就是自己的应用截图不能反应自己App的主要功能，然后重新换了截图，能展示主要功能的截图即可。</strong></font>
 </blockquote>
-<h4 id="6、Guideline-2-1-Performance-App-Completeness"><a href="#6、Guideline-2-1-Performance-App-Completeness" class="headerlink" title="6、Guideline 2.1 - Performance - App Completeness"></a>6、Guideline 2.1 - Performance - App Completeness</h4><pre><code>We discovered one or more bugs in your app when reviewed on iPad running iOS 11.4.1 on Wi-Fi connected to an IPv6 network.
+<h4 id="6、Guideline-2-1-Performance-App-Completeness"><a href="#6、Guideline-2-1-Performance-App-Completeness" class="headerlink" title="6、Guideline 2.1 - Performance - App Completeness"></a>6、Guideline 2.1 - Performance - App Completeness</h4><pre class=" language-bash"><code class="language-bash">We discovered one or <span class="token function">more</span> bugs <span class="token keyword">in</span> your app when reviewed on iPad running iOS 11.4.1 on Wi-Fi connected to an IPv6 network.
 
 Specifically, we were unable to fully load your app’s content during review.
 
 Next Steps
 
-To resolve this issue, please run your app on a device to identify any issues, then revise and resubmit your app for review.
+To resolve this issue, please run your app on a device to identify any issues, <span class="token keyword">then</span> revise and resubmit your app <span class="token keyword">for</span> review.
 
-If we misunderstood the intended behavior of your app, please reply to this message in Resolution Center to provide information on how these features were intended to work.
+If we misunderstood the intended behavior of your app, please reply to this message <span class="token keyword">in</span> Resolution Center to provide information on how these features were intended to work.
 
-For new apps, uninstall all previous versions of your app from a device, then install and follow the steps to reproduce the issue. For updates, install the new version as an update to the previous version, then follow the steps to reproduce the issue.
+For new apps, uninstall all previous versions of your app from a device, <span class="token keyword">then</span> <span class="token function">install</span> and follow the steps to reproduce the issue. For updates, <span class="token function">install</span> the new version as an update to the previous version, <span class="token keyword">then</span> follow the steps to reproduce the issue.
 
 Resources
 
-For information about testing your app and preparing it for review, please see Technical Note TN2431: App Testing Guide.
+For information about testing your app and preparing it <span class="token keyword">for</span> review, please see Technical Note TN2431: App Testing Guide.
 
-For a networking overview, please review About Networking. For a more specific overview of App Review’s IPv6 requirements, please review the IPv6 and App Review discussion on the Apple Developer Forum.
+For a networking overview, please review About Networking. For a <span class="token function">more</span> specific overview of App Review’s IPv6 requirements, please review the IPv6 and App Review discussion on the Apple Developer Forum.
 
-Please see attached screenshot for details.
-</code></pre><blockquote>
+Please see attached screenshot <span class="token keyword">for</span> details.
+</code></pre>
+<blockquote>
 <font color="#2E8B57"><strong>解析：ipv6的问题，具体参考以下地址 <a href="https://shimo.im/docs/r4WRJroUsdMJHPoa/" target="_blank" rel="noopener">https://shimo.im/docs/r4WRJroUsdMJHPoa/</a> 《iOS上架iPV6被拒问题》，可复制链接后用石墨文档 App 打开</strong></font>  
 </blockquote>
-<h4 id="7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage"><a href="#7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage" class="headerlink" title="7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage"></a>7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage</h4><pre><code>We noticed that your app requests the user’s consent to access their camera but does not clarify the use of this feature in the permission modal alert.
+<h4 id="7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage"><a href="#7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage" class="headerlink" title="7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage"></a>7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage</h4><pre class=" language-bash"><code class="language-bash">We noticed that your app requests the user’s consent to access their camera but does not clarify the use of this feature <span class="token keyword">in</span> the permission modal alert.
 
 Next Steps
 
-To resolve this issue, please revise the permission modal alert to specify why the app is requesting access to the user&#39;s camera.
+To resolve this issue, please revise the permission modal alert to specify why the app is requesting access to the user's camera.
 
-The permission request alert should specify how your app will use this feature to help users understand why your app is requesting access to their personal data.
+The permission request alert should specify how your app will use this feature to <span class="token function">help</span> <span class="token function">users</span> understand why your app is requesting access to their personal data.
 
 Resources
 
-For additional information and instructions on configuring and presenting an alert, please review the Requesting Permission section of the iOS Human Interface Guidelines and the Information Property List Key Reference. You may also want to review the Technical Q&amp;A QA1937: Resolving the Privacy-Sensitive Data App Rejection page for details on how to provide a usage description for permission request alerts.
+For additional information and instructions on configuring and presenting an alert, please review the Requesting Permission section of the iOS Human Interface Guidelines and the Information Property List Key Reference. You may also want to review the Technical Q<span class="token operator">&amp;</span>A QA1937: Resolving the Privacy-Sensitive Data App Rejection page <span class="token keyword">for</span> details on how to provide a usage description <span class="token keyword">for</span> permission request alerts.
 
-Learn more about Protecting the User’s Privacy.
+Learn <span class="token function">more</span> about Protecting the User’s Privacy.
 
-Please see attached screenshots for details.
-</code></pre><p>一般苹果会配备以下类似截图<br>    <img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/app.png?raw=true" alt=""></p>
+Please see attached screenshots <span class="token keyword">for</span> details.
+</code></pre>
+<p>一般苹果会配备以下类似截图<br>    <img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/app.png?raw=true" alt=""></p>
 <blockquote>
 <font color="#2E8B57"><strong>解析：自从iOS10之后加入了各种权限问题，比如相机、相册、网络、定位等等权限，应用中使用这些权限的过程中必须配备详细描述，使用这项权限干什么，比如请求使用您的定位权限，便于为您提供周边景区服务。所以描述完整很重要。</strong></font>
 </blockquote>
-<h4 id="8、Guideline-5-2-1-Legal-Intellectual-Property"><a href="#8、Guideline-5-2-1-Legal-Intellectual-Property" class="headerlink" title="8、Guideline 5.2.1 - Legal - Intellectual Property"></a>8、Guideline 5.2.1 - Legal - Intellectual Property</h4><pre><code>The seller and company names associated with your app do not reflect the name “西安市人民政府” in the app or its metadata, as required by Guideline 5.2.1 of the App Store Review Guidelines.
+<h4 id="8、Guideline-5-2-1-Legal-Intellectual-Property"><a href="#8、Guideline-5-2-1-Legal-Intellectual-Property" class="headerlink" title="8、Guideline 5.2.1 - Legal - Intellectual Property"></a>8、Guideline 5.2.1 - Legal - Intellectual Property</h4><pre class=" language-bash"><code class="language-bash">The seller and company names associated with your app <span class="token keyword">do</span> not reflect the name “西安市人民政府” <span class="token keyword">in</span> the app or its metadata, as required by Guideline 5.2.1 of the App Store Review Guidelines.
 
 Next Steps
 
 Your app must be published under a seller name and company name that reflects the 西安市人民政府 name. If you have developed this app on behalf of a client, please advise your client to add you to the development team of their Apple Developer account.
 
-Once created, you cannot change your seller name or company name in iTunes Connect. For assistance with changing your company name or seller name, you will need to contact iTunes Connect through the Contact Us page. Select Getting Started from the first dropdown menu, then select General iTunes Connect Inquiry to contact the appropriate iTunes Connect team.
-</code></pre><blockquote>
+Once created, you cannot change your seller name or company name <span class="token keyword">in</span> iTunes Connect. For assistance with changing your company name or seller name, you will need to contact iTunes Connect through the Contact Us page. Select Getting Started from the first dropdown menu, <span class="token keyword">then</span> <span class="token keyword">select</span> General iTunes Connect Inquiry to contact the appropriate iTunes Connect team.
+</code></pre>
+<blockquote>
 <font color="#2E8B57"><strong>解析：涉及到一个资质问题，大致就是说该帐号并不能代表某机构或者某组织去发布销售该应用，<br>       一般情况都是其他项目想用我们公司帐号上架，出现这种问题，也就是说我们公司暂时无法代表政<br>       府去发布某政务服务应用。一般解决方案去除应用中明显的字眼：比如xxx市人民政务，xxx市政<br>       务服务中心，或者直接客户自己提供开发者帐号，不用我们公司帐号上架</strong></font>
 </blockquote>
-<h4 id="9、应用出现-beta版、测试版字样"><a href="#9、应用出现-beta版、测试版字样" class="headerlink" title="9、应用出现 beta版、测试版字样"></a>9、应用出现 beta版、测试版字样</h4><pre><code>Your app appears to be a pre-release, test, or trial version with a limited feature set. Apps that are created for demonstration or trial purposes are not appropriate for the App Store and do not comply with the App Store Review Guidelines.
-To ensure compliance with the App Store Review Guidelines, it would be appropriate to revise your app to complete, remove, or fully configure any partially implemented feature(s).
+<h4 id="9、应用出现-beta版、测试版字样"><a href="#9、应用出现-beta版、测试版字样" class="headerlink" title="9、应用出现 beta版、测试版字样"></a>9、应用出现 beta版、测试版字样</h4><pre class=" language-bash"><code class="language-bash">Your app appears to be a pre-release, test, or trial version with a limited feature set. Apps that are created <span class="token keyword">for</span> demonstration or trial purposes are not appropriate <span class="token keyword">for</span> the App Store and <span class="token keyword">do</span> not comply with the App Store Review Guidelines.
+To ensure compliance with the App Store Review Guidelines, it would be appropriate to revise your app to complete, remove, or fully configure any partially implemented feature<span class="token punctuation">(</span>s<span class="token punctuation">)</span>.
 
-If you would like to conduct beta trial for your app, you may wish to review the TestFlight Beta Testing Guide.
-</code></pre><blockquote>
+If you would like to conduct beta trial <span class="token keyword">for</span> your app, you may wish to review the TestFlight Beta Testing Guide.
+</code></pre>
+<blockquote>
 <font color="#2E8B57"><strong>解析：不要过度谦虚地在启动画面或者应用名称上加上”beta”字样，苹果不允许测试版产品上架。也就是整个应用无论从启动到细枝末节的某个页面上都不要出现测试、beta字样，一经苹果审核到，基本都是被打回。</strong></font>
 </blockquote>
 
@@ -812,7 +822,7 @@ If you would like to conduct beta trial for your app, you may wish to review the
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -824,7 +834,7 @@ If you would like to conduct beta trial for your app, you may wish to review the
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

@@ -409,11 +409,9 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>项目开发中,随着时间的推移,项目业务结构的越来越复杂,引入的东西越来越多,作为一个app入口的AppDelegate,会变得越来越“肥胖”,会发现里面有第三方分享注册、消息推送注册、友盟统计、键盘管理工具初始化等等,代码写的再工整, 也会显的这个入口很拥挤.所以就有了减肥计划的开始.</p>
-<p>#分类<br>分类这种为Delegate瘦身,最初亲身经历是整合环信过程中,将环信的登录等代理独立出去</p>
-<p>#AOP面向切面编程</p>
-<p>#load</p>
-
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>项目开发中,随着时间的推移,项目业务结构的越来越复杂,引入的东西越来越多,作为一个app入口的AppDelegate,会变得越来越“肥胖”,会发现里面有第三方分享注册、消息推送注册、友盟统计、键盘管理工具初始化等等,代码写的再工整, 也会显的这个入口很拥挤.所以就有了减肥计划的开始.</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>分类这种为Delegate瘦身,最初亲身经历是整合环信过程中,将环信的登录等代理独立出去</p>
+<h2 id="AOP面向切面编程"><a href="#AOP面向切面编程" class="headerlink" title="AOP面向切面编程"></a>AOP面向切面编程</h2><h2 id="load"><a href="#load" class="headerlink" title="load"></a>load</h2>
             </div>
             <hr>
 
@@ -585,7 +583,7 @@
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">iOS动画##简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animati</div>
+                    <div class="summary">简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2018-06-28
@@ -696,7 +694,7 @@
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -708,7 +706,7 @@
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

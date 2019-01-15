@@ -393,65 +393,85 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1、tableViewCell-分割线边距缩进"><a href="#1、tableViewCell-分割线边距缩进" class="headerlink" title="1、tableViewCell 分割线边距缩进"></a>1、tableViewCell 分割线边距缩进</h1><pre><code>-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+                <h1 id="1、tableViewCell-分割线边距缩进"><a href="#1、tableViewCell-分割线边距缩进" class="headerlink" title="1、tableViewCell 分割线边距缩进"></a>1、tableViewCell 分割线边距缩进</h1><pre class=" language-bash"><code class="language-bash">-<span class="token punctuation">(</span>void<span class="token punctuation">)</span>tableView:<span class="token punctuation">(</span>UITableView *<span class="token punctuation">)</span>tableView willDisplayCell:<span class="token punctuation">(</span>UITableViewCell *<span class="token punctuation">)</span>cell forRowAtIndexPath:<span class="token punctuation">(</span>NSIndexPath *<span class="token punctuation">)</span>indexPath <span class="token punctuation">{</span>
     // 设置分割线左右边距
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsMake(0,100, 0,8)];
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>cell respondsToSelector:@selector<span class="token punctuation">(</span>setSeparatorInset:<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">[</span>cell setSeparatorInset:UIEdgeInsetsMake<span class="token punctuation">(</span>0,100, 0,8<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     //
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>cell respondsToSelector:@selector<span class="token punctuation">(</span>setPreservesSuperviewLayoutMargins:<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">[</span>cell setPreservesSuperviewLayoutMargins:NO<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     // 设置cell左右边距
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsMake(0, 8, 0,8)];
-    }
-}</code></pre>
-
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>cell respondsToSelector:@selector<span class="token punctuation">(</span>setLayoutMargins:<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">[</span>cell setLayoutMargins:UIEdgeInsetsMake<span class="token punctuation">(</span>0, 8, 0,8<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>#2、cocoapods降级操作</p>
 <p> 1查看当前版本</p>
-<pre><code>pod --version</code></pre>
- 2查看安装列表
-<pre><code>gem list</code></pre>
-3卸载
-<pre><code>sudo gem uninstall cocoapods -v 1.3.1</code></pre>
-4安装
-<pre><code>sudo gem install cocoapods -v 1.3.1</code></pre>
+<pre class=" language-bash"><code class="language-bash">pod --version
+</code></pre>
+<p> 2查看安装列表</p>
+<pre class=" language-bash"><code class="language-bash">gem list
+</code></pre>
+<p>3卸载</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> gem uninstall cocoapods -v 1.3.1
+</code></pre>
+<p>4安装</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> gem <span class="token function">install</span> cocoapods -v 1.3.1
+</code></pre>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> gem uninstall cocoapods
+</code></pre>
+<p>先查看本地安装过的cocopods相关东西，命令如下：<br>$ gem list –local | grep cocoapods<br>会显示如下：</p>
+<blockquote>
+<p>cocoapods-core (0.39.0)<br>cocoapods-downloader (0.9.3)<br>cocoapods-plugins (0.4.2)<br>cocoapods-search (0.1.0)<br>cocoapods-stats (0.6.2)<br>cocoapods-trunk (0.6.4)<br>cocoapods-try (0.5.1)<br>然后逐个删除吧：</p>
+</blockquote>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> gem uninstall cocoapods-core
+</code></pre>
+<p>#2.1 安装RVM</p>
+<pre class=" language-bash"><code class="language-bash">curl -L get.rvm.io <span class="token operator">|</span> <span class="token function">bash</span> -s stable
 
-<p>sudo gem uninstall cocoapods</p>
-<p>先查看本地安装过的cocopods相关东西，命令如下：<br>$ gem list –local | grep cocoapods<br>会显示如下：<br>cocoapods-core (0.39.0)<br>cocoapods-downloader (0.9.3)<br>cocoapods-plugins (0.4.2)<br>cocoapods-search (0.1.0)<br>cocoapods-stats (0.6.2)<br>cocoapods-trunk (0.6.4)<br>cocoapods-try (0.5.1)<br>然后逐个删除吧：<br>$ sudo gem uninstall cocoapods-core</p>
-<p>#2.1 安装RVM<br>curl -L get.rvm.io | bash -s stable</p>
-<p>source ~/.bashrc<br>source ~/.bash_profile<br>rvm -v<br>rvm list known<br>rvm install 2.3.0</p>
+<span class="token function">source</span> ~/.bashrc
+<span class="token function">source</span> ~/.bash_profile
+rvm -v
+rvm list known
+rvm <span class="token function">install</span> 2.3.0
+</code></pre>
 <p>#3、Runtime之交换方法</p>
-<pre><code>+ (void)methodSwizzlingWithOriginalSelector:(SEL)originalSelector
-                         bySwizzledSelector:(SEL)swizzledSelector {
+<pre class=" language-bash"><code class="language-bash">+ <span class="token punctuation">(</span>void<span class="token punctuation">)</span>methodSwizzlingWithOriginalSelector:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>originalSelector
+                         bySwizzledSelector:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>swizzledSelector <span class="token punctuation">{</span>
 
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-        BOOL didAddMethod = class_addMethod(class,originalSelector,
-                                            method_getImplementation(swizzledMethod),
-                                            method_getTypeEncoding(swizzledMethod));
-        if (didAddMethod) {
-            class_replaceMethod(class,swizzledSelector,
-                                method_getImplementation(originalMethod),
-                                method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
-    });
+    static dispatch_once_t onceToken<span class="token punctuation">;</span>
+    dispatch_once<span class="token punctuation">(</span><span class="token operator">&amp;</span>onceToken, ^<span class="token punctuation">{</span>
+        Class class <span class="token operator">=</span> <span class="token punctuation">[</span>self class<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        Method originalMethod <span class="token operator">=</span> class_getInstanceMethod<span class="token punctuation">(</span>class, originalSelector<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Method swizzledMethod <span class="token operator">=</span> class_getInstanceMethod<span class="token punctuation">(</span>class, swizzledSelector<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        BOOL didAddMethod <span class="token operator">=</span> class_addMethod<span class="token punctuation">(</span>class,originalSelector,
+                                            method_getImplementation<span class="token punctuation">(</span>swizzledMethod<span class="token punctuation">)</span>,
+                                            method_getTypeEncoding<span class="token punctuation">(</span>swizzledMethod<span class="token punctuation">))</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>didAddMethod<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            class_replaceMethod<span class="token punctuation">(</span>class,swizzledSelector,
+                                method_getImplementation<span class="token punctuation">(</span>originalMethod<span class="token punctuation">)</span>,
+                                method_getTypeEncoding<span class="token punctuation">(</span>originalMethod<span class="token punctuation">))</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            method_exchangeImplementations<span class="token punctuation">(</span>originalMethod, swizzledMethod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-}</code></pre>
-
+<span class="token punctuation">}</span>
+</code></pre>
 <p>#上架应用预览<br>    <a href="https://itunes.apple.com/cn/app/yan-yu/id1393900517" target="_blank" rel="noopener">https://itunes.apple.com/cn/app/yan-yu/id1393900517</a>    </p>
 <h1 id="系统相册界面上移"><a href="#系统相册界面上移" class="headerlink" title="系统相册界面上移"></a>系统相册界面上移</h1><p>是因为全局设置了ScrollView属性导致的.</p>
- <pre><code>if (@available(iOS 11.0, *)){//避免滚动视图顶部出现20的空白以及push或者pop的时候页面有一个上移或者下移的异常动画的问题
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    }</code></pre>  
-
-<p>  在调用相册前重置就好了<br>  <pre><code>if (@available(iOS 11, *)) {<br>        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;<br>    }</code></pre> </p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token punctuation">(</span>@available<span class="token punctuation">(</span>iOS 11.0, *<span class="token punctuation">))</span><span class="token punctuation">{</span>//避免滚动视图顶部出现20的空白以及push或者pop的时候页面有一个上移或者下移的异常动画的问题
+        <span class="token punctuation">[</span><span class="token punctuation">[</span>UIScrollView appearance<span class="token punctuation">]</span> setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>  在调用相册前重置就好了</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token punctuation">(</span>@available<span class="token punctuation">(</span>iOS 11, *<span class="token punctuation">))</span> <span class="token punctuation">{</span>
+        UIScrollView.appearance.contentInsetAdjustmentBehavior <span class="token operator">=</span> UIScrollViewContentInsetAdjustmentAutomatic<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
 <h1 id="如何防止反编译"><a href="#如何防止反编译" class="headerlink" title="如何防止反编译"></a>如何防止反编译</h1><p>1、对本地数据存储NSUserDefault,sqlite进行加密处理，保护关键信息    （本地数据加密）<br>2、对程序中出现的URL进行加密处理，防止URL被静态分析                 (URL地址加密)<br>3、对客户端的网路请求数据进行加密，防止通过网络拦截获取数据           (请求数据加密)<br>4、代码混淆<br>5、第三方防护，网易云盾</p>
 <h1 id="Xcode编译错误"><a href="#Xcode编译错误" class="headerlink" title="Xcode编译错误"></a>Xcode编译错误</h1><pre><code>Warning: The Copy Bundle Resources build phase contains this target&#39;s Info.plist file &#39;Proj/Other/Info.plist&#39;.
 编译时将 info.plist文件也进行了编译
@@ -681,7 +701,8 @@
                 <div class="card-content article-content">
                     <div class="summary">消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例
 Person *p = [[Person alloc] init];
-对于我们平常使用的初始化方法 allo</div>
+
+对于我们平常使用的初始化方法 all</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-05-21
@@ -741,7 +762,7 @@ Person *p = [[Person alloc] init];
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -753,7 +774,7 @@ Person *p = [[Person alloc] init];
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

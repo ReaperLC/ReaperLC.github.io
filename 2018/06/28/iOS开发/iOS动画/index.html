@@ -6,7 +6,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="iOS动画-炫酷效果从此刻开始, ReaperLC的博客">
-    <meta name="description" content="iOS动画##简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animati">
+    <meta name="description" content="简介IOS 动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -409,10 +409,10 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="iOS动画"><a href="#iOS动画" class="headerlink" title="iOS动画"></a>iOS动画</h1><p>##简介<br>IOS 动画主要是指Core Animation框架。官方使用文档地址为：<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html" target="_blank" rel="noopener">Core Animation Guide</a>。<br>Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Animation的动画效果。Core Animation将大部分实际的绘图任务交给了图形硬件来处理，图形硬件会加速图形渲染的速度。这种自动化的图形加速技术让动画拥有更高的帧率并且显示效果更加平滑，不会加重CPU的负担而影响程序的运行速度。</p>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>IOS 动画主要是指Core Animation框架。官方使用文档地址为：<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html" target="_blank" rel="noopener">Core Animation Guide</a>。<br>Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Animation的动画效果。Core Animation将大部分实际的绘图任务交给了图形硬件来处理，图形硬件会加速图形渲染的速度。这种自动化的图形加速技术让动画拥有更高的帧率并且显示效果更加平滑，不会加重CPU的负担而影响程序的运行速度。</p>
 <p>那些酷炫的实现，其实进行步骤分解，你就会发现都是基础动画合理的搭配组合，对坐标尺寸、视图显示、形态变化一一进行了代码描述，就形成了你呈现在你眼前的动画效果。</p>
-<p>##结构<br><img src="https://camo.githubusercontent.com/9fe3e0f9f3a1a750292d80b899b395a5b20f85b0/687474703a2f2f696d672e6d792e6373646e2e6e65742f75706c6f6164732f3230313530372f32332f313433373631373536325f333139302e706e67" alt=""></p>
-<p>##常用属性<br>duration:动画持续时间<br>beginTime:动画开始时间<br>repeatCount:动画重复次数<br>autoreverses:执行的动画按照原动画返回执行<br>timingFunction:控制动画的显示节奏，系统主要提供了以下几种</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><img src="https://camo.githubusercontent.com/9fe3e0f9f3a1a750292d80b899b395a5b20f85b0/687474703a2f2f696d672e6d792e6373646e2e6e65742f75706c6f6164732f3230313530372f32332f313433373631373536325f333139302e706e67" alt=""></p>
+<h2 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h2><p>duration:动画持续时间<br>beginTime:动画开始时间<br>repeatCount:动画重复次数<br>autoreverses:执行的动画按照原动画返回执行<br>timingFunction:控制动画的显示节奏，系统主要提供了以下几种</p>
 <blockquote>
 <p>kCAMediaTimingFunctionLinear 线性动画<br>kCAMediaTimingFunctionEaseIn 先慢后快（慢进快出）<br>kCAMediaTimingFunctionEaseOut 先块后慢（快进慢出）<br>kCAMediaTimingFunctionEaseInEaseOut 先慢后快再慢<br>kCAMediaTimingFunctionDefault 默认，也属于中间比较快</p>
 </blockquote>
@@ -428,59 +428,43 @@
 <blockquote>
 <p>kCATransitionFade 渐变效果<br>kCATransitionMoveIn 进入覆盖效果<br>kCATransitionPush 推出效果<br>kCATransitionReveal 揭露离开效果 subtype : 过渡动画的动画方向<br>kCATransitionFromRight 从右侧进入<br>kCATransitionFromLeft 从左侧进入<br>kCATransitionFromTop 从顶部进入<br>kCATransitionFromBottom 从底部进入</p>
 </blockquote>
-<p>##动画的三种调用方式</p>
-<p>###使用block</p>
-<blockquote>
-<pre><code>[UIView animateWithDuration:1.0f animations:^{
-     self.animationView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50);
-} completion:^(BOOL finished) {
-
-}];
-</code></pre></blockquote>
-<p>###UIView [begin commit]</p>
-<blockquote>
-<pre><code>[UIView beginAnimations:nil context:nil];
-[UIView setAnimationDuration:1.0f];
-self.animationView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50);
-[UIView commitAnimations];
-</code></pre></blockquote>
-<p>###CABaseAnimation</p>
-<blockquote>
-<pre><code>CABasicAnimation *anima = [CABasicAnimation animationWithKeyPath:@&quot;position&quot;];
-anima.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, SCREEN_HEIGHT/2-100)];
-anima.toValue = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-75)];
-anima.duration = 2.0f;
-//fillMode=kCAFillModeForwards和removedOnComletion=NO
-anima.fillMode = kCAFillModeBackwards;
-anima.removedOnCompletion = YES;
-anima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-[self.animationView.layer addAnimation:anima forKey:@&quot;positionAnimation&quot;];
-</code></pre></blockquote>
-<p>##一、基础动画<br>重要属性</p>
+<h2 id="动画的三种调用方式"><a href="#动画的三种调用方式" class="headerlink" title="动画的三种调用方式"></a>动画的三种调用方式</h2><h3 id="使用block"><a href="#使用block" class="headerlink" title="使用block"></a>使用block</h3><pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span>UIView animateWithDuration:1.0f animations:^<span class="token punctuation">{</span>
+      self.animationView.frame <span class="token operator">=</span> CGRectMake<span class="token punctuation">(</span>SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> completion:^<span class="token punctuation">(</span>BOOL finished<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="UIView-begin-commit"><a href="#UIView-begin-commit" class="headerlink" title="UIView [begin commit]"></a>UIView [begin commit]</h3><pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span>UIView beginAnimations:nil context:nil<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>UIView setAnimationDuration:1.0f<span class="token punctuation">]</span><span class="token punctuation">;</span>
+self.animationView.frame <span class="token operator">=</span> CGRectMake<span class="token punctuation">(</span>SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>UIView commitAnimations<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="CABaseAnimation"><a href="#CABaseAnimation" class="headerlink" title="CABaseAnimation"></a>CABaseAnimation</h3><pre class=" language-bash"><code class="language-bash">CABasicAnimation *anima <span class="token operator">=</span> <span class="token punctuation">[</span>CABasicAnimation animationWithKeyPath:@<span class="token string">"position"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+anima.fromValue <span class="token operator">=</span> <span class="token punctuation">[</span>NSValue valueWithCGPoint:CGPointMake<span class="token punctuation">(</span>0, SCREEN_HEIGHT/2-100<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+anima.toValue <span class="token operator">=</span> <span class="token punctuation">[</span>NSValue valueWithCGPoint:CGPointMake<span class="token punctuation">(</span>SCREEN_WIDTH, SCREEN_HEIGHT/2-75<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+anima.duration <span class="token operator">=</span> 2.0f<span class="token punctuation">;</span>
+//fillMode<span class="token operator">=</span>kCAFillModeForwards和removedOnComletion<span class="token operator">=</span>NO
+anima.fillMode <span class="token operator">=</span> kCAFillModeBackwards<span class="token punctuation">;</span>
+anima.removedOnCompletion <span class="token operator">=</span> YES<span class="token punctuation">;</span>
+anima.timingFunction <span class="token operator">=</span> <span class="token punctuation">[</span>CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>self.animationView.layer addAnimation:anima forKey:@<span class="token string">"positionAnimation"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="一、基础动画"><a href="#一、基础动画" class="headerlink" title="一、基础动画"></a>一、基础动画</h2><p>重要属性</p>
 <blockquote>
 <p>fromValue：keyPath对应的初始值<br>toValue：keyPath对应的结束值</p>
 </blockquote>
 <p>基础动画主要提供了对于CALayer对象中的可变属性进行简单动画的操作。比如：位移(position)、透明度(opacity)、缩放(scale)、旋转(rotate)、背景色(backgroundColor)等等。<br>具体效果实例演示</p>
-<p>##二、关键帧动画(keyAnimation)<br>具体效果实例演示</p>
-<p>##三、动画组(animationGroup)<br>具体效果实例演示</p>
-<p>##三、转场动画 (transition)<br>iOS7开始，苹果就提供了自定义转场的API，模态推送present和dismiss、导航控制器push和pop、标签控制器的控制器切换都可以自定义转场，具体效果实例演示</p>
-<p>###1、转场协议<uiviewcontrolleranimatedtransitioning><br>转场动画的实现 遵从上面这个协议以及实现协议中的两个方法，如下：</uiviewcontrolleranimatedtransitioning></p>
-<blockquote>
-<p> //返回动画事件  </p>
-<ul>
-<li>(NSTimeInterval)transitionDuration:(nullable id <uiviewcontrollercontexttransitioning>)transitionContext;<br>//所有的过渡动画事务都在这个方法里面完成</uiviewcontrollercontexttransitioning></li>
-<li>(void)animateTransition:(id <uiviewcontrollercontexttransitioning>)transitionContext;</uiviewcontrollercontexttransitioning></li>
-</ul>
-</blockquote>
-<p>##四、动画扩展 </p>
-<p>###1、Lottie动画库</p>
-<p>####1.1、简介</p>
-<p>Easily add high-quality animation to any native app.<br>Lottie is an iOS, Android, and React Native library that renders After Effects animations in real time, allowing apps to use animations as easily as they use static images.</p>
+<h2 id="二、关键帧动画-keyAnimation"><a href="#二、关键帧动画-keyAnimation" class="headerlink" title="二、关键帧动画(keyAnimation)"></a>二、关键帧动画(keyAnimation)</h2><p>具体效果实例演示</p>
+<h2 id="三、动画组-animationGroup"><a href="#三、动画组-animationGroup" class="headerlink" title="三、动画组(animationGroup)"></a>三、动画组(animationGroup)</h2><p>具体效果实例演示</p>
+<h2 id="三、转场动画-transition"><a href="#三、转场动画-transition" class="headerlink" title="三、转场动画 (transition)"></a>三、转场动画 (transition)</h2><p>iOS7开始，苹果就提供了自定义转场的API，模态推送present和dismiss、导航控制器push和pop、标签控制器的控制器切换都可以自定义转场，具体效果实例演示</p>
+<h3 id="1、转场协议"><a href="#1、转场协议" class="headerlink" title="1、转场协议"></a>1、转场协议<uiviewcontrolleranimatedtransitioning></uiviewcontrolleranimatedtransitioning></h3><p>转场动画的实现 遵从上面这个协议以及实现协议中的两个方法，如下：</p>
+<pre class=" language-bash"><code class="language-bash">//返回动画事件  
+- <span class="token punctuation">(</span>NSTimeInterval<span class="token punctuation">)</span>transitionDuration:<span class="token punctuation">(</span>nullable <span class="token function">id</span> <span class="token operator">&lt;</span>UIViewControllerContextTransitioning<span class="token operator">></span><span class="token punctuation">)</span>transitionContext<span class="token punctuation">;</span>
+//所有的过渡动画事务都在这个方法里面完成
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>animateTransition:<span class="token punctuation">(</span>id <span class="token operator">&lt;</span>UIViewControllerContextTransitioning<span class="token operator">></span><span class="token punctuation">)</span>transitionContext<span class="token punctuation">;</span>
+</code></pre>
+<h2 id="四、动画扩展"><a href="#四、动画扩展" class="headerlink" title="四、动画扩展"></a>四、动画扩展</h2><h3 id="1、Lottie动画库"><a href="#1、Lottie动画库" class="headerlink" title="1、Lottie动画库"></a>1、Lottie动画库</h3><h4 id="1-1、简介"><a href="#1-1、简介" class="headerlink" title="1.1、简介"></a>1.1、简介</h4><p>Easily add high-quality animation to any native app.<br>Lottie is an iOS, Android, and React Native library that renders After Effects animations in real time, allowing apps to use animations as easily as they use static images.</p>
 <p>简单的为任何原生APP添加高质量动画<br>Lottie是一个iOS，Android和React Native库，可以实时渲染After Effects动画，并且允许本地app像静态资源那样轻松地使用动画。<br><img src="https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example1.gif" alt=""><br><img src="https://raw.githubusercontent.com/airbnb/lottie-ios/master/_Gifs/Examples2.gif" alt=""></p>
-<p>####1.2、使用（以OC为例）</p>
-<p>###2、facebook开源动画库</p>
-<p>####2.1、开源地址 <a href="https://github.com/facebook/pop" target="_blank" rel="noopener">https://github.com/facebook/pop</a></p>
-
+<h4 id="1-2、使用（以OC为例）"><a href="#1-2、使用（以OC为例）" class="headerlink" title="1.2、使用（以OC为例）"></a>1.2、使用（以OC为例）</h4><h3 id="2、facebook开源动画库"><a href="#2、facebook开源动画库" class="headerlink" title="2、facebook开源动画库"></a>2、facebook开源动画库</h3><h4 id="2-1、开源地址-https-github-com-facebook-pop"><a href="#2-1、开源地址-https-github-com-facebook-pop" class="headerlink" title="2.1、开源地址 https://github.com/facebook/pop"></a>2.1、开源地址 <a href="https://github.com/facebook/pop" target="_blank" rel="noopener">https://github.com/facebook/pop</a></h4>
             </div>
             <hr>
 
@@ -748,7 +732,7 @@ AES加密RSA加密</div>
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -760,7 +744,7 @@ AES加密RSA加密</div>
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

@@ -371,6 +371,22 @@ $ brew install git
     <div class="card">
         <div class="card-content article-info">
             
+            <div class="article-tag">
+                
+                <a href="/tags/hexo/" target="_blank">
+                    <span class="chip bg-color">hexo</span>
+                </a>
+                
+                <a href="/tags/博客/" target="_blank">
+                    <span class="chip bg-color">博客</span>
+                </a>
+                
+                <a href="/tags/搭建/" target="_blank">
+                    <span class="chip bg-color">搭建</span>
+                </a>
+                
+            </div>
+            
             <div class="post-info">
                 
                 <span class="post-cate">
@@ -414,7 +430,7 @@ $ brew install git
 <pre class=" language-bash"><code class="language-bash">$ <span class="token function">cat</span> ~/.ssh/id_rsa.pub
 </code></pre>
 <p>该命令将公钥文件中的值，也就是一个很长的字符串输出到命令行中，复制该值备用。</p>
-<p>###Node.js安装<br>Node是javascript的一种运行时环境，也是近年来非常流行的一门技术。安装Node.js的最佳方式是使用nvm。在命令行输入</p>
+<h3 id="Node-js安装"><a href="#Node-js安装" class="headerlink" title="Node.js安装"></a>Node.js安装</h3><p>Node是javascript的一种运行时环境，也是近年来非常流行的一门技术。安装Node.js的最佳方式是使用nvm。在命令行输入</p>
 <pre class=" language-bash"><code class="language-bash">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh <span class="token operator">|</span> <span class="token function">bash</span>
 </code></pre>
 <p>这条命令通过curl下载install.sh脚本，并执行脚本。待执行完成后，它会把nvm命令的执行路径放到~/.bashrc文件里，我们可以用cat命令来查看一下</p>
@@ -429,7 +445,7 @@ $ brew install git
 <p>如果能正确打印出版本信息就证明nvm已经安装成功。接着通过执行以下命令来安装Node.js</p>
 <pre class=" language-bash"><code class="language-bash">$ nvm <span class="token function">install</span> stable
 </code></pre>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>上述环境配置完毕后，即可安装hexo</p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>上述环境配置完毕后，即可安装hexo</p>
 <pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
 </code></pre>
 <p>npm是Node.js自带的一个包管理工具，用于安装和卸载Node模块。上面的命令将Hexo这个模块以全局的方式安装到我们的电脑中，是Hexo官方推荐的方式。但笔者在运行这条命令时，出现了如下的错误</p>
@@ -454,7 +470,7 @@ $ brew install git
 <pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> --unsafe-perm --verbose -g hexo
 </code></pre>
 <p>至此，Hexo本人尝试安装成功。</p>
-<h3 id="Hexo使用"><a href="#Hexo使用" class="headerlink" title="Hexo使用"></a>Hexo使用</h3><p>终端切换到一个你准备用来搭建博客的目录，然后执行命令</p>
+<h2 id="Hexo使用"><a href="#Hexo使用" class="headerlink" title="Hexo使用"></a>Hexo使用</h2><p>终端切换到一个你准备用来搭建博客的目录，然后执行命令</p>
 <pre class=" language-bash"><code class="language-bash">$ hexo init blog
 </code></pre>
 <p>其中blog将会作为博客网站的本地主目录，该命令对文件夹进行了初始化，生成了一些建设网站所必须的材料。切换到myblog文件夹下，执行以下命令</p>
@@ -468,9 +484,7 @@ $ brew install git
 INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 </code></pre>
 <p>复制<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 到浏览器就可以看到hexo默认配置的landscape主题的博客界面<br>再往后就是定制化，个性化修改你自己想要的风格了。</p>
-<p>###修改配置信息</p>
-<p>###通过git发布</p>
-<p>首先，我们要在github上新建一个Repository，名称固定为</p>
+<h3 id="修改配置信息"><a href="#修改配置信息" class="headerlink" title="修改配置信息"></a>修改配置信息</h3><h3 id="通过git发布"><a href="#通过git发布" class="headerlink" title="通过git发布"></a>通过git发布</h3><p>首先，我们要在github上新建一个Repository，名称固定为</p>
 <pre class=" language-bash"><code class="language-bash">$ yourNickName.github.io
 </code></pre>
 <p>其中yourNickName指的是你的github账户昵称，注意必须按照这个规则来命名。然后我们编辑myblog/_config.yml文件，在文件的最后几行找到deploy设置项，按照下面的方式进行修改</p>
@@ -489,8 +503,7 @@ $ hexo deploy
 <p>Hexo会将所有文件推送到github上对应的项目中。然后访问一下地址：</p>
 <p><a href="https://yourNickName.github.io" target="_blank" rel="noopener">https://yourNickName.github.io</a></p>
 <p>即可查看你自己的博客啦</p>
-<p>##修改背景图</p>
-<pre class=" language-bash"><code class="language-bash">body <span class="token punctuation">{</span>
+<h2 id="修改背景图"><a href="#修改背景图" class="headerlink" title="修改背景图"></a>修改背景图</h2><pre class=" language-bash"><code class="language-bash">body <span class="token punctuation">{</span>
     background:url<span class="token punctuation">(</span>https://source.unsplash.com/random/1600x900<span class="token punctuation">)</span><span class="token punctuation">;</span>
     background-repeat: no-repeat<span class="token punctuation">;</span>
     background-attachment:fixed<span class="token punctuation">;</span>
@@ -673,8 +686,8 @@ $ hexo deploy
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">iOS逆向工程-非越狱软件逆向工程，指的是通过分析一个程序或系统的功能、结构或行为，将它的技术实现或细节推导出来的过程。当我们对一个软件的功能很感兴趣，却又拿不到它的源代码时，往往可以通过逆向工程来对它进行分析。
-逆向工程主要有两个作用：分</div>
+                    <div class="summary">iOS逆向工程-非越狱简介软件逆向工程，指的是通过分析一个程序或系统的功能、结构或行为，将它的技术实现或细节推导出来的过程。当我们对一个软件的功能很感兴趣，却又拿不到它的源代码时，往往可以通过逆向工程来对它进行分析。
+运用逆向工程主要有两个</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-14
@@ -785,7 +798,7 @@ $ hexo deploy
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -797,7 +810,7 @@ $ hexo deploy
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

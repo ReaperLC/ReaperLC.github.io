@@ -6,9 +6,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="iOS中的图片自适应拉伸, ReaperLC的博客">
-    <meta name="description" content="iOS中的图片自适应拉伸iOS5之前
-
-(UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:(NSInteger)topCapHe">
+    <meta name="description" content="iOS中的图片自适应拉伸iOS5之前- (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:(NSInteger)topCapHe">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -395,18 +393,12 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="iOS中的图片自适应拉伸"><a href="#iOS中的图片自适应拉伸" class="headerlink" title="iOS中的图片自适应拉伸"></a>iOS中的图片自适应拉伸</h1><p>iOS5之前</p>
-<ul>
-<li>(UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:(NSInteger)topCapHeight;  </li>
-</ul>
-<p>iOS5</p>
-<ul>
-<li>(UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets；</li>
-</ul>
-<p>iOS6</p>
-<ul>
-<li>(UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode；</li>
-</ul>
+                <h2 id="iOS中的图片自适应拉伸"><a href="#iOS中的图片自适应拉伸" class="headerlink" title="iOS中的图片自适应拉伸"></a>iOS中的图片自适应拉伸</h2><h3 id="iOS5之前"><a href="#iOS5之前" class="headerlink" title="iOS5之前"></a>iOS5之前</h3><pre class=" language-bash"><code class="language-bash">- <span class="token punctuation">(</span>UIImage *<span class="token punctuation">)</span>stretchableImageWithLeftCapWidth:<span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>leftCapWidth topCapHeight:<span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>topCapHeight<span class="token punctuation">;</span>  
+</code></pre>
+<h3 id="iOS5"><a href="#iOS5" class="headerlink" title="iOS5"></a>iOS5</h3><pre class=" language-bash"><code class="language-bash">- <span class="token punctuation">(</span>UIImage *<span class="token punctuation">)</span>resizableImageWithCapInsets:<span class="token punctuation">(</span>UIEdgeInsets<span class="token punctuation">)</span>capInsets；
+</code></pre>
+<h3 id="iOS6"><a href="#iOS6" class="headerlink" title="iOS6"></a>iOS6</h3><pre class=" language-bash"><code class="language-bash">- <span class="token punctuation">(</span>UIImage *<span class="token punctuation">)</span>resizableImageWithCapInsets:<span class="token punctuation">(</span>UIEdgeInsets<span class="token punctuation">)</span>capInsets resizingMode:<span class="token punctuation">(</span>UIImageResizingMode<span class="token punctuation">)</span>resizingMode；s
+</code></pre>
 
             </div>
             <hr>
@@ -633,7 +625,7 @@
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">iOS调试技巧
+                    <div class="summary">
 NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用;
 //否则一旦引入 C 或者 C++ 代码或者框架就会出错!
 #ifdef __OBJC__
@@ -641,7 +633,7 @@ NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用;
 //只在开发中用:
 #ifdef DEBUG
 
-//定义 </div>
+//定义 NSLog(_</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-09-14
@@ -701,7 +693,7 @@ NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用;
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -713,7 +705,7 @@ NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用;
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 

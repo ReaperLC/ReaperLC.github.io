@@ -7,15 +7,13 @@
     <meta charset="utf-8">
     <meta name="keywords" content="函数式、链式语法, ReaperLC的博客">
     <meta name="description" content="#函数式、链式语法
-#import 
+Person.h
+#import &amp;lt;Foundation/Foundation.h&gt;
 
 @interface Person : NSObject
 /** 传统写法 */
 - (void)eat;
-- (void)sleep;
-
-/** 使用‘[]’连续调用 */
-- (Person *)">
+- (void)s">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -419,114 +417,115 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>#函数式、链式语法</p>
-<pre><code>#import <foundation foundation.h="">
+<p><strong>Person.h</strong></p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#import &lt;Foundation/Foundation.h></span>
 
-@interface Person : NSObject
+@interface Person <span class="token keyword">:</span> NSObject
 /** 传统写法 */
-- (void)eat;
-- (void)sleep;
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>eat<span class="token punctuation">;</span>
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>sleep<span class="token punctuation">;</span>
 
-/** 使用‘[]’连续调用 */
-- (Person *)eat1;
-- (Person *)sleep1;
+/** 使用‘<span class="token punctuation">[</span><span class="token punctuation">]</span>’连续调用 */
+- <span class="token punctuation">(</span>Person *<span class="token punctuation">)</span>eat1<span class="token punctuation">;</span>
+- <span class="token punctuation">(</span>Person *<span class="token punctuation">)</span>sleep1<span class="token punctuation">;</span>
 
-/** 使用‘()’函数式编程,block实现 */
+/** 使用‘<span class="token punctuation">(</span><span class="token punctuation">)</span>’函数式编程,block实现 */
 
-- (void(^)(void))eat2;
-- (void(^)(void))sleep2;
+- <span class="token punctuation">(</span>void<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>eat2<span class="token punctuation">;</span>
+- <span class="token punctuation">(</span>void<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>sleep2<span class="token punctuation">;</span>
 
 /** 使用函数式 + 链式 无参 */
-- (Person *(^)(void))eat3;
-- (Person *(^)(void))sleep3;
+- <span class="token punctuation">(</span>Person *<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>eat3<span class="token punctuation">;</span>
+- <span class="token punctuation">(</span>Person *<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>sleep3<span class="token punctuation">;</span>
 
 /** 函数式 + 链式 带参 */
-- (Person * (^)(NSString *foodName))eat4;
-- (Person * (^)(NSInteger hour))sleep4;
+- <span class="token punctuation">(</span>Person * <span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>NSString *foodName<span class="token punctuation">))</span>eat4<span class="token punctuation">;</span>
+- <span class="token punctuation">(</span>Person * <span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>NSInteger hour<span class="token punctuation">))</span>sleep4<span class="token punctuation">;</span>
 @end
-</foundation></code></pre>
-
-<pre><code>#import "Person.h"
+</code></pre>
+<p><strong>Person.m</strong></p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#import "Person.h"</span>
 
 @implementation Person
-#pragma mark - 传统写法,单独调用,不能任意顺序组合
-- (void)eat {
-    NSLog(@"%s",__func__);
-}
+<span class="token comment" spellcheck="true">#pragma mark - 传统写法,单独调用,不能任意顺序组合</span>
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>eat <span class="token punctuation">{</span>
+    NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__func__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
--(void)sleep {
-    NSLog(@"%s",__func__);
-}
+-<span class="token punctuation">(</span>void<span class="token punctuation">)</span>sleep <span class="token punctuation">{</span>
+    NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__func__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-#pragma mark - 使用‘[]’实现连续调用
-- (Person *)eat1 {
-    NSLog(@"%s",__func__);
-    return self;
-}
+<span class="token comment" spellcheck="true">#pragma mark - 使用‘[]’实现连续调用</span>
+- <span class="token punctuation">(</span>Person *<span class="token punctuation">)</span>eat1 <span class="token punctuation">{</span>
+    NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__func__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
--(Person *)sleep1{
-    NSLog(@"%s",__func__);
-    return self;
-}
+-<span class="token punctuation">(</span>Person *<span class="token punctuation">)</span>sleep1<span class="token punctuation">{</span>
+    NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__func__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-#pragma mark - 使用‘()’函数式编程,block实现
+<span class="token comment" spellcheck="true">#pragma mark - 使用‘()’函数式编程,block实现</span>
 
--(void (^)(void))eat2 {
+-<span class="token punctuation">(</span>void <span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>eat2 <span class="token punctuation">{</span>
 
     //定义block
-    void (^eat2Block)(void) = ^ {
-        NSLog(@"%s",__FUNCTION__);
-    };
-    return eat2Block;
-}
+    void <span class="token punctuation">(</span>^eat2Block<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token operator">=</span> ^ <span class="token punctuation">{</span>
+        NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> eat2Block<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
--(void (^)(void))sleep2 {
+-<span class="token punctuation">(</span>void <span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>sleep2 <span class="token punctuation">{</span>
     //定义block
-    void (^sleep2Block)(void) = ^ {
-        NSLog(@"%s",__FUNCTION__);
-    };
-    return sleep2Block;
-}
+    void <span class="token punctuation">(</span>^sleep2Block<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token operator">=</span> ^ <span class="token punctuation">{</span>
+        NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sleep2Block<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-#pragma mark - 使用函数式 + 链式 无参
+<span class="token comment" spellcheck="true">#pragma mark - 使用函数式 + 链式 无参</span>
 
--(Person *(^)(void))eat3{
+-<span class="token punctuation">(</span>Person *<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>eat3<span class="token punctuation">{</span>
 
-    Person *(^eat3Block)(void) = ^{
-        NSLog(@"%s",__FUNCTION__);
-        return self;
-    };
-    return eat3Block;
-}
+    Person *<span class="token punctuation">(</span>^eat3Block<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token operator">=</span> ^<span class="token punctuation">{</span>
+        NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> eat3Block<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
--(Person *(^)(void))sleep3{
+-<span class="token punctuation">(</span>Person *<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">))</span>sleep3<span class="token punctuation">{</span>
 
-    Person *(^sleep3Block)(void) = ^{
-        NSLog(@"%s",__FUNCTION__);
-        return self;
-    };
-    return sleep3Block;
-}
+    Person *<span class="token punctuation">(</span>^sleep3Block<span class="token punctuation">)</span><span class="token punctuation">(</span>void<span class="token punctuation">)</span> <span class="token operator">=</span> ^<span class="token punctuation">{</span>
+        NSLog<span class="token punctuation">(</span>@<span class="token string">"%s"</span>,__FUNCTION__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sleep3Block<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-#pragma mark - 函数式 + 链式 带参
-- (Person *(^)(NSString *))eat4
-{
-    Person * (^eat4Block)(NSString *) = ^(NSString *foodName) {
-        NSLog(@"这个人吃了: %@",foodName);
-        return self;
-    };
-    return eat4Block;
-}
+<span class="token comment" spellcheck="true">#pragma mark - 函数式 + 链式 带参</span>
+- <span class="token punctuation">(</span>Person *<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>NSString *<span class="token punctuation">))</span>eat4
+<span class="token punctuation">{</span>
+    Person * <span class="token punctuation">(</span>^eat4Block<span class="token punctuation">)</span><span class="token punctuation">(</span>NSString *<span class="token punctuation">)</span> <span class="token operator">=</span> ^<span class="token punctuation">(</span>NSString *foodName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        NSLog<span class="token punctuation">(</span>@<span class="token string">"这个人吃了: %@"</span>,foodName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> eat4Block<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 //上下两种写法一样
-- (Person *(^)(NSInteger))sleep4
-{
-    return ^(NSInteger hour) {
-        NSLog(@"然后睡了%ld小时",(long)hour);
-        return self;
-    };
-}
+- <span class="token punctuation">(</span>Person *<span class="token punctuation">(</span>^<span class="token punctuation">)</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">))</span>sleep4
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> ^<span class="token punctuation">(</span>NSInteger hour<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        NSLog<span class="token punctuation">(</span>@<span class="token string">"然后睡了%ld小时"</span>,<span class="token punctuation">(</span>long<span class="token punctuation">)</span>hour<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-@end</code></pre>
-
+@end
+</code></pre>
 
             </div>
             <hr>
@@ -689,7 +688,7 @@
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">上一篇</div>
             <div class="card">
-                <a href="/2018/04/08/iOS开发/设备尺寸/">
+                <a href="/2018/04/08/iOS开发/常用宏定义/">
                     <div class="card-image">
                         
                         
@@ -718,6 +717,14 @@
                     </div>
                 </div>
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/宏定义/" target="_blank">
+                        <span class="chip bg-color">宏定义</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
@@ -735,9 +742,8 @@
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">#实用框架
-1.新闻类的顶部选项卡类似网易新闻：WMPageController，HMSegmentControl，HTHorizontalSelectionList
-这三者我跟推荐第一种，第一种有很多手势，比如点击顶部列表会滑动到最顶端。</div>
+                    <div class="summary">新闻选项卡1.新闻类的顶部选项卡类似网易新闻：WMPageController，HMSegmentControl，HTHorizontalSelectionList
+这三者我跟推荐第一种，第一种有很多手势，比如点击顶部列表会滑动到最顶端。具</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-04-02
@@ -753,6 +759,18 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/源码/" target="_blank">
+                        <span class="chip bg-color">源码</span>
+                    </a>
+                    
+                    <a href="/tags/第三方/" target="_blank">
+                        <span class="chip bg-color">第三方</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -781,7 +799,7 @@
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingSelector: 'h1,h2,h3,h4'
+            headingSelector: 'h2,h3,h4'
         });
 
         // modify the toc link href to support Chinese.
@@ -793,7 +811,7 @@
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1,h2,h3,h4').each(function () {
+        $('#articleContent').children('h2,h3,h4').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
