@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>iOS逆向工程</title>
+      <link href="/2019/01/14/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/iOS%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B(%E9%9D%9E%E8%B6%8A%E7%8B%B1)/"/>
+      <url>/2019/01/14/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/iOS%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B(%E9%9D%9E%E8%B6%8A%E7%8B%B1)/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS逆向工程-非越狱"><a href="#iOS逆向工程-非越狱" class="headerlink" title="iOS逆向工程-非越狱"></a>iOS逆向工程-非越狱</h1><p>软件逆向工程，指的是通过分析一个程序或系统的功能、结构或行为，将它的技术实现或细节推导出来的过程。当我们对一个软件的功能很感兴趣，却又拿不到它的源代码时，往往可以通过逆向工程来对它进行分析。</p><p>逆向工程主要有两个作用：<br><strong>分析目标程序，拿到关键信息，可以归类于安全相关的逆向工程</strong></p><blockquote><ul><li>评定软件的安全级别</li><li>逆向恶意软件</li><li>检查软件后门</li></ul></blockquote><p><strong>借鉴他人的程序功能来开发自己的软件，可以归类于开发相关的逆向工程</strong></p><blockquote><ul><li>逆向系统API</li><li>借鉴别的软件</li></ul></blockquote><h2 id="脱壳、砸壳"><a href="#脱壳、砸壳" class="headerlink" title="脱壳、砸壳"></a>脱壳、砸壳</h2><p><a href="https://github.com/conradev/dumpdecrypted" target="_blank" rel="noopener">dumpdecrypted</a><br><a href="https://github.com/AloneMonkey/frida-ios-dump" target="_blank" rel="noopener">AloneMonkey</a></p><h4 id="AloneMonkey"><a href="#AloneMonkey" class="headerlink" title="AloneMonkey"></a>AloneMonkey</h4><p><a href="https://github.com/AloneMonkey/MonkeyDev/wiki/%E5%AE%89%E8%A3%85" target="_blank" rel="noopener">安装</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 逆向工程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 逆向 </tag>
+            
+            <tag> 分析 </tag>
+            
+            <tag> 编码 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于Mac环境下Hexo搭建指南</title>
+      <link href="/2018/11/16/Hexo%E6%90%AD%E5%BB%BA/Mac%E4%B8%8BHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+      <url>/2018/11/16/Hexo%E6%90%AD%E5%BB%BA/Mac%E4%B8%8BHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>安装Hexo前需要先安装Git和Node.js</p><h3 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h3><p>HomeBrew是一种包管理工具，可以帮助您方便快捷的安装与卸载软件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure><p>安装结束后在命令行输入git后运行，如果屏幕上出现git命令的使用帮助，说明安装成功。</p><h3 id="SSH配置"><a href="#SSH配置" class="headerlink" title="SSH配置"></a>SSH配置</h3><p>首先检查本地是否已存在ssh-keys</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -a ~/.ssh/</span><br></pre></td></tr></table></figure><p>以上命令列出当前用户主目录下的.ssh目录中的所有文件，如果存在id_rsa和id_rsa.pub则跳过下一步，否则需要手动生成一组ssh-key</p><p>手动生成</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure><p>其中<a href="mailto:your_email@example.com" target="_blank" rel="noopener">your_email@example.com</a>换成自己的git帐号邮箱即可</p><p>生成的文件默认会放在之前提到的.ssh目录中，我们需要获得公钥的值，在命令行输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure><p>该命令将公钥文件中的值，也就是一个很长的字符串输出到命令行中，复制该值备用。</p><p>###Node.js安装<br>Node是javascript的一种运行时环境，也是近年来非常流行的一门技术。安装Node.js的最佳方式是使用nvm。在命令行输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash</span><br></pre></td></tr></table></figure><p>这条命令通过curl下载install.sh脚本，并执行脚本。待执行完成后，它会把nvm命令的执行路径放到~/.bashrc文件里，我们可以用cat命令来查看一下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.bashrc</span><br></pre></td></tr></table></figure><p>确认存在以上配置后，通过执行source命令来使得环境变量生效</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure><p>至此我们就把nvm安装好了，可以通过以下命令查看nvm版本号</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm --version</span><br></pre></td></tr></table></figure><p>如果能正确打印出版本信息就证明nvm已经安装成功。接着通过执行以下命令来安装Node.js</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install stable</span><br></pre></td></tr></table></figure><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>上述环境配置完毕后，即可安装hexo</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>npm是Node.js自带的一个包管理工具，用于安装和卸载Node模块。上面的命令将Hexo这个模块以全局的方式安装到我们的电脑中，是Hexo官方推荐的方式。但笔者在运行这条命令时，出现了如下的错误</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! Error: EACCES: permission denied, mkdir <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span></span><br><span class="line">npm ERR!     at Error (native)</span><br><span class="line">npm ERR!  &#123; [Error: EACCES: permission denied, mkdir <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>]</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: <span class="string">'EACCES'</span>,</span><br><span class="line">npm ERR!   syscall: <span class="string">'mkdir'</span>,</span><br><span class="line">npm ERR!   path: <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>,</span><br><span class="line">npm ERR!   fstream_type: <span class="string">'Directory'</span>,</span><br><span class="line">npm ERR!   fstream_path: <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>,</span><br><span class="line">npm ERR!   fstream_class: <span class="string">'DirWriter'</span>,</span><br><span class="line">npm ERR!   fstream_stack:</span><br><span class="line">npm ERR!    [ <span class="string">'/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25'</span>,</span><br><span class="line">npm ERR!      <span class="string">'/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53'</span>,</span><br><span class="line">npm ERR!      <span class="string">'FSReqWrap.oncomplete (fs.js:82:15)'</span> ] &#125;</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Please try running this <span class="built_in">command</span> again as root/Administrator.</span><br></pre></td></tr></table></figure><p>询问度娘，采用另外一种安装方式，如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install --unsafe-perm --verbose -g hexo</span><br></pre></td></tr></table></figure><p>至此，Hexo本人尝试安装成功。</p><h3 id="Hexo使用"><a href="#Hexo使用" class="headerlink" title="Hexo使用"></a>Hexo使用</h3><p>终端切换到一个你准备用来搭建博客的目录，然后执行命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog</span><br></pre></td></tr></table></figure><p>其中blog将会作为博客网站的本地主目录，该命令对文件夹进行了初始化，生成了一些建设网站所必须的材料。切换到myblog文件夹下，执行以下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure><p>安装完成后，执行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">出现如下即可说明搭建成功</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure><p>复制<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 到浏览器就可以看到hexo默认配置的landscape主题的博客界面<br>再往后就是定制化，个性化修改你自己想要的风格了。</p><p>###修改配置信息</p><p>###通过git发布</p><p>首先，我们要在github上新建一个Repository，名称固定为</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yourNickName.github.io</span><br></pre></td></tr></table></figure><p>其中yourNickName指的是你的github账户昵称，注意必须按照这个规则来命名。然后我们编辑myblog/_config.yml文件，在文件的最后几行找到deploy设置项，按照下面的方式进行修改</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: git@github.com:coolBoyGym/coolboygym.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p>其中的repository字段需改成你自己的giuhub项目对应的地址。</p><p>修改完成后，在blog目录下依次运行以下命令（此命令本地修改后 push到git都需要执行）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>Hexo会将所有文件推送到github上对应的项目中。然后访问一下地址：</p><p><a href="https://yourNickName.github.io" target="_blank" rel="noopener">https://yourNickName.github.io</a></p><p>即可查看你自己的博客啦</p><p>##修改背景图</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    background:url(https://source.unsplash.com/random/1600x900);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-attachment:fixed;</span><br><span class="line">    background-position:50% 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>url可更换为自己喜欢的图片的地址。</p><p>repeat：是否重复出现</p><p>attachment：定义背景图片随滚动轴的移动方式</p><p>position：设置背景图像的起始位置。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS富文本-让你的label绚烂起来</title>
+      <link href="/2018/11/13/iOS%E5%BC%80%E5%8F%91/iOS%E5%AF%8C%E6%96%87%E6%9C%AC/"/>
+      <url>/2018/11/13/iOS%E5%BC%80%E5%8F%91/iOS%E5%AF%8C%E6%96%87%E6%9C%AC/</url>
+      
+        <content type="html"><![CDATA[<p>NSFontAttributeName                设置字体属性，默认值：字体：Helvetica(Neue) 字号：12<br>NSForegroundColorAttributeNam      设置字体颜色，取值为 UIColor对象，默认值为黑色<br>NSBackgroundColorAttributeName     设置字体所在区域背景颜色，取值为 UIColor对象，默认值为nil, 透明色<br>NSLigatureAttributeName            设置连体属性，取值为NSNumber 对象(整数)，0 表示没有连体字符，1 表示使用默认的连体字符<br>NSKernAttributeName                设定字符间距，取值为 NSNumber 对象（整数），正值间距加宽，负值间距变窄<br>NSStrikethroughStyleAttributeName  设置删除线，取值为 NSNumber 对象（整数）<br>NSStrikethroughColorAttributeName  设置删除线颜色，取值为 UIColor 对象，默认值为黑色<br>NSUnderlineStyleAttributeName      设置下划线，取值为 NSNumber 对象（整数），枚举常量 NSUnderlineStyle中的值，与删除线类似<br>NSUnderlineColorAttributeName      设置下划线颜色，取值为 UIColor 对象，默认值为黑色<br>NSStrokeWidthAttributeName         设置笔画宽度，取值为 NSNumber 对象（整数），负值填充效果，正值中空效果<br>NSStrokeColorAttributeName         填充部分颜色，不是字体颜色，取值为 UIColor 对象<br>NSShadowAttributeName              设置阴影属性，取值为 NSShadow 对象<br>NSTextEffectAttributeName          设置文本特殊效果，取值为 NSString 对象，目前只有图版印刷效果可用：<br>NSBaselineOffsetAttributeName      设置基线偏移值，取值为 NSNumber （float）,正值上偏，负值下偏<br>NSObliquenessAttributeName         设置字形倾斜度，取值为 NSNumber （float）,正值右倾，负值左倾<br>NSExpansionAttributeName           设置文本横向拉伸属性，取值为 NSNumber （float）,正值横向拉伸文本，负值横向压缩文本<br>NSWritingDirectionAttributeName    设置文字书写方向，从左向右书写或者从右向左书写<br>NSVerticalGlyphFormAttributeName   设置文字排版方向，取值为 NSNumber 对象(整数)，0 表示横排文本，1 表示竖排文本<br>NSLinkAttributeName                设置链接属性，点击后调用浏览器打开指定URL地址<br>NSAttachmentAttributeName          设置文本附件,取值为NSTextAttachment对象,常用于文字图片混排<br>NSParagraphStyleAttributeName      设置文本段落排版格式，取值为 NSParagraphStyle 对象</p><p>SDWebimage</p><p>Memory Disk</p><p>先从内存缓存查询 ,</p><p>查询到 &gt; 取出展示  </p><p>未查询到 &gt; 从磁盘缓存中获取</p><p>获取到 &gt; 设置到内存缓存 &gt; 取出展示</p><p>未获取到 &gt; 调用网络瞎子啊</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 富文本 </tag>
+            
+            <tag> 颜色、字体 </tag>
+            
+            <tag> 背景 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GCD的前世今生</title>
+      <link href="/2018/10/17/iOS%E5%BC%80%E5%8F%91/GCD%E7%BA%BF%E7%A8%8B/"/>
+      <url>/2018/10/17/iOS%E5%BC%80%E5%8F%91/GCD%E7%BA%BF%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h1><p>串行 (DISPATCH_QUEUE_SERIAL)<br>并发 (DISPATCH_QUEUE_CONCURRENT)</p><p>四种组合方式：</p><h2 id="同步执行-并发队列"><a href="#同步执行-并发队列" class="headerlink" title="同步执行 + 并发队列"></a>同步执行 + 并发队列</h2><p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p><h2 id="异步执行-并发队列"><a href="#异步执行-并发队列" class="headerlink" title="异步执行 + 并发队列"></a>异步执行 + 并发队列</h2><p>开启新线程，并发执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5+%E5%B9%B6%E5%8F%91.png?raw=true" alt=""></p><h2 id="同步执行-串行队列"><a href="#同步执行-串行队列" class="headerlink" title="同步执行 + 串行队列"></a>同步执行 + 串行队列</h2><p>没开启新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%90%8C%E6%AD%A5%20+%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p><h2 id="异步执行-串行队列"><a href="#异步执行-串行队列" class="headerlink" title="异步执行 + 串行队列"></a>异步执行 + 串行队列</h2><p> 开启一条新线程，串行执行<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/GCD/GCD%E4%BD%BF%E7%94%A8/Resource/%E5%BC%82%E6%AD%A5%2B%20%E4%B8%B2%E8%A1%8C.png?raw=true" alt=""></p><p>特殊情况：</p><p>同步执行 + 主队列   主线程调用：死锁卡住不执行 其他线程调用：没有开启新线程，串行执行任务<br>异步执行 + 主队列   没开启新线程，串行执行</p><p>栅栏  dispatch_barrier_async<br>延时  dispatch_after<br>一次  dispatch_once  （单例）<br>对列组dispatch_group<br>监听  dispatch_group_notify<br>阻塞线程 dispatch_group_wait</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Weakself 与 Strongself的兄弟情</title>
+      <link href="/2018/10/16/iOS%E5%BC%80%E5%8F%91/WeakSelf%E4%B8%8EStrongSelf/"/>
+      <url>/2018/10/16/iOS%E5%BC%80%E5%8F%91/WeakSelf%E4%B8%8EStrongSelf/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Weakself-与-Strongself"><a href="#Weakself-与-Strongself" class="headerlink" title="Weakself 与 Strongself"></a>Weakself 与 Strongself</h1><p>1、什么时候用weakself?</p><p>主要看block是否被self持有，并且有没有产生循环引用 ，倘若都没有就不需要用weakself</p><p>2、什么时候用strongself?</p><p>主要是防止block执行过程中 self提前被释放导致出现奇怪的逻辑甚至是crash</p><p>总结来说，解决循环引用问题主要有两个办法：</p><p>防止循环引用</p><p>第一个办法是「事前避免」，我们在会产生循环引用的地方使用 weak 弱引用，以避免产生循环引用。<br>第二个办法是「事后补救」，我们明确知道会存在循环引用，但是我们在合理的位置主动断开环中的一个引用，使得对象得以回收。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> self </tag>
+            
+            <tag> weakself </tag>
+            
+            <tag> Strongself </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS中的图片自适应拉伸</title>
+      <link href="/2018/10/16/iOS%E5%BC%80%E5%8F%91/iOS%E4%B8%AD%E5%9B%BE%E7%89%87%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94%E6%8B%89%E4%BC%B8/"/>
+      <url>/2018/10/16/iOS%E5%BC%80%E5%8F%91/iOS%E4%B8%AD%E5%9B%BE%E7%89%87%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94%E6%8B%89%E4%BC%B8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS中的图片自适应拉伸"><a href="#iOS中的图片自适应拉伸" class="headerlink" title="iOS中的图片自适应拉伸"></a>iOS中的图片自适应拉伸</h1><p>iOS5之前</p><ul><li>(UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:(NSInteger)topCapHeight;  </li></ul><p>iOS5</p><ul><li>(UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets；</li></ul><p>iOS6</p><ul><li>(UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode；</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS调试技巧大全</title>
+      <link href="/2018/09/14/iOS%E5%BC%80%E5%8F%91/iOS%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
+      <url>/2018/09/14/iOS%E5%BC%80%E5%8F%91/iOS%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS调试技巧"><a href="#iOS调试技巧" class="headerlink" title="iOS调试技巧"></a>iOS调试技巧</h1><p><img src="https://images-cdn.shimo.im/Z480axvu1FgK6Voq/%E4%B8%8B%E8%BD%BD.png!thumbnail" alt=""></p><h2 id="NSLog"><a href="#NSLog" class="headerlink" title="NSLog"></a>NSLog</h2><pre><code>//保证 ifdef 中的宏定义只会在 OC 代码中被引用;//否则一旦引入 C 或者 C++ 代码或者框架就会出错!#ifdef __OBJC__//只在开发中用:#ifdef DEBUG//定义 NSLog(__VA_AGRS__)://#define NSLog(...)  NSLog(__VA_ARGS__)#define NSLog(fmt, ...) NSLog((@"%s [Line %d]" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)//如果在非 DEBUG 情况下:#else//NSLog(...)后面不跟任何内容,在非 DEBUG 情况下(提交上线发布时)该 NSLog(...)自动失效!#define NSLog(...)//结束"ifdef DEBUG",有 以 ifdef 开始就要有 endif 结束!就酱!#endif//结束"ifdef __OBJC__",有 以 ifdef 开始就要有 endif 结束!就酱!#endif</code></pre><p>控制台打印结果如下：</p><p><img src="https://images-cdn.shimo.im/Uf0XLUvibq4sU5vD/%E6%89%93%E5%8D%B0%E6%95%B0%E6%8D%AE.png!thumbnail" alt=""></p><h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><h3 id="普通断点"><a href="#普通断点" class="headerlink" title="普通断点"></a>普通断点</h3><p>1、快捷键添加方式 光标移动到需要断点的代码处： command + \<br>2、代码行旁边点击添加</p><p><img src="https://images-cdn.shimo.im/PiYSJXQH0dkvytqj/bug.png!thumbnail" alt=""></p><p>再点击取消断点</p><p><img src="https://images-cdn.shimo.im/FgAiNXkHnuQs8845/bug1.png!thumbnail" alt=""></p><h3 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h3><p>以上的断点只是最普通的，我们还能对断点的属性进行配置，设置条件，使断点更加智能化，右键断点进入编辑对话框：</p><p>1、右键断点，选择 Edit Breakpoint…</p><p><img src="https://images-cdn.shimo.im/xRZQFRR8WZg9yXBB/tianjia.png!thumbnail" alt=""></p><p>2、添加条件语句，此处OC怎么判断，条件语句就怎么写</p><p><img src="https://images-cdn.shimo.im/DzEjRIUO6F0ET11E/%E6%9D%A1%E4%BB%B6%E6%96%AD%E7%82%B9.png!thumbnail" alt=""></p><p>如上截图的这个例子，此断点如果不添加条件，循环中的代码每次都要单步执行，但是加了如下的条件：</p><pre><code>[str isEqualToString:@"5"]</code></pre><p>遍历前4位元素的时候是会顺利执行，不会断点的，当遍历到第5位，满足条件，中断程序，进行调试。</p><p>3、添加ignore条件，忽略前n次的执行</p><p><img src="https://images-cdn.shimo.im/uFhTWsGYDHwO58lc/ignor.png!thumbnail" alt=""></p><p> 如上图 ，4次之后才会单步执行后面的遍历，前4次是不会终止程序的。</p><p>4、查看函数调用次数</p><p><img src="https://images-cdn.shimo.im/mhoOaSpVmusxQR0F/%E6%AC%A1%E6%95%B0.png!thumbnail" alt=""></p><h2 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h2><p>断点的功能不限于上面所述,实际开发过程中，经常会遇见崩溃直接走到main函数，此时异常断点就派上用场了，点击 + 号选择 Exception Breakpoint…</p><p><img src="https://images-cdn.shimo.im/VMJXnPvIiispSceB/break.png!thumbnail" alt=""></p><p>如下即可，编辑断点，也还有相关详细设置，此处不做赘述</p><p><img src="https://images-cdn.shimo.im/3R6fTXmtxwIwsUck/yichang.png!thumbnail" alt=""></p><h2 id="符号断点"><a href="#符号断点" class="headerlink" title="符号断点"></a>符号断点</h2><p>符号断点创建同于异常断点，只不过点击 +  选择 Symbolic Breakpoint…即可<br>一般符号断点可以在你指定的[类名 方法名]时中断执行。比如指定</p><pre><code>[ViewController viewDidLoad]</code></pre><p><img src="https://images-cdn.shimo.im/dIYL0DLRumQfbB5x/fuhao.png!thumbnail" alt=""></p><p>那么程序在执行到viewDidLoad都会断点调试。</p><p>假如Symbol处只添加了一个方法名如下：</p><p><img src="https://images-cdn.shimo.im/9ypANLnnpxon2JfL/dosomething.png!thumbnail" alt=""></p><p>那么程序会执行到doSomething这个方法时断点调试，如下：</p><p><img src="https://images-cdn.shimo.im/491kCRts9sUei5wX/do.png!thumbnail" alt=""></p><h2 id="Console-LLDB命令"><a href="#Console-LLDB命令" class="headerlink" title="Console(LLDB命令)"></a>Console(LLDB命令)</h2><p> LLDB 绑定在 Xcode 内部，存在于主窗口底部的控制台中。<a href="http://lldb.llvm.org/lldb-gdb.html" target="_blank" rel="noopener">http://lldb.llvm.org/lldb-gdb.html</a> 这里是一份lldb命令清单，列出了lldb可用的命令。</p><p>常用的help命令，它会帮你罗列处命令列表供你选择</p><h3 id="help"><a href="#help" class="headerlink" title="help"></a><pre><code>help</code></pre></h3><p> 罗列出的所有方法中呢，就挑最常用的几种，比如：po/p/expression等，下面详细描述下：</p><p> <img src="https://images-cdn.shimo.im/wCTIyZBzkkUern0g/hellp.png!thumbnail" alt="">  </p><h3 id="print-obj"><a href="#print-obj" class="headerlink" title="print obj"></a><pre><code>print obj</code></pre></h3><p>   使用中用 p 代替即可，很明显这个是个打印命令</p><p>   <img src="https://images-cdn.shimo.im/D09mVI0vlbY4ZRKL/p.png!thumbnail" alt=""></p><h3 id="expression-obj"><a href="#expression-obj" class="headerlink" title="expression obj"></a><pre><code>expression obj</code></pre></h3><p>  改变程序实际参数的值，目的是方便了调试：不用重新运行项目</p><p>  <img src="https://images-cdn.shimo.im/c9SRcofiYsAVRGdD/expression.png!thumbnail" alt=""></p><p>  比如上面截图中的数组arr初始化数据为@[@”1”,@”2”,@”3”,@”4”,@”5”,@”6”,@”7”,@”8”];通过expression 修改元素为打印出来的结果。</p><h3 id="po-obj"><a href="#po-obj" class="headerlink" title="po obj"></a><pre><code>po obj</code></pre></h3><p>   平时用的比较多的“po”，它是“print object”的简写，po一下可以看到对象的详细信息</p><p>  <img src="https://images-cdn.shimo.im/QjzSfGUnZWgpTskk/po.png!thumbnail" alt=""></p><h3 id="call-obj"><a href="#call-obj" class="headerlink" title="call obj"></a><pre><code>call obj</code></pre></h3><p>   调用的意思，可以控制台调用函数或者方法 动态改变</p>   <pre><code>call  [self.view setBackgroundColor:[UIColor redColor]]</code></pre><p>   可以重设当前View背景色 无需重新运行</p><p>   或者调用程序里自己定义的函数方法</p>   <pre><code>call  [self doSomething] </code></pre><p>   <img src="https://images-cdn.shimo.im/IOptiQU3BdMeFoOx/call.png!thumbnail" alt=""></p><p>   可见虽然函数还未运行，但是call命令却是可以提前调用的。</p><h2 id="NSZoombieEnabled"><a href="#NSZoombieEnabled" class="headerlink" title="NSZoombieEnabled"></a>NSZoombieEnabled</h2><p>僵尸对象调试开启：</p><p><img src="https://images-cdn.shimo.im/znk7s1gFIPIVBoH1/%E5%83%B5%E5%B0%B8%E5%AF%B9%E8%B1%A1.png!thumbnail" alt=""></p><h2 id="视图调试"><a href="#视图调试" class="headerlink" title="视图调试"></a>视图调试</h2><h3 id="View-Debug（Xcode6往后）"><a href="#View-Debug（Xcode6往后）" class="headerlink" title="View Debug（Xcode6往后）"></a>View Debug（Xcode6往后）</h3><p>Xcode6以后，苹果就已经推出了Debug View Hierarchy,也就是 视图层级调试， Xcode6之前还得去找第三方软件去查看视图层级</p><p><img src="https://images-cdn.shimo.im/77IIQB48k90E1yEt/viewdebug.png!thumbnail" alt=""></p><h3 id="po-打印视图层级"><a href="#po-打印视图层级" class="headerlink" title="po 打印视图层级"></a>po 打印视图层级</h3><h3 id="po-view-rescursiveDescription"><a href="#po-view-rescursiveDescription" class="headerlink" title="po [view rescursiveDescription]"></a><pre><code>po [view rescursiveDescription]</code></pre></h3><p><img src="https://images-cdn.shimo.im/toZVqt6hPog9YYxs/po_view.png!thumbnail" alt=""></p><p>由上打印结果也能看出当前视图层级，只是没有View Debug来的直观</p><h4 id="po-UIApplication-sharedApplication-keyWindow-recursiveDescription"><a href="#po-UIApplication-sharedApplication-keyWindow-recursiveDescription" class="headerlink" title="po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]"></a><pre><code>po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]</code></pre></h4><p>上面这段无需打断点 ，只要暂停，然后就可以输出当前窗口上的层级树。</p><h3 id="Reveal"><a href="#Reveal" class="headerlink" title="Reveal"></a>Reveal</h3><p>第三方 视图层级查看软件， </p><h2 id="Analyze静态分析"><a href="#Analyze静态分析" class="headerlink" title="Analyze静态分析"></a>Analyze静态分析</h2><p>静态分析工具 Product-&gt;Analyze(快捷键command+shift+B)可以找出代码潜在错误,如内存泄露,未使用函数和变量,循环引用等，但是友情提醒一句： <strong>Analyze静态分析不可全信，但也不能不信。</strong></p><p>Analyze主要的作用有：</p><ul><li>本地化问题 Localizability Issue (Apple)</li><li>声明错误检查（Dead store）</li><li>内存泄露检查 Memory Error</li><li>逻辑错误检查 Logic Error</li><li>API调用错误检查 API Misuse</li></ul><p><img src="https://images-cdn.shimo.im/ZQXabstnf1UWhlL8/analyze.png!thumbnail" alt=""></p><p>通过镜头分析，最后的结果会分门别类的列好如下图：</p><p><img src="https://images-cdn.shimo.im/gkZQpTMgozoBK6eG/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90.png!thumbnail" alt=""></p><h3 id="本地化问题"><a href="#本地化问题" class="headerlink" title="本地化问题"></a>本地化问题</h3><p>诸如此类，提示 User-facing text should use localized string macro…,  意思是面向用户的文本应该使用本地化的字符串宏.</p><p><img src="https://images-cdn.shimo.im/I5aWSPm9wjMSDudk/%E6%9C%AC%E5%9C%B0%E5%8C%96.png!thumbnail" alt=""></p><p>这种情况一般是因为代码中配置了本地化,面向用户的应该用字符串宏,而我们直接赋值为汉字.如下：</p><p><img src="https://images-cdn.shimo.im/yStYvFBnV3UETWDV/local.png!thumbnail" alt=""></p><p>所以解决方法：<br>1、直接将此处配置关闭，设置为NO<br>2、将项目中直接赋值的文本提出来，本地化</p><h3 id="声明错误检查"><a href="#声明错误检查" class="headerlink" title="声明错误检查"></a>声明错误检查</h3><p>无效数据如：Unused、Never read…. ，大致是那一类创建了但从未使用的变量</p><p><img src="https://images-cdn.shimo.im/zJDdDSVF0L0HAwm0/unuser.png!thumbnail" alt=""></p><p>一般情况删除这些变量即可</p><h3 id="内存泄露检查"><a href="#内存泄露检查" class="headerlink" title="内存泄露检查"></a>内存泄露检查</h3><p>1、一般来说都是由于使用的CoreFoundation后没有release造成的。 在RAC下Foundation框架下的不需要进行release，由于Core Foundation不在ARC管理范围内,所以需要主动release。</p><p>2、另外一些就是需要返回非空，却return nil;<br>3、空引用</p><h2 id="instruments动态分析"><a href="#instruments动态分析" class="headerlink" title="instruments动态分析"></a>instruments动态分析</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LLDB </tag>
+            
+            <tag> NSLog </tag>
+            
+            <tag> 断点 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>断•舍•离</title>
+      <link href="/2018/08/07/%E5%85%B6%E4%BB%96/%E7%A2%8E/"/>
+      <url>/2018/08/07/%E5%85%B6%E4%BB%96/%E7%A2%8E/</url>
+      
+        <content type="html"><![CDATA[<p>烟火  村口  小孩  期盼</p><p>月圆  门口  背影  希望</p><p>毅然远行 </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS音视频开发</title>
+      <link href="/2018/08/06/iOS%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
+      <url>/2018/08/06/iOS%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Audio"><a href="#Audio" class="headerlink" title="Audio"></a>Audio</h1><h4 id="1、iOS-框架"><a href="#1、iOS-框架" class="headerlink" title="1、iOS 框架"></a>1、iOS 框架</h4><p>MediaPlayer 、 AudioToolbox 、 AudioUnit 、 AVFoundation 、 AVKit 、 OpenAL。其中MediaPlayer 、 AVFoundation 是基于 Objective-C/Swift 的； AudioToolBox 、 AudioUnit 和 OpenAL 是基于 C 的。</p><h4 id="2、第三方库"><a href="#2、第三方库" class="headerlink" title="2、第三方库"></a>2、第三方库</h4><p>FFmpeg 、 FAAC 、 FAAD2。</p><p>使用 MediaPlayer 框架的 MPMusicPlayerController 播放音频文件。<br>使用 AudioToolbox 框架的 System Sound Services 播放音频文件、 Audio Queue Services 录制和播放音频数据、 Audio Converter Services 进行音频转码(格式、 bit-depth 和采样率)、 Audio File Services 和 AudioFileStream 读写音频文件。<br>使用 AudioUnit 框架进行回音消除、音频数据录制和播放等。<br>使用 AVFoundation 框架的 AVAudioSession 操作音频会话、 AVAudioFile(iOS8) 读写音频文件、 AVAudioRecorder 录制音频文件、 AVAudioPlayer 和 AVPlayer 播放音频文件、 AVCaptureSession 录制音频和视频数据。<br>在 iOS 8 之前使用 AVFoundation 框架的 AVAssetWritter 将 PCM 音频写入 AAC LC 编码格式的音频文件，而且使用的是硬编码。<br>在 iOS 8 及以后可以使用 AVFoundation 框架的 AVAudioEngine 进行均衡器、混响和混音等操作，其基于底层的 AudioUnit ，但比后者更易用。<br>在 iOS 8 及以后可以使用 AVKit 框架的 AVPlayerController 播放音频文件或流。<br>使用 FAAC 将 PCM 软编码为 AAC LC。<br>使用 FFmpeg 或 FAAD2 将 AAC LC 软解码为 PCM 、 PCM 重采样(Resample)。</p><h1 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h1><h4 id="1、iOS-框架-1"><a href="#1、iOS-框架-1" class="headerlink" title="1、iOS 框架"></a>1、iOS 框架</h4><p>UIKit 、 MediaPlayer 、 AVFoundation 、 AVKit 、 VideoToolBox 、 GLKit(OpenGL ES) 。其中 UIKit 、 MediaPlayer 、 AVFoundation 和 AVKit 基于 Objective-C ； VideoToolBox 和 GLKit 基于 C 的。当然， GLKit 远远不只是可以渲染视频。</p><h4 id="2、第三方库-1"><a href="#2、第三方库-1" class="headerlink" title="2、第三方库"></a>2、第三方库</h4><p>FFmpeg 、 x264。</p><p>使用 UIKit 框架的 UIImagePickerController 录制包含音频的视频文件、 UIVideoEditorController 可对视频进行简单编辑。<br>使用 MediaPlayer 框架的 MPMoviePlayerViewController(MPMoviePlayerController/MPMoviePlayer) 播放视频文件或流。<br>使用 AVFoundation 框架的 AVPlayer 播放视频文件或流、 AVCaptureSession 录制视频帧。<br>在 iOS 8 之前使用 AVFoundation 框架的 AVAssetWritter 将 YUV 数据写入 H.264 编码格式的视频文件，而且使用的是硬编码。<br>在 iOS 8 及以后使用 VideoToolBox 框架将 YUV 视频数据硬编码为 H.264 ，以及将 H.264 硬解码为 YUV 视频数据。<br>在 iOS 8 及以后可以使用 AVKit 框架的 AVPlayerController 播放视频文件或流。<br>使用 GLKit 将 sRGB 或 YUV 视频数据渲染输出到屏幕。<br>使用 FFmpeg 将 H.264 软解码为 YUV 。<br>使用 x264 将 YUV 视频软编码为 H.264 。</p><p>1、官方资料<br>a:综合<br>Audio &amp; Video Starting Point<br>Multimedia Programming Guide<br>Core Audio Overview<br>Audio Session Programming Guide<br>b.MediaPlayer<br>Media Player Framework Reference<br>iPod Library Access Programming Guide<br>c.Audio Toolbox<br>Audio Toolbox Framework Reference<br>Audio Queue Programming Guide<br>d.Audio Unit<br>Audio Unit Programming Guide<br>Audio Unit Hosting Guide For iOS<br>e.AV Foundation<br>AV Foundation Framework Reference<br>AV Foundation Programming Guide<br>f.编解码及文件格式<br>CAF File Overview<br>Core Audio Format Specification<br>Apple Core Audio Format Specification 1.0<br>g.WWDC<br>WWDC 2013 606 : Moving to AVKit and AVFoundation<br>WWDC 2014 503 : Direct access to media encoding and decoding</p><p>2、第三方资料<br>Learning Core Audio<br>Audio file format<br>Comparison of audio coding formats<br>List of codecs<br>List of open-source codecs<br>Comparison of video codecs<br>Comparison of video container formats<br>Color space (YUV、sRGB)<br>objc.io #12 相机与照片<br>objc.io #23 视频<br>objc.io #24 音频<br><a href="http://msching.github.io/blog/2014/07/07/audio-in-ios/" target="_blank" rel="noopener">http://msching.github.io/blog/2014/07/07/audio-in-ios/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Web前端之路</title>
+      <link href="/2018/08/01/%E5%85%B6%E4%BB%96/Web%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/"/>
+      <url>/2018/08/01/%E5%85%B6%E4%BB%96/Web%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/</url>
+      
+        <content type="html"><![CDATA[<p>#Web前端之路<br>一部分：学习时间：1.5月</p><p>html+div+css+ps切图+ftp网站上传（网站上线）阿里图标+html5标签+css3动画+手机网站开发+swiper.js+iscroll.js</p><p>二部分：学习时间：2.5月</p><p>JavaScript+jQuery+Ajax+正则表达式+面向对象+js插件+代码性能优化+github+sea.js+require.js+gulp</p><p>三部分：学习时间：2月</p><p>2D+3D应用+移动触屏事件touch+Canvas+Svg+多媒体技术+地理信息+本地存储+H5拖拽api+跨域操作+多线程+highcharts图表+bootstrap</p><p>思维导图</p><p><a href="https://www.processon.com/view/link/57d28d0ee4b0942d7a89c9dd" target="_blank" rel="noopener">https://www.processon.com/view/link/57d28d0ee4b0942d7a89c9dd</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git初识</title>
+      <link href="/2018/07/27/%E5%85%B6%E4%BB%96/Git%E4%BD%BF%E7%94%A8/"/>
+      <url>/2018/07/27/%E5%85%B6%E4%BB%96/Git%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h1><h2 id="1、创建空目录"><a href="#1、创建空目录" class="headerlink" title="1、创建空目录"></a>1、创建空目录</h2><pre><code>$ mkdir learngit$ cd learngit$ pwd/Users/michael/learngit</code></pre><blockquote><p>pwd用于显示当前目录</p></blockquote><h2 id="2、初始化仓库"><a href="#2、初始化仓库" class="headerlink" title="2、初始化仓库"></a>2、初始化仓库</h2><pre><code>git initInitialized empty Git repository in /Users/michael/learngit/.git/</code></pre><blockquote><p>ls -ah 查看隐藏文件</p></blockquote><h2 id="3、添加文件至版本库"><a href="#3、添加文件至版本库" class="headerlink" title="3、添加文件至版本库"></a>3、添加文件至版本库</h2><p>将新建的文件放置在新建的仓库learngit目录下</p><h4 id="3-1、-添加"><a href="#3-1、-添加" class="headerlink" title="3.1、 添加"></a>3.1、 添加</h4><pre><code>$ git add readme.txt</code></pre><h4 id="3-2、-提交"><a href="#3-2、-提交" class="headerlink" title="3.2、 提交"></a>3.2、 提交</h4><pre><code>$ $ git commit -m "wrote a readme file"[master (root-commit) eaadf4e] wrote a readme file 1 file changed, 2 insertions(+) create mode 100644 readme.txt</code></pre><h4 id="3-3、-状态"><a href="#3-3、-状态" class="headerlink" title="3.3、 状态"></a>3.3、 状态</h4><pre><code>$ git status</code></pre><h4 id="3-4、-修改的地方"><a href="#3-4、-修改的地方" class="headerlink" title="3.4、  修改的地方"></a>3.4、  修改的地方</h4><pre><code>$ git diff</code></pre><h4 id="3-5、-历史记录"><a href="#3-5、-历史记录" class="headerlink" title="3.5、 历史记录"></a>3.5、 历史记录</h4><pre><code>$ git log</code></pre>或者<pre><code>$ git log --pretty=oneline</code></pre><blockquote><p>成行显示</p></blockquote><h2 id="4、-版本回退"><a href="#4、-版本回退" class="headerlink" title="4、 版本回退"></a>4、 版本回退</h2><pre><code>$ git reset --hard HEAD^</code></pre><p>git 中HEAD表示当前版本， HEAD^^ 表示上一个版本，HEAD^^ 表示上上个版本，依次类推<br>当然若回退版本过多，写 ^^ 容易出错，可用 HEAD~100 ，往上100个版本。</p><pre><code>git reset --hard c87d5c3</code></pre><p>c87d5c3即为之前提交GPL时的ID， 可以不必写全，但也不能写一两位，避免重复</p><h2 id="5、-命令记录"><a href="#5、-命令记录" class="headerlink" title="5、 命令记录"></a>5、 命令记录</h2><pre><code>$ git reflog</code></pre><blockquote><p>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset –hard commit_id。</p></blockquote><blockquote><p>穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。</p></blockquote><blockquote><p>要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。</p></blockquote><h2 id="6、-工作区、暂存区"><a href="#6、-工作区、暂存区" class="headerlink" title="6、 工作区、暂存区"></a>6、 工作区、暂存区</h2><p>git add 实际上是把当前所有修改都添加到暂存区<br>git commit 就可以一次性把暂存区的所有修改提交到分支</p><h2 id="7、-Git管理修改"><a href="#7、-Git管理修改" class="headerlink" title="7、 Git管理修改"></a>7、 Git管理修改</h2><blockquote><p>第一次修改 -&gt; git add -&gt; 第二次修改 -&gt; git commit</p></blockquote><p>上述操作最终只提交了 第一次修改，第二次并未提交，因为第二次修改并未add到暂存区</p><blockquote><p>第一次修改 -&gt; git add -&gt; 第二次修改 -&gt; git add -&gt; git commit</p></blockquote><p>此操作代表两次都已经提交</p><h2 id="8、-撤销修改"><a href="#8、-撤销修改" class="headerlink" title="8、 撤销修改"></a>8、 撤销修改</h2><p>丢弃工作区的修改</p><pre><code>$ git checkout -- readme.txt</code></pre>暂存区修改撤销，放回工作区<pre><code>$ git reset HEAD readme.txt</code></pre><h2 id="9、-删除文件"><a href="#9、-删除文件" class="headerlink" title="9、 删除文件"></a>9、 删除文件</h2><pre><code>$ git rv readme.txt</code></pre><h2 id="10、-添加远程仓库"><a href="#10、-添加远程仓库" class="headerlink" title="10、 添加远程仓库"></a>10、 添加远程仓库</h2><p>连接远程仓库，server-name即为Github账户名</p><pre><code>$ git remote add origin git@server-name:path/repo-name.git</code></pre><p>第一次推送</p><pre><code>$ git push -u origin master</code></pre><p>后续修改推送</p><pre><code>$ git push origin master</code></pre><h2 id="11、-克隆远程仓库"><a href="#11、-克隆远程仓库" class="headerlink" title="11、 克隆远程仓库"></a>11、 克隆远程仓库</h2><pre><code>$ git clone git@github.com:michaelliao/gitskills.git</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具使用 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTTP头域</title>
+      <link href="/2018/07/20/iOS%E5%BC%80%E5%8F%91/Http%E5%A4%B4%E5%9F%9F/"/>
+      <url>/2018/07/20/iOS%E5%BC%80%E5%8F%91/Http%E5%A4%B4%E5%9F%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HTTP常见头域"><a href="#HTTP常见头域" class="headerlink" title="HTTP常见头域"></a>HTTP常见头域</h1><p>##HTTP Request header（请求头）</p><p>###1、Cache头域</p><p>if-Modified-since：缓存</p><p>if-None-Match：可提高性能（在Response中添加ETag信息，客户端再次请求资源，Request中加入if-None-Match（ETag的值），服务器验证ETag，若没改变返回状态码304，有改变，返回状态码200）</p><p>Pragma：防止页面被缓存</p><p>Cache-Control：Response—Request遵循的缓存机制</p><p>　　public：可以被任何缓存所缓存</p><p>　　private:内容只缓存在私有缓存中</p><p>　　no-cache：所有内容都不会被缓存</p><p>###2、Client头域</p><p>Accept：浏览器可以接受的文件类型（Accept：text/html 表示浏览器可接受服务器返回的文件类型为text/html）</p><p>Accept-Encodig：指定压缩方法，是否支持压缩，支持什么压缩方法（gzip、deflate）</p><p>Accept-Language：浏览器申明自己的接收语言</p><p>User-Accept：告知服务器客户端使用的操作系统与浏览器的名称和版本</p><p>Accept-chareset：浏览器申明自己接收的字符集。如gb2312，UTF_8</p><p>###3、Cookie/Login头域</p><p>Cookie：将cookie的值发送给服务器</p><p>###4、Entity头域</p><p>Content-Length：发送给HTTP服务器的数据长度</p><p>Content-Type：决定文件接收方将以什么形式、什么编码读取此文件</p><p>###5、Miscellaneous头域</p><p>Referer：提供了Request的上下文信息，告诉服务器我是从哪个链接过来的</p><p>A——&gt;B（B的服务器从Referer中统计有多少用户是从A过来的）</p><p>###6、Transport头域</p><p>connection：Keep—alive            TCP连接不会关闭</p><p>connection：close                     一个Request完成后，TCP连接关闭</p><p>###7、Host：<br>发送请求时，该报头域是必需的。主要用于指定被请求资源的Internet主机和端口号，通常从HTTP URL 中提取出来</p><p>##HTTP Response header（返回头）</p><p>###1、Cache头域</p><p>Date：生成消息的具体时间和日期</p><p>Expires：浏览器在指定过期时间内使用本地缓存</p><p>###2、Cookie/Login头域</p><p>P3P：用户跨域设置cookie，可以解决iframe跨域访问cookie的问题</p><p>Set-Cookie：重要的header，用于把cookie发送到客户端浏览器，每一个写入cookie都会生成一个set-cookie</p><p>###3、Entity头域</p><p>ETag：与if-None-Match配合使用</p><p>Last-Modified：用于指示资源的最后修改日期和时间</p><p>Content-Type：Web服务器告知浏览器自己响应对象的类型和字符集</p><p>Content-Length：指明实体正文长度，以字节方式存储的十进制数字表示。在数据下行中，要预先在服务器中缓存所有数据，然后所有数据一并发给客户端</p><p>Content-Encoding：Web服务器表明自己用了什么压缩方式（gzip、deflate）压缩响应中的对象</p><p>Content-Language：服务器告知浏览器自己响应的对象语言</p><p>###4、Miscellaneous头域</p><p>Server：指明HTTP服务器的软件信息</p><p>X-Powered-By：表明网站是用什么技术开发的</p><p>X-AspNet-Version：如果网站是用Asp/Net开发的，这个header用来表明Asp/Net的版本</p><p>###5、Transport头域</p><p>connection：Keep—alive            TCP连接不会关闭</p><p>connection：close                     一个Request完成后，TCP连接关闭</p><p>###6、Location头域</p><p>Location：用于重定向一个新的位置，包括新的URL地址</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS 数据加密</title>
+      <link href="/2018/07/05/iOS%E5%BC%80%E5%8F%91/iOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86/"/>
+      <url>/2018/07/05/iOS%E5%BC%80%E5%8F%91/iOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h1 id="常用加密算法"><a href="#常用加密算法" class="headerlink" title="常用加密算法"></a>常用加密算法</h1><h2 id="Base64加密"><a href="#Base64加密" class="headerlink" title="Base64加密"></a>Base64加密</h2><h2 id="MD5加密"><a href="#MD5加密" class="headerlink" title="MD5加密"></a>MD5加密</h2><p><a href="https://www.cmd5.com/" target="_blank" rel="noopener">https://www.cmd5.com/</a></p><h2 id="AES加密"><a href="#AES加密" class="headerlink" title="AES加密"></a>AES加密</h2><h2 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS动画-炫酷效果从此刻开始</title>
+      <link href="/2018/06/28/iOS%E5%BC%80%E5%8F%91/iOS%E5%8A%A8%E7%94%BB/"/>
+      <url>/2018/06/28/iOS%E5%BC%80%E5%8F%91/iOS%E5%8A%A8%E7%94%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS动画"><a href="#iOS动画" class="headerlink" title="iOS动画"></a>iOS动画</h1><p>##简介<br>IOS 动画主要是指Core Animation框架。官方使用文档地址为：<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html" target="_blank" rel="noopener">Core Animation Guide</a>。<br>Core Animation是IOS和OS X平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Animation的动画效果。Core Animation将大部分实际的绘图任务交给了图形硬件来处理，图形硬件会加速图形渲染的速度。这种自动化的图形加速技术让动画拥有更高的帧率并且显示效果更加平滑，不会加重CPU的负担而影响程序的运行速度。</p><p>那些酷炫的实现，其实进行步骤分解，你就会发现都是基础动画合理的搭配组合，对坐标尺寸、视图显示、形态变化一一进行了代码描述，就形成了你呈现在你眼前的动画效果。</p><p>##结构<br><img src="https://camo.githubusercontent.com/9fe3e0f9f3a1a750292d80b899b395a5b20f85b0/687474703a2f2f696d672e6d792e6373646e2e6e65742f75706c6f6164732f3230313530372f32332f313433373631373536325f333139302e706e67" alt=""></p><p>##常用属性<br>duration:动画持续时间<br>beginTime:动画开始时间<br>repeatCount:动画重复次数<br>autoreverses:执行的动画按照原动画返回执行<br>timingFunction:控制动画的显示节奏，系统主要提供了以下几种</p><blockquote><p>kCAMediaTimingFunctionLinear 线性动画<br>kCAMediaTimingFunctionEaseIn 先慢后快（慢进快出）<br>kCAMediaTimingFunctionEaseOut 先块后慢（快进慢出）<br>kCAMediaTimingFunctionEaseInEaseOut 先慢后快再慢<br>kCAMediaTimingFunctionDefault 默认，也属于中间比较快</p></blockquote><p>delegate ： 动画代理。能够检测动画的执行和结束。</p><blockquote><p>@interface NSObject (CAAnimationDelegate)</p><ul><li>(void)animationDidStart:(CAAnimation *)anim;</li><li>(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;<br>@end</li></ul></blockquote><p>path:关键帧动画中的执行路径<br>type:过渡动画的动画类型，系统提供了四种过渡动画。</p><blockquote><p>kCATransitionFade 渐变效果<br>kCATransitionMoveIn 进入覆盖效果<br>kCATransitionPush 推出效果<br>kCATransitionReveal 揭露离开效果 subtype : 过渡动画的动画方向<br>kCATransitionFromRight 从右侧进入<br>kCATransitionFromLeft 从左侧进入<br>kCATransitionFromTop 从顶部进入<br>kCATransitionFromBottom 从底部进入</p></blockquote><p>##动画的三种调用方式</p><p>###使用block</p><blockquote><pre><code>[UIView animateWithDuration:1.0f animations:^{     self.animationView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50);} completion:^(BOOL finished) {}];</code></pre></blockquote><p>###UIView [begin commit]</p><blockquote><pre><code>[UIView beginAnimations:nil context:nil];[UIView setAnimationDuration:1.0f];self.animationView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-100, 50, 50);[UIView commitAnimations];</code></pre></blockquote><p>###CABaseAnimation</p><blockquote><pre><code>CABasicAnimation *anima = [CABasicAnimation animationWithKeyPath:@&quot;position&quot;];anima.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, SCREEN_HEIGHT/2-100)];anima.toValue = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-75)];anima.duration = 2.0f;//fillMode=kCAFillModeForwards和removedOnComletion=NOanima.fillMode = kCAFillModeBackwards;anima.removedOnCompletion = YES;anima.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];[self.animationView.layer addAnimation:anima forKey:@&quot;positionAnimation&quot;];</code></pre></blockquote><p>##一、基础动画<br>重要属性</p><blockquote><p>fromValue：keyPath对应的初始值<br>toValue：keyPath对应的结束值</p></blockquote><p>基础动画主要提供了对于CALayer对象中的可变属性进行简单动画的操作。比如：位移(position)、透明度(opacity)、缩放(scale)、旋转(rotate)、背景色(backgroundColor)等等。<br>具体效果实例演示</p><p>##二、关键帧动画(keyAnimation)<br>具体效果实例演示</p><p>##三、动画组(animationGroup)<br>具体效果实例演示</p><p>##三、转场动画 (transition)<br>iOS7开始，苹果就提供了自定义转场的API，模态推送present和dismiss、导航控制器push和pop、标签控制器的控制器切换都可以自定义转场，具体效果实例演示</p><p>###1、转场协议<uiviewcontrolleranimatedtransitioning><br>转场动画的实现 遵从上面这个协议以及实现协议中的两个方法，如下：</uiviewcontrolleranimatedtransitioning></p><blockquote><p> //返回动画事件  </p><ul><li>(NSTimeInterval)transitionDuration:(nullable id <uiviewcontrollercontexttransitioning>)transitionContext;<br>//所有的过渡动画事务都在这个方法里面完成</uiviewcontrollercontexttransitioning></li><li>(void)animateTransition:(id <uiviewcontrollercontexttransitioning>)transitionContext;</uiviewcontrollercontexttransitioning></li></ul></blockquote><p>##四、动画扩展 </p><p>###1、Lottie动画库</p><p>####1.1、简介</p><p>Easily add high-quality animation to any native app.<br>Lottie is an iOS, Android, and React Native library that renders After Effects animations in real time, allowing apps to use animations as easily as they use static images.</p><p>简单的为任何原生APP添加高质量动画<br>Lottie是一个iOS，Android和React Native库，可以实时渲染After Effects动画，并且允许本地app像静态资源那样轻松地使用动画。<br><img src="https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example1.gif" alt=""><br><img src="https://raw.githubusercontent.com/airbnb/lottie-ios/master/_Gifs/Examples2.gif" alt=""></p><p>####1.2、使用（以OC为例）</p><p>###2、facebook开源动画库</p><p>####2.1、开源地址 <a href="https://github.com/facebook/pop" target="_blank" rel="noopener">https://github.com/facebook/pop</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 基础动画 </tag>
+            
+            <tag> 核心动画 </tag>
+            
+            <tag> 炫酷 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>AppDelegate的瘦身之路</title>
+      <link href="/2018/06/28/iOS%E5%BC%80%E5%8F%91/AppDelegate%E7%98%A6%E8%BA%AB%E4%B9%8B%E8%B7%AF/"/>
+      <url>/2018/06/28/iOS%E5%BC%80%E5%8F%91/AppDelegate%E7%98%A6%E8%BA%AB%E4%B9%8B%E8%B7%AF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>项目开发中,随着时间的推移,项目业务结构的越来越复杂,引入的东西越来越多,作为一个app入口的AppDelegate,会变得越来越“肥胖”,会发现里面有第三方分享注册、消息推送注册、友盟统计、键盘管理工具初始化等等,代码写的再工整, 也会显的这个入口很拥挤.所以就有了减肥计划的开始.</p><p>#分类<br>分类这种为Delegate瘦身,最初亲身经历是整合环信过程中,将环信的登录等代理独立出去</p><p>#AOP面向切面编程</p><p>#load</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> appDelagte </tag>
+            
+            <tag> 减肥瘦身 </tag>
+            
+            <tag> 剥离 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>AppStore审核之路</title>
+      <link href="/2018/06/28/iOS%E5%BC%80%E5%8F%91/AppStore%E5%AE%A1%E6%A0%B8%E4%B9%8B%E8%B7%AF/"/>
+      <url>/2018/06/28/iOS%E5%BC%80%E5%8F%91/AppStore%E5%AE%A1%E6%A0%B8%E4%B9%8B%E8%B7%AF/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>作为一个iOS开发来说，头疼的不是提出的需求有多么难实现，也不是出现的bug有多么难解决，而是app开发完成，测试完美ending,你以为这样就万事大吉了？错❌，最后一个可大可小的 坑，也许会让你一两个月都爬不出来，那就是 AppStore上架审核。</p><p>相对于安卓应用，iOS版本的发布，乔布斯真的没给你太多选择，果断还是有钱人说了算，那么只能听他安排，乖乖的去App Store 填写一大串基本信息，上传安装包，提交审核。别看口头上说的貌似挺简单，只有当你亲身经历，屡遭苹果毒手，才知道什么叫绝望。</p><h2 id="App-Store三步曲"><a href="#App-Store三步曲" class="headerlink" title="App Store三步曲"></a>App Store三步曲</h2><p>在描述我惨痛经历之前，先给大家介绍下App Store审核的流程</p><font color="#DC143C"><strong>苹果审核大体分为三部分，预审、机审和人工审核</strong>。</font><p>目前应用提审的整个流程大体分为五个阶段：<br><strong><font color="#2E8B57">Prepare For Upload（准备上传）<br>Waiting For Review（等待审核）<br>In Review（审核）<br>Pending Developer Release(等待开发者发布）<br>Ready For Sale（准备销售）</font></strong></p><p>APP上传后，会进入到 Wait for Review 状态，而后进入到In Review状态，In Review一般2天左右就会审核通过或者是被打回。</p><p>包上传后首先进入的是预审，会被扫描API等，预审通过后会在iTC里出现，然后才可以提交至 Waiting；</p><p>在 Waiting For Review（等待审核）阶段一般是机审，机审主要是对代码进行机器审核，排查APP是否重复应用，更多地依赖机器自动审核，减少人工成本；</p><p>通过后会进入In Review（审核）阶段，即人工审核阶段，这个阶段主要看的是App的元数据，例如APP封面、功能、体验等等，注重用户体验。</p><p>苹果官方提供审核指南文档以及常见被拒总结：</p><p><a href="https://developer.apple.com/cn/app-store/launch/" target="_blank" rel="noopener">https://developer.apple.com/cn/app-store/launch/</a></p><p>那么下面就记录一下项目上线过程中那些层出不穷的拒绝理由</p><h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h4 id="1、应用内带检查更新功能"><a href="#1、应用内带检查更新功能" class="headerlink" title="1、应用内带检查更新功能"></a>1、应用内带检查更新功能</h4><pre><code> Your app includes an update button or alerts the user to update the app. To avoid user confusion, app version updates must utilize the iOS built-in update mechanism. We’ve attached screenshot(s) for your reference.Next StepsPlease remove the update feature from your app. To distribute a new version of your app, upload the new app binary version into the same iTunes Connect record you created for the app’s previous version. Updated versions keep the same Apple ID, iTunes Connect ID (SKU), and bundle ID as the original version, and are available free to customers who purchased a previous version.</code></pre><blockquote><font color="#2E8B57"> <strong>解析：从2015年3月起，所有包含检查更新功能的 App 都会被拒绝上架。所以应用中不允许出现检查更新的字样，而且设计版本号的地方也不能有点击效果，否则苹果会误以为这是更新版本。</strong></font></blockquote><h4 id="2、iPhone-应用在-iPad-上不能正常显示"><a href="#2、iPhone-应用在-iPad-上不能正常显示" class="headerlink" title="2、iPhone 应用在 iPad 上不能正常显示"></a>2、iPhone 应用在 iPad 上不能正常显示</h4><pre><code>We noticed that your app did not run at iPhone resolution when reviewed on iPad running iOS 9.1, which is a violation of the App Store Review Guidelines. We’ve attached screenshot(s) for your reference.Specifically, the buttons at the bottom of the app are inaccessible when running on iPad.Next StepsPlease revise your app to ensure it runs at iPhone resolution on iPad.</code></pre><blockquote><font color="#2E8B57"><strong>解析：iPhone程序必须不经修改就能以iPhone分辨率和2倍iPhone 3GS的分辨率在iPad上运行。即使你的App 只为 iPhone 用户提供，在 iPad 上也必须能够正常显示，否则审核会被拒绝。开发人员做好适配。</strong></font></blockquote><h4 id="3、使用第三方登录问题"><a href="#3、使用第三方登录问题" class="headerlink" title="3、使用第三方登录问题"></a>3、使用第三方登录问题</h4><pre><code>Additionally, we found that your app requires the installation of another app before it can be used, which is not in compliance with the App Store Review Guidelines. Apps should be able to run on launch, without requiring additional applications to be installed.    Specifically, we were required to install WeChat/QQ before we could use the sharing features in your app.    Please revise your app so that a user can use it upon launch. If your app requires authentication before use, please use a method that can authenticate users from within your app.</code></pre><blockquote><font color="#2E8B57"><strong>解析：接入第三方登录要检测是否安装了第三方客户端，未安装时不要显示对应按钮。2015年9月之前，通常可以采用判断未安装则隐藏登录按钮的方式。但目前隐藏按钮的方式也可能被审核拒绝，QQ 和微博提供了 web 登录的方式，如果判断未安装，需要允许用户使用 webview 的登录方式。苹果在条款中有声明不允许 iOS 应用的正常使用需要依赖另外一个 App。</strong></font></blockquote><p><strong><em><font color="#DC143C">以上这三点是开发人员开发过程中需要注意，并且可以主动去避免的。</font></em></strong></p><h4 id="4、Guideline-2-1-Information-Needed"><a href="#4、Guideline-2-1-Information-Needed" class="headerlink" title="4、Guideline 2.1 - Information Needed"></a>4、Guideline 2.1 - Information Needed</h4><pre><code>We have started the review of your app, but we were unable to successfully register for an in-app account. In order for us to review your app, please provide a demo account so that we may fully assess your app&#39;s features.Next StepsTo help us proceed with the review of your app, please provide a user name and password in the App Review Information section for your app in iTunes Connect. Please be sure to include content in your app that demonstrates the features and functionality available in your app.To provide demo account information:- Log in to iTunes Connect- Click &quot;My Apps&quot;- Select your app- Click on the app version on the left side of the screen- Scroll down to &quot;App Review Information&quot;- Select the &quot;Sign-in required&quot; box- Enter demo credentials in the &quot;User name&quot; and &quot;Password&quot; fields- Once you&#39;ve completed all changes, click the &quot;Save&quot; button at the top of the Version Information page.If your iTunes Connect status shows as Metadata Rejected, we do not require a new binary to correct this issue. Please reply to this message in Resolution Center to confirm the availability of a valid demo account, and we will continue with the review.</code></pre><blockquote><font color="#2E8B57"><strong>解析：根据描述，是提供的app登录帐号，苹果审核时输入并不能成功登录导致。所以这种情况<br>     第一，要确保服务器状态稳定，保证苹果审核期间接口都能正常请求<br>     第二，确保提供的帐号的确能够登录，并且后台数据库需要长期保留该帐号信息，勿删。</strong></font></blockquote><h4 id="5、Guideline-2-3-3-Performance-Accurate-Metadata"><a href="#5、Guideline-2-3-3-Performance-Accurate-Metadata" class="headerlink" title="5、Guideline 2.3.3 - Performance - Accurate Metadata"></a>5、Guideline 2.3.3 - Performance - Accurate Metadata</h4><pre><code>We noticed that your screenshots do not sufficiently reflect your app in use.Please see attached screenshots for details.Next StepsTo resolve this issue, please revise your screenshots to ensure that they accurately reflect the app in use on the supported devices. For iPhone, you need a set of 5.5-inch display screenshots and for iPad, you need a set for 12.9-inch display. This set will be scaled appropriately down to other device sizes when viewed on the App Store in each territory.ResourcesFor resources on creating great screenshots for the App Store, you may want to review the App Store Product Page information available on the Apple developer portal.Please ensure you have made any screenshot modifications using Media Manager. You should confirm your app looks and behaves identically in all languages and on all supported devices. Learn how to use Media Manager to add custom screenshots for each display size and localization.Since your iTunes Connect status is Metadata Rejected, we do NOT require a new binary. To revise the metadata, visit iTunes Connect to select your app and revise the desired metadata values. Once you’ve completed all changes, reply to this message in Resolution Center and we will continue the review.NOTE: Please be sure to make any metadata changes to all app localizations by selecting each specific localization and making appropriate changes.</code></pre><blockquote><font color="#2E8B57"><strong>解析：简单点说就是自己的应用截图不能反应自己App的主要功能，然后重新换了截图，能展示主要功能的截图即可。</strong></font></blockquote><h4 id="6、Guideline-2-1-Performance-App-Completeness"><a href="#6、Guideline-2-1-Performance-App-Completeness" class="headerlink" title="6、Guideline 2.1 - Performance - App Completeness"></a>6、Guideline 2.1 - Performance - App Completeness</h4><pre><code>We discovered one or more bugs in your app when reviewed on iPad running iOS 11.4.1 on Wi-Fi connected to an IPv6 network.Specifically, we were unable to fully load your app’s content during review.Next StepsTo resolve this issue, please run your app on a device to identify any issues, then revise and resubmit your app for review.If we misunderstood the intended behavior of your app, please reply to this message in Resolution Center to provide information on how these features were intended to work.For new apps, uninstall all previous versions of your app from a device, then install and follow the steps to reproduce the issue. For updates, install the new version as an update to the previous version, then follow the steps to reproduce the issue.ResourcesFor information about testing your app and preparing it for review, please see Technical Note TN2431: App Testing Guide.For a networking overview, please review About Networking. For a more specific overview of App Review’s IPv6 requirements, please review the IPv6 and App Review discussion on the Apple Developer Forum.Please see attached screenshot for details.</code></pre><blockquote><font color="#2E8B57"><strong>解析：ipv6的问题，具体参考以下地址 <a href="https://shimo.im/docs/r4WRJroUsdMJHPoa/" target="_blank" rel="noopener">https://shimo.im/docs/r4WRJroUsdMJHPoa/</a> 《iOS上架iPV6被拒问题》，可复制链接后用石墨文档 App 打开</strong></font>  </blockquote><h4 id="7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage"><a href="#7、Guideline-5-1-1-Legal-Privacy-Data-Collection-and-Storage" class="headerlink" title="7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage"></a>7、Guideline 5.1.1 - Legal - Privacy - Data Collection and Storage</h4><pre><code>We noticed that your app requests the user’s consent to access their camera but does not clarify the use of this feature in the permission modal alert.Next StepsTo resolve this issue, please revise the permission modal alert to specify why the app is requesting access to the user&#39;s camera.The permission request alert should specify how your app will use this feature to help users understand why your app is requesting access to their personal data.ResourcesFor additional information and instructions on configuring and presenting an alert, please review the Requesting Permission section of the iOS Human Interface Guidelines and the Information Property List Key Reference. You may also want to review the Technical Q&amp;A QA1937: Resolving the Privacy-Sensitive Data App Rejection page for details on how to provide a usage description for permission request alerts.Learn more about Protecting the User’s Privacy.Please see attached screenshots for details.</code></pre><p>一般苹果会配备以下类似截图<br>    <img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/app.png?raw=true" alt=""></p><blockquote><font color="#2E8B57"><strong>解析：自从iOS10之后加入了各种权限问题，比如相机、相册、网络、定位等等权限，应用中使用这些权限的过程中必须配备详细描述，使用这项权限干什么，比如请求使用您的定位权限，便于为您提供周边景区服务。所以描述完整很重要。</strong></font></blockquote><h4 id="8、Guideline-5-2-1-Legal-Intellectual-Property"><a href="#8、Guideline-5-2-1-Legal-Intellectual-Property" class="headerlink" title="8、Guideline 5.2.1 - Legal - Intellectual Property"></a>8、Guideline 5.2.1 - Legal - Intellectual Property</h4><pre><code>The seller and company names associated with your app do not reflect the name “西安市人民政府” in the app or its metadata, as required by Guideline 5.2.1 of the App Store Review Guidelines.Next StepsYour app must be published under a seller name and company name that reflects the 西安市人民政府 name. If you have developed this app on behalf of a client, please advise your client to add you to the development team of their Apple Developer account.Once created, you cannot change your seller name or company name in iTunes Connect. For assistance with changing your company name or seller name, you will need to contact iTunes Connect through the Contact Us page. Select Getting Started from the first dropdown menu, then select General iTunes Connect Inquiry to contact the appropriate iTunes Connect team.</code></pre><blockquote><font color="#2E8B57"><strong>解析：涉及到一个资质问题，大致就是说该帐号并不能代表某机构或者某组织去发布销售该应用，<br>       一般情况都是其他项目想用我们公司帐号上架，出现这种问题，也就是说我们公司暂时无法代表政<br>       府去发布某政务服务应用。一般解决方案去除应用中明显的字眼：比如xxx市人民政务，xxx市政<br>       务服务中心，或者直接客户自己提供开发者帐号，不用我们公司帐号上架</strong></font></blockquote><h4 id="9、应用出现-beta版、测试版字样"><a href="#9、应用出现-beta版、测试版字样" class="headerlink" title="9、应用出现 beta版、测试版字样"></a>9、应用出现 beta版、测试版字样</h4><pre><code>Your app appears to be a pre-release, test, or trial version with a limited feature set. Apps that are created for demonstration or trial purposes are not appropriate for the App Store and do not comply with the App Store Review Guidelines.To ensure compliance with the App Store Review Guidelines, it would be appropriate to revise your app to complete, remove, or fully configure any partially implemented feature(s).If you would like to conduct beta trial for your app, you may wish to review the TestFlight Beta Testing Guide.</code></pre><blockquote><font color="#2E8B57"><strong>解析：不要过度谦虚地在启动画面或者应用名称上加上”beta”字样，苹果不允许测试版产品上架。也就是整个应用无论从启动到细枝末节的某个页面上都不要出现测试、beta字样，一经苹果审核到，基本都是被打回。</strong></font></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AppStore </tag>
+            
+            <tag> 上架 </tag>
+            
+            <tag> 审核 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>世上本无坑，踩的人多了变有了坑</title>
+      <link href="/2018/05/21/iOS%E5%BC%80%E5%8F%91/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/"/>
+      <url>/2018/05/21/iOS%E5%BC%80%E5%8F%91/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、tableViewCell-分割线边距缩进"><a href="#1、tableViewCell-分割线边距缩进" class="headerlink" title="1、tableViewCell 分割线边距缩进"></a>1、tableViewCell 分割线边距缩进</h1><pre><code>-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {    // 设置分割线左右边距    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {        [cell setSeparatorInset:UIEdgeInsetsMake(0,100, 0,8)];    }    //    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {        [cell setPreservesSuperviewLayoutMargins:NO];    }    // 设置cell左右边距    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {        [cell setLayoutMargins:UIEdgeInsetsMake(0, 8, 0,8)];    }}</code></pre><p>#2、cocoapods降级操作</p><p> 1查看当前版本</p><pre><code>pod --version</code></pre> 2查看安装列表<pre><code>gem list</code></pre>3卸载<pre><code>sudo gem uninstall cocoapods -v 1.3.1</code></pre>4安装<pre><code>sudo gem install cocoapods -v 1.3.1</code></pre><p>sudo gem uninstall cocoapods</p><p>先查看本地安装过的cocopods相关东西，命令如下：<br>$ gem list –local | grep cocoapods<br>会显示如下：<br>cocoapods-core (0.39.0)<br>cocoapods-downloader (0.9.3)<br>cocoapods-plugins (0.4.2)<br>cocoapods-search (0.1.0)<br>cocoapods-stats (0.6.2)<br>cocoapods-trunk (0.6.4)<br>cocoapods-try (0.5.1)<br>然后逐个删除吧：<br>$ sudo gem uninstall cocoapods-core</p><p>#2.1 安装RVM<br>curl -L get.rvm.io | bash -s stable</p><p>source ~/.bashrc<br>source ~/.bash_profile<br>rvm -v<br>rvm list known<br>rvm install 2.3.0</p><p>#3、Runtime之交换方法</p><pre><code>+ (void)methodSwizzlingWithOriginalSelector:(SEL)originalSelector                         bySwizzledSelector:(SEL)swizzledSelector {    static dispatch_once_t onceToken;    dispatch_once(&onceToken, ^{        Class class = [self class];        Method originalMethod = class_getInstanceMethod(class, originalSelector);        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);        BOOL didAddMethod = class_addMethod(class,originalSelector,                                            method_getImplementation(swizzledMethod),                                            method_getTypeEncoding(swizzledMethod));        if (didAddMethod) {            class_replaceMethod(class,swizzledSelector,                                method_getImplementation(originalMethod),                                method_getTypeEncoding(originalMethod));        } else {            method_exchangeImplementations(originalMethod, swizzledMethod);        }    });}</code></pre><p>#上架应用预览<br>    <a href="https://itunes.apple.com/cn/app/yan-yu/id1393900517" target="_blank" rel="noopener">https://itunes.apple.com/cn/app/yan-yu/id1393900517</a>    </p><h1 id="系统相册界面上移"><a href="#系统相册界面上移" class="headerlink" title="系统相册界面上移"></a>系统相册界面上移</h1><p>是因为全局设置了ScrollView属性导致的.</p> <pre><code>if (@available(iOS 11.0, *)){//避免滚动视图顶部出现20的空白以及push或者pop的时候页面有一个上移或者下移的异常动画的问题        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];    }</code></pre>  <p>  在调用相册前重置就好了<br>  <pre><code>if (@available(iOS 11, *)) {<br>        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;<br>    }</code></pre> </p><h1 id="如何防止反编译"><a href="#如何防止反编译" class="headerlink" title="如何防止反编译"></a>如何防止反编译</h1><p>1、对本地数据存储NSUserDefault,sqlite进行加密处理，保护关键信息    （本地数据加密）<br>2、对程序中出现的URL进行加密处理，防止URL被静态分析                 (URL地址加密)<br>3、对客户端的网路请求数据进行加密，防止通过网络拦截获取数据           (请求数据加密)<br>4、代码混淆<br>5、第三方防护，网易云盾</p><h1 id="Xcode编译错误"><a href="#Xcode编译错误" class="headerlink" title="Xcode编译错误"></a>Xcode编译错误</h1><pre><code>Warning: The Copy Bundle Resources build phase contains this target&apos;s Info.plist file &apos;Proj/Other/Info.plist&apos;.编译时将 info.plist文件也进行了编译</code></pre><p><strong>解决方案: 在 Copy Bundle Resources中将警告文件删除重新编译即可</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS Runtime的妙用</title>
+      <link href="/2018/05/21/iOS%E5%BC%80%E5%8F%91/Runtime%E5%A6%99%E7%94%A8/"/>
+      <url>/2018/05/21/iOS%E5%BC%80%E5%8F%91/Runtime%E5%A6%99%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h1><p>Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例</p><pre><code>Person *p = [[Person alloc] init];</code></pre>对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下:<pre><code>//通过类名获取类Class class = objc_getClass("Person");//注意Class实际上也是对象，所以同样能够接受消息，向Class发送alloc消息Person *p = objc_msgSend(class,@selector(alloc));//发送init消息给Person实例pp = objc_msgSend(p,@selector(init));//发送run消息给p 即调用run实例方法objc_msgSend(p, @selector(run));//汇总传递消息链objc_msgSend(objc_msgSend(objc_msgSend(objc_getClass("Person"), @selector(alloc)), @selector(init)), @selector(run));</code></pre><h1 id="动态修改变量"><a href="#动态修改变量" class="headerlink" title="动态修改变量"></a>动态修改变量</h1><pre><code>/** 1.动态修改变量（私有变量也可修改)*/- (void)dynamicModifyVariable {    NSLog(@"修改前姓名为:%@", [p valueForKey:@"age"]);    unsigned int count = 0;    // 获取类的成员变量列表(包括私有) 获取属性，方法，协议列表 类似    Ivar *varList = class_copyIvarList([Person class], &count);    for (int i = 0; i < count; i++) {        Ivar var = varList[i];        const char *varName = ivar_getName(var);        NSString *proname = [NSString stringWithUTF8String:varName];        NSLog(@"查看成员变量:%@",proname);        if ([proname isEqualToString:@"_age"]) {            object_setIvar(p, var, @"22");//            [p setValue:@"22" forKey:@"age"];        }    }    NSLog(@"修改后姓名为:%@", [p valueForKey:@"age"]);}</code></pre><h1 id="动态添加方法"><a href="#动态添加方法" class="headerlink" title="动态添加方法"></a>动态添加方法</h1><p>分类不能增加方法,Extension 可以</p><pre><code>//1、注册方法SEL getInformationSelector = sel_registerName("getPersonAllInfo");//2、添加方法class_addMethod([Person class], getInformationSelector, (IMP)getInformation, "v@");</code></pre><h1 id="动态拦截与替换方法"><a href="#动态拦截与替换方法" class="headerlink" title="动态拦截与替换方法"></a>动态拦截与替换方法</h1><p>拦截系统自带方法的调用(Swizzle黑魔法),也可以理解为替换系统方法<br>使用场景:比如数据埋点,搜集某些页面进入次数,或者按钮点击次数,在不改变原有结构的前提下,使用拦截方法可以实现无侵入式埋点或者其他功能, 但是方法拦截需要慎重使用,可能牵一发而动全身.</p><pre><code>+(void)load {    [super load];    static dispatch_once_t onceToken;    dispatch_once(&onceToken, ^{        //获取方法名        SEL origSel = @selector(sendAction:to:forEvent:);        SEL swizSel = @selector(ept_sendAction:to:forEvent:);        Method origMethod = class_getInstanceMethod([self class], origSel);        Method swizMethod = class_getInstanceMethod([self class], swizSel);        //判断方法是否添加成功        BOOL addMethod = class_addMethod([self class], origSel, method_getImplementation(swizMethod), method_getTypeEncoding(swizMethod));        if (addMethod) {            //替换类中已有方法的实现,如果该方法不存在添加该方法            class_replaceMethod([self class], swizSel, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));        }else{            //替换Method            method_exchangeImplementations(origMethod, swizMethod);        }    });}- (void)ept_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event{    [self ept_sendAction:action to:target forEvent:event];    NSLog(@"拦截系统点击方法成功,调用ept_sendAction");}</code></pre>动态拦截替换方法常用函数:> **<font color="#2E8B57">1、class_getInstanceMethod 获取方法名> 2、class_addMethod 判断方法是否添加成功> 3、class_replaceMethod 替换类中已有方法的实现,如果该方法不存在添加该方法> 4、method_exchangeImplementations 替换Method</font>**# 动态添加属性 <pre><code>// 重写set和get方法 设置关联- (NSString *)mobile {    return objc_getAssociatedObject(self, "mobile");}- (void)setMobile:(NSString *)mobile {    objc_setAssociatedObject(self, "mobile", mobile, OBJC_ASSOCIATION_RETAIN_NONATOMIC);} </code></pre><p>重写set和get方法,设置关联属性</p><blockquote><p>/*<em><br> 第一个参数:当前对象<br> 第二个参数:新增属性键值 </em>/</p></blockquote> <pre><code>objc_getAssociatedObject(id _Nonnull object, const void * _Nonnull key)</code></pre><blockquote><p>/*<em><br> 第一个参数id object, 当前对象<br> 第二个参数const void </em>key, 关联的key，是c字符串<br> 第三个参数id value, 被关联的对象的值<br> 第四个参数objc_AssociationPolicy policy关联引用的规则<br> */</p></blockquote> <pre><code>objc_setAssociatedObject(id _Nonnull object, const void * _Nonnull key,id _Nullable value, objc_AssociationPolicy policy)</code></pre><h1 id="自动化归解档"><a href="#自动化归解档" class="headerlink" title="自动化归解档"></a>自动化归解档</h1><p>归解档遵循<font color="#2E8B57">NSCoding</font>协议即可,实现归档和解档即可</p><pre><code>#pragma mark - coding- (void)encodeWithCoder:(NSCoder *)aCoder;- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;</code></pre><p>对于自定义类型的归解档,最原始的方法就是挨个属性去归档、解档,但是当你要归档的对象永远数亿属性资产的时候,很显然最原始的方法已经无法满足我们对于效率的诉求,从而就有了自动化归解档的诞生</p><p>分别在两个方法去遍历成员变量,取值、设值</p><pre><code>#pragma mark - coding- (void)encodeWithCoder:(NSCoder *)aCoder{    /**     传统做法:挨个属性去归档     但是当遇到n多属性的时候 显然一个个去归档就很繁琐了     *///    [aCoder encodeObject:self.name forKey:@"name"];//    [aCoder encodeObject:self.sex forKey:@"sex"];//    [aCoder encodeObject:self.friends forKey:@"friends"];    unsigned int count = 0;    Ivar *ivarList = class_copyIvarList([Person class], &count);    for (int i = 0; i < count; i ++) {        Ivar ivar = ivarList[i];                     // 从成员列表中取出成员变量        const char *name = ivar_getName(ivar);       // 获取成员变量名        // 进行归档        NSString *key = [NSString stringWithUTF8String:name];        id value = [self valueForKey:key];        [aCoder encodeObject:value forKey:key];    }    free(ivarList);}</code></pre><p>获取成员变量,赋值成员变量</p><pre><code>- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{    self = [super init];    if (self) {//        _name = [aDecoder decodeObjectForKey:@"name"];//        _sex = [aDecoder decodeObjectForKey:@"sex"];//        _friends = [aDecoder decodeObjectForKey:@"friends"];        unsigned int count = 0;        Ivar *ivarList = class_copyIvarList([Person class], &count);        for (int i = 0; i < count; i++) {            Ivar ivar = ivarList[i];                        // 从成员列表中取出成员变量            const char *name = ivar_getName(ivar);       // 获取成员变量名            // 进行解档            NSString *key = [NSString stringWithUTF8String:name];            id value = [aDecoder decodeObjectForKey:key];            // 将值赋值给成员变量            [self setValue:value forKey:key];        }        free(ivarList);    }    return self;}</code></pre><h1 id="字典转模型"><a href="#字典转模型" class="headerlink" title="字典转模型"></a>字典转模型</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Runtime </tag>
+            
+            <tag> 消息机制 </tag>
+            
+            <tag> 消息转发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>常用宏定义</title>
+      <link href="/2018/04/08/iOS%E5%BC%80%E5%8F%91/%E8%AE%BE%E5%A4%87%E5%B0%BA%E5%AF%B8/"/>
+      <url>/2018/04/08/iOS%E5%BC%80%E5%8F%91/%E8%AE%BE%E5%A4%87%E5%B0%BA%E5%AF%B8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="设备尺寸"><a href="#设备尺寸" class="headerlink" title="设备尺寸"></a>设备尺寸</h1><pre><code>#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000 // 当前Xcode支持iOS8及以上#define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)#define SCREENH_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)#define SCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)#else#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height#define SCREEN_SIZE [UIScreen mainScreen].bounds.size#endif</code></pre><p>#颜色设置</p><pre><code>/** 随机颜色 */#define LNRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]/** 不透明设置 */#define LNRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]/** 带透明设置 */#define LNRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]/** clear背景颜色 */#define LNClearColor [UIColor clearColor]</code></pre><p>#视图设置</p><pre><code>/** 设置视图圆角和边框 */#define LNViewBorderRadius(View, Radius, Width, Color)\\[View.layer setCornerRadius:(Radius)];\[View.layer setMasksToBounds:YES];\[View.layer setBorderWidth:(Width)];\[View.layer setBorderColor:[Color CGColor]]/** 由角度转换弧度 由弧度转换角度 */#define LNDegreesToRadian(x) (M_PI * (x) / 180.0)#define LNRadianToDegrees(radian) (radian*180.0)/(M_PI)/** 获取图片资源 */#define kLNImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]</code></pre><p>#系统判断</p><pre><code>/** 判断是否为iPhone */#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)/** 判断是否为iPad */#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)/** 判断是否为ipod */#define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])/** 判断是否为 iPhone 5SE */#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f && [[UIScreen mainScreen] bounds].size.height == 568.0f/** 判断是否为iPhone 6/6s */#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f && [[UIScreen mainScreen] bounds].size.height == 667.0f/** 判断是否为iPhone 6Plus/6sPlus */#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f && [[UIScreen mainScreen] bounds].size.height == 736.0f/** 判断是否iphone X **/#define KISIphoneX (CGSizeEqualToSize(CGSizeMake(375.f, 812.f), [UIScreen mainScreen].bounds.size) || CGSizeEqualToSize(CGSizeMake(812.f, 375.f), [UIScreen mainScreen].bounds.size))/** 获取系统版本 */#define IOS_SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]/** 判断 iOS 8 或更高的系统版本 */#define IOS_VERSION_8_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0)? (YES):(NO))/** 判断是真机还是模拟器 */#if TARGET_OS_IPHONE//iPhone Device#endif#if TARGET_IPHONE_SIMULATOR//iPhone Simulator#endif</code></pre><p>#沙盒操作</p><pre><code>/** 获取temp */#define kPathTemp NSTemporaryDirectory()/** 获取沙盒 Document */#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]/** 获取沙盒 Cache */#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]</code></pre><p>#GCD常用</p><pre><code>/** GCD - 一次性执行 */#define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);/** GCD - 在Main线程上运行 */#define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);/** GCD - 开启异步线程 */#define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);</code></pre><p>#其他</p><pre><code>#define LNWeakSelf(type)  __weak typeof(type) weaktype = type;#define LNStrongSelf(type)  __strong typeof(type) type = weaktype;/** 获取通知中心 */#define LNNotificationCenter [NSNotificationCenter defaultCenter]/** 自定义log */#ifdef DEBUG#define LNLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])#else#define LNLog(...)#endif</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>函数式、链式语法</title>
+      <link href="/2018/04/02/iOS%E5%BC%80%E5%8F%91/%E5%87%BD%E6%95%B0%E5%BC%8F%E3%80%81%E9%93%BE%E5%BC%8F%E8%AF%AD%E6%B3%95/"/>
+      <url>/2018/04/02/iOS%E5%BC%80%E5%8F%91/%E5%87%BD%E6%95%B0%E5%BC%8F%E3%80%81%E9%93%BE%E5%BC%8F%E8%AF%AD%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>#函数式、链式语法</p><pre><code>#import <foundation foundation.h="">@interface Person : NSObject/** 传统写法 */- (void)eat;- (void)sleep;/** 使用‘[]’连续调用 */- (Person *)eat1;- (Person *)sleep1;/** 使用‘()’函数式编程,block实现 */- (void(^)(void))eat2;- (void(^)(void))sleep2;/** 使用函数式 + 链式 无参 */- (Person *(^)(void))eat3;- (Person *(^)(void))sleep3;/** 函数式 + 链式 带参 */- (Person * (^)(NSString *foodName))eat4;- (Person * (^)(NSInteger hour))sleep4;@end</foundation></code></pre><pre><code>#import "Person.h"@implementation Person#pragma mark - 传统写法,单独调用,不能任意顺序组合- (void)eat {    NSLog(@"%s",__func__);}-(void)sleep {    NSLog(@"%s",__func__);}#pragma mark - 使用‘[]’实现连续调用- (Person *)eat1 {    NSLog(@"%s",__func__);    return self;}-(Person *)sleep1{    NSLog(@"%s",__func__);    return self;}#pragma mark - 使用‘()’函数式编程,block实现-(void (^)(void))eat2 {    //定义block    void (^eat2Block)(void) = ^ {        NSLog(@"%s",__FUNCTION__);    };    return eat2Block;}-(void (^)(void))sleep2 {    //定义block    void (^sleep2Block)(void) = ^ {        NSLog(@"%s",__FUNCTION__);    };    return sleep2Block;}#pragma mark - 使用函数式 + 链式 无参-(Person *(^)(void))eat3{    Person *(^eat3Block)(void) = ^{        NSLog(@"%s",__FUNCTION__);        return self;    };    return eat3Block;}-(Person *(^)(void))sleep3{    Person *(^sleep3Block)(void) = ^{        NSLog(@"%s",__FUNCTION__);        return self;    };    return sleep3Block;}#pragma mark - 函数式 + 链式 带参- (Person *(^)(NSString *))eat4{    Person * (^eat4Block)(NSString *) = ^(NSString *foodName) {        NSLog(@"这个人吃了: %@",foodName);        return self;    };    return eat4Block;}//上下两种写法一样- (Person *(^)(NSInteger))sleep4{    return ^(NSInteger hour) {        NSLog(@"然后睡了%ld小时",(long)hour);        return self;    };}@end</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 链式 </tag>
+            
+            <tag> 函数 </tag>
+            
+            <tag> 点语法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>实用框架</title>
+      <link href="/2018/04/02/iOS%E5%BC%80%E5%8F%91/%E5%AE%9E%E7%94%A8%E6%A1%86%E6%9E%B6/"/>
+      <url>/2018/04/02/iOS%E5%BC%80%E5%8F%91/%E5%AE%9E%E7%94%A8%E6%A1%86%E6%9E%B6/</url>
+      
+        <content type="html"><![CDATA[<p>#实用框架</p><p>1.新闻类的顶部选项卡类似网易新闻：WMPageController，HMSegmentControl，HTHorizontalSelectionList</p><p>这三者我跟推荐第一种，第一种有很多手势，比如点击顶部列表会滑动到最顶端。具体使用方法请参考<a href="https://github.com/wangmchn/WMPageController" target="_blank" rel="noopener">点击打开链接</a></p><p>2.自定义tabbar：CYLTabBarController</p><p>闲鱼和转转这两个app相信大部分人都用过，他们的tabbar是不是很有特色呢，想拥有和他们一样的效果就使用这个框架。具体使用方法请参考点击<a href="https://github.com/ChenYilong/CYLTabBarController" target="_blank" rel="noopener">打开链接</a></p><p>3.抽屉效果：MMDrawerController，RESideMenu</p><p>很多app需要做成侧边栏菜单栏的抽屉效果，这时候你就可以选择MMDrawerController，具体使用方法请参考点击<a href="https://github.com/mutualmobile/MMDrawerController" target="_blank" rel="noopener">打开链接</a></p><p>4.KVC键值对编码常用来字典和模型互转：MJExtension，Mantle，JsonModel</p><p>这三者都很好用，我比较常用MJExtension，耦合性低不需要继承，直接用就行，具体使用方法请参考点击<a href="https://github.com/CoderMJLee/MJExtension" target="_blank" rel="noopener">打开链接</a></p><p>5.透明指示层：MBProgressHUD，SVProgressHUD</p><p>这两者是当前最常使用的，不过我更倾向于第一种，具体使用方法请参考点击<a href="https://github.com/jdg/MBProgressHUD" target="_blank" rel="noopener">打开链接</a></p><p>6.避免键盘遮挡输入框：TPKeyboardAvoiding</p><p>有了这个框架，我们再也不用监听键盘的升起落下了。具体使用方法请参考点击<a href="https://github.com/michaeltyson/TPKeyboardAvoiding" target="_blank" rel="noopener">打开链接</a></p><p>7.网络请求的框架：AFNetworking，YTKNetworking</p><p>相信只要是做iOS开发的都知道AFN，但是AFN使用起来还是有点繁琐，所以我推荐大家使用YTKNetworking（基于AFN的封装），具体使用方法请参考点击<a href="https://github.com/yuantiku/YTKNetwork" target="_blank" rel="noopener">打开链接</a></p><p>8.图表：Charts，MPAndroidChart</p><p>Charts这个框架是根据MPAndroidChart改的，Charts是用Swift语言写的，MPAndroidChart是用java语言写的，有柱状图，饼图，雷达图等等，具体使用方法请参考点击<a href="https://github.com/danielgindi/Charts" target="_blank" rel="noopener">打开链接</a></p><p>9.屏幕适配：Masonry，SnapKit，HandyAutoLayout</p><p>我常用Masonry做屏幕适配，其他两个也挺多人用，关于Masonry使用请参考点击<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="noopener">打开链接</a></p><p>10.JavaScript与ObjectiveC之间发送消息：WebViewJavaScriptBridge</p><p>用于JS与OC交互时使用，请参考点击<a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">打开链接</a>。提到这个顺便说下JSPatch与JSPatchConvertor，前者是可以用JavaScript语言编写原生iOSapp，后者是将OC语言的代码转成JavaScript语言</p><p>11.计算tableViewCell的行号：UITableView-FDTemplateLayoutCell</p><p>有时我们需要根据cell里的数据来计算cell的高度，实现起来比较困难，此时就可以用这个框架啦，使用参考点击<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="noopener">打开链接</a></p><p>12.ARSegmentPager</p><p>a fully custom UITabbarController-likely controller with parallax header，使用参考点击<a href="https://github.com/AugustRush/ARSegmentPager" target="_blank" rel="noopener">打开链接</a></p><p>13.WYPopoverController</p><p>当前内容的弹框，使用参考点击<a href="https://github.com/nicolaschengdev/WYPopoverController" target="_blank" rel="noopener">打开链接</a></p><p>14.用来编辑富文本：YYText，TTTAttributedLabel</p><p>这两个框架可以结合使用，都是用于富文本问题</p><p>15.显示webView的加载进度：NJKWebViewProgress</p><p>使用请参考点击<a href="https://github.com/ninjinkun/NJKWebViewProgress" target="_blank" rel="noopener">打开链接</a></p><p>16.SAMKeychain</p><p>使用参考点击<a href="https://github.com/soffes/SAMKeychain" target="_blank" rel="noopener">打开链接</a></p><p>17.三级联动的pickview以及时间选择等等：ActionSheetPicker-3.0</p><p>使用参考点击<a href="https://github.com/skywinder/ActionSheetPicker-3.0" target="_blank" rel="noopener">打开链接</a></p><p>18.下拉刷新水滴动画：ODRefreshControl</p><p>使用参考点击<a href="https://github.com/Sephiroth87/ODRefreshControl" target="_blank" rel="noopener">打开链接</a></p><p>19.轮播图：SDCycleScrollView</p><p>使用参考点击<a href="https://github.com/gsdios/SDCycleScrollView" target="_blank" rel="noopener">打开链接</a></p><p>1、使用XML请求SOAP，用NSURLConnectionDelegate实现</p><p>   <a href="http://www.webxml.com.cn/zh_cn/web_services.aspx" target="_blank" rel="noopener">可用接口</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS转场动画-让你的页面app不再单调</title>
+      <link href="/2018/03/23/iOS%E5%BC%80%E5%8F%91/fromView%20and%20toView/"/>
+      <url>/2018/03/23/iOS%E5%BC%80%E5%8F%91/fromView%20and%20toView/</url>
+      
+        <content type="html"><![CDATA[<h1 id="fromView-and-toView"><a href="#fromView-and-toView" class="headerlink" title="fromView and toView"></a>fromView and toView</h1><p>转场动画中时常会出现 fromView 和 toView 这一组相对的概念</p><p>fromView:跳转前的视图<br>toView：跳转后的视图</p><p>当然这两个视图是相对的，<br>比如A present to B ,此时 A =  fromView , B = toView<br>然而B dismiss to A ,此时 B =  fromView , A = toView<br>所以fromView和toView不是固定且一成不变的，会随着动画的执行和结束发生变化，扮演不同的角色</p><h1 id="presentedViewController-and-presentingViewController"><a href="#presentedViewController-and-presentingViewController" class="headerlink" title="presentedViewController and presentingViewController"></a>presentedViewController and presentingViewController</h1><p>听过  fromView 和 toView ，想必  presentedViewController 和 presentingViewController也不会太陌生，这也是一组相对概念，而且容易与第一组混淆。</p><p>不同之处在于  presentedViewController 和 presentingViewController  的身份不受present影响，简单说还是上面的例子<br>比如A present to B ,此时 A = presentedViewController , B = presentingViewController<br>然而B dismiss to A ,此时 A = presentedViewController , B = presentingViewController</p><h1 id="modalPresentationStyle"><a href="#modalPresentationStyle" class="headerlink" title="modalPresentationStyle"></a>modalPresentationStyle</h1><p>系统提供的一个present时动画的枚举类型</p><pre><code>typedef NS_ENUM(NSInteger, UIModalPresentationStyle) {        UIModalPresentationFullScreen = 0,        UIModalPresentationPageSheet NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED,        UIModalPresentationFormSheet NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED,        UIModalPresentationCurrentContext NS_ENUM_AVAILABLE_IOS(3_2),        UIModalPresentationCustom NS_ENUM_AVAILABLE_IOS(7_0),        UIModalPresentationOverFullScreen NS_ENUM_AVAILABLE_IOS(8_0),        UIModalPresentationOverCurrentContext NS_ENUM_AVAILABLE_IOS(8_0),        UIModalPresentationPopover NS_ENUM_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED,        UIModalPresentationBlurOverFullScreen __TVOS_AVAILABLE(11_0) __IOS_PROHIBITED __WATCHOS_PROHIBITED,        UIModalPresentationNone NS_ENUM_AVAILABLE_IOS(7_0) = -1,};</code></pre><p>其中可以自定义动画效果的只有两种：FullScreen和Custom，两者的区别在于FullScreen会移除fromView，而Custom不会。</p><h1 id="UIViewControllerTransitioningDelegate"><a href="#UIViewControllerTransitioningDelegate" class="headerlink" title="UIViewControllerTransitioningDelegate"></a>UIViewControllerTransitioningDelegate</h1><h1 id="transitionFromViewController"><a href="#transitionFromViewController" class="headerlink" title="transitionFromViewController"></a>transitionFromViewController</h1><p>通常的使用场景是 在多个Child ViewController之间切换.</p><pre><code>[self transitionFromViewController:<#(nonnull uiviewcontroller="" *)#="">                      toViewController:<#(nonnull uiviewcontroller="" *)#="">                              duration:<#(nstimeinterval)#>                               options:<#(uiviewanimationoptions)#>                            animations:<#^(void)animations#>                            completion:<#^(bool finished)completion#="">];                            </#^(bool></#^(void)animations#></#(uiviewanimationoptions)#></#(nstimeinterval)#></#(nonnull></#(nonnull></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>UICollectionView Layout自定义 Layout布局</title>
+      <link href="/2018/03/02/iOS%E5%BC%80%E5%8F%91/UICollectionView%20Layout%E8%87%AA%E5%AE%9A%E4%B9%89%20Layout%E5%B8%83%E5%B1%80/"/>
+      <url>/2018/03/02/iOS%E5%BC%80%E5%8F%91/UICollectionView%20Layout%E8%87%AA%E5%AE%9A%E4%B9%89%20Layout%E5%B8%83%E5%B1%80/</url>
+      
+        <content type="html"><![CDATA[<p>UICollectionView Layout自定义 Layout布局</p><p>#前言</p><h3 id="要从容地着手去做一件事-但一旦开始-就要坚持到底。——比阿斯【美】"><a href="#要从容地着手去做一件事-但一旦开始-就要坚持到底。——比阿斯【美】" class="headerlink" title="要从容地着手去做一件事,但一旦开始,就要坚持到底。——比阿斯【美】"></a><strong>要从容地着手去做一件事,但一旦开始,就要坚持到底。——比阿斯【美】</strong></h3><p>对于UIcollectionView的基础使用相信各位早已烂熟于心，那么对于UICollectionView Layout自定义布局呢？你知道多少？当我们使用系统自带的UICollectionViewFlowLayout无法实现我们的布局时，我们就不得不考虑自定义layout。现将自定义布局规为以下三部曲：</p><ul><li><p>覆写prepareLayout方法，并在里面事先就计算好必要的布局信息并存储起来，初始化。</p></li><li><p>基于prepareLayout方法中的布局信息，使用collectionViewContentSize方法返回UICollectionView的内容尺寸。</p></li><li><p>使用layoutAttributesForElementsInRect:方法返回指定区域cell、Supplementary View和Decoration View的布局属性。</p></li></ul><h1 id="重写PrepareLayout"><a href="#重写PrepareLayout" class="headerlink" title="重写PrepareLayout"></a>重写PrepareLayout</h1><h1 id="重写collectionViewContentSize"><a href="#重写collectionViewContentSize" class="headerlink" title="重写collectionViewContentSize"></a>重写collectionViewContentSize</h1><h1 id="重写layoutAttributesForElementsInRect"><a href="#重写layoutAttributesForElementsInRect" class="headerlink" title="重写layoutAttributesForElementsInRect"></a>重写layoutAttributesForElementsInRect</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>前人栽树，后人乘凉，开发道路上已经有各位大佬为我们趟过雷，剩下的就是需要我们自己去吸收，去探索那些遗留的雷区，谁能发现，当然就会成为造福人类的英雄了。</p><p>1、<a href="https://www.jianshu.com/p/cabec2786241?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation" target="_blank" rel="noopener">详细分享UICollectionView的自定义布局(瀑布流, 线性, 圆形…)</a><br>2、<a href="https://www.jianshu.com/p/83f2d6ac7e68" target="_blank" rel="noopener">自定义布局和自定义流水布局（CollectionViewLayout和CollectionViewFlowLayout）</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>基础讲解</title>
+      <link href="/2018/01/22/iOS%E5%BC%80%E5%8F%91/15165912880700/"/>
+      <url>/2018/01/22/iOS%E5%BC%80%E5%8F%91/15165912880700/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://www.jianshu.com/p/56e40ea56813" target="_blank" rel="noopener">集锦</a><br><a href="https://www.cnblogs.com/jukaiit/p/7932313.html" target="_blank" rel="noopener">解答</a></p><p>1、为什么说Objective-C是一门动态的语言？</p><pre><code>这里动态语言指的是不需要在编译时确定所有的东西，在运行时还可以动态的添加变量、方法和类。Objective-C 可以通过Runtime 这个运行时机制，在运行时确定类或者变量的类型，动态的添加变量、方法、类等，所以说Objective-C 是一门动态的语言。</code></pre><p>2、讲一下MVC和MVVM，MVP？</p><pre><code>MVC ：  简单来说就是逻辑、试图、数据进行分层，实现解耦。最早存在于桌面程序中的, M是指业务        数据, V是指用户界面, C则是控制器在具体的业务场景中, C作为M和V之间的连接, 负责获        取输入的业务数据,然后将处理后的数据输出到界面上做相应展示, 另外, 在数据有所更新        时, C还需要及时提交相应更新到界面展示. 在上述过程中, 因为M和V之间是完全隔离的,         所以在业务场景切换时, 通常只需要替换相应的C, 复用已有的M和V便可快速搭建新的业务        场景. MVVM： 由视图(View)、视图模型(ViewModel)、模型(Model)三部分组成，将一部分逻辑(耗时，       公共方法，网络请求等)和数据的处理等操作从控制器里面搬运到ViewModel中</code></pre><p>3、为什么代理要用weak？代理的delegate和dataSource有什么区别？block和代理的区别?</p><pre><code>weak:  指明该对象并不负责保持delegate这个对象，delegate这个对象的销毁由外部控制,防止循环引用。delegate:偏重于与用户交互的回调，有那些方法可以供我使用dataSource:偏重于数据的回调delegate是操作，datasource是数据**block与代理**1、都是进行单一回调，2、delegate是个对象，然后用过一个对象自己调用代理协议函数来完成整个流程。block是传递一个函   数指针，利用函数指针执行来进行回调。3、在内存管理上，delegate不需要保存引用。block对引用数据有copy的处理。</code></pre><p>4、属性的实质是什么？包括哪几个部分？属性默认的关键字都有哪些？@dynamic关键字和@synthesize关键字是用来做什么的？</p><pre><code>@property = 实例变量 + get方法 + set方法  （因此使用property会自动生成get和set）readwrite，assign, atomic;@synthesize和@dynamic区别, 在声明property属性后，有2种实现选择:@synthesize编译器期间，让编译器自动生成getter/setter方法。当有自定义的存或取方法时，自定义会屏蔽自动生成该方法@dynamic告诉编译器，不自动生成getter/setter方法，避免编译期间产生警告，然后由自己实现存取方法。或存取方法在运行时动态创建绑定：主要使用在CoreData的实现NSManagedObject子类时使用，由Core Data框架在程序运行的时动态生成子类属性 </code></pre><p>5、属性的默认关键字是什么？</p><pre><code>对于基本数据类型默认关键字是atomic,readwrite,assign对于普通的OC对象atomic,readwrite,strong    </code></pre><p>6、NSString为什么要用copy关键字，如果用strong会有什么问题？（注意：这里没有说用strong就一定不行。使用copy和strong是看情况而定</p><table><thead><tr><th>属性关键字</th><th style="text-align:center">作用</th></tr></thead><tbody><tr><td>strong</td><td style="text-align:center">在赋值时调用被指向对象的retain方法，使其引用计数加1</td></tr><tr><td>weak</td><td style="text-align:center">不增加对象的引用计数，不持有对象，对象消失，指针自动变为nil</td></tr><tr><td>assign</td><td style="text-align:center">只用来修饰基础数据类型（int double等），不改变引用计数</td></tr><tr><td>copy</td><td style="text-align:center">建立一个引用计数为1的对象，通常用于NSString和block</td></tr><tr><td>atomic</td><td style="text-align:center">原子操作，提供线程安全，默认属性，耗费系统资源</td></tr><tr><td>nonatomic</td><td style="text-align:center">非原子操作，不提供线程安全，效率更高</td></tr><tr><td>readonly</td><td style="text-align:center">只读属性</td></tr><tr><td>readwrite</td><td style="text-align:center">读写属性，默认</td></tr><tr><td>unsafe_unretained</td><td style="text-align:center">类似weak,但引用计数为0，指针不会nil</td></tr></tbody></table><p>7、如何令自己所写的对象具有拷贝功能?</p><pre><code>具体步骤：1、需声明该类遵从 NSCopying 协议2、实现 NSCopying 协议。该协议只有一个方法:- (id)copyWithZone:(NSZone *)zone;注意：一提到让自己的类用 copy 修饰符，我们总是想覆写copy方法，其实真正需要实现的却是 “copyWithZone” 方法。</code></pre><p>8、可变集合类 和 不可变集合类的 copy 和 mutablecopy有什么区别？如果是集合是内容复制的话，集合里面的元素也是内容复制么？</p><p>9、为什么IBOutlet修饰的UIView也适用weak关键字？</p><pre><code>因为当我们将控件拖到Storyboard上，相当于新创建了一个对象，而这个对象是加到视图控制器的view上，view有一个subViews属性，这个属性是一个数组，里面是这个view的所有子view，而我们加的控件就位于这个数组中，那么说明，实际上我们的控件对象是属于view的，也就是说view对加到它上面的控件是强引用。当我们使用Outlet属性的时候，我们是在viewController里面使用，而这个Outlet属性是有view来进行强引用的，我们在viewController里面仅仅是对其使用，并没有必要拥有它，所以是weak的</code></pre><p>10、nonatomic和atomic的区别？atomic是绝对的线程安全么？为什么？如果不是，那应该如何实现？</p><pre><code>nonatomic的内存管理语义是非原子性的，非原子性的操作本来就是线程不安全，而atomic的操作是原子性的，但并不意味着他就是线程安全的，它会增加正确的几率，能够更好的避免线程错误，但仍旧是不安全的。</code></pre><p>11、UICollectionView自定义layout如何实现？</p><p>12、用StoryBoard开发界面有什么弊端？如何避免？</p><pre><code>1、难以维护2、性能瓶颈3、错误定位困难</code></pre><p>13、进程和线程的区别？同步异步的区别？并行和并发的区别？</p><pre><code>进程和线程: 同步和异步:并行(parallellism)和并发(concurrency)</code></pre><p>14、线程间通信？</p><p>15、GCD的一些常用的函数？（group，barrier，信号量，线程同步）</p><p>16、如何使用队列来避免资源抢夺？</p><p>17、数据持久化的几个方案（fmdb用没用过）</p><pre><code>plist文件（属性列表）preference（偏好设置）NSKeyedArchiver（归档）SQLite 3CoreData</code></pre><p>18、说一下AppDelegate的几个方法？从后台到前台调用了哪些方法？第一次启动调用了哪些方法？从前台到后台调用了哪些方法？<br>1、 <strong>– (BOOL)application:(UIApplication )application didFinishLaunchingWithOptions:<br> (NSDictionary )launchOptions NS_AVAILABLE_IOS(3_0);</strong></p><pre><code>当应用程序启动时（不包括已在后台的情况下转到前台），调用此回调。launchOptions是启动参数，假如用户通过点击push通知启动的应用，这个参数里会存储一些push通知的信息。</code></pre><p>2、 <strong>– (void)applicationDidBecomeActive:(UIApplication *)application;</strong></p><pre><code> // Restart any tasks that were paused (or not yet started) while the  application was inactive. If the application was previously in the  background, optionally refresh the user interface.当应用程序全新启动，或者在后台转到前台，完全激活时，都会调用这个方法。如果应用程序是以前运行在后台，这时可以选择刷新用户界面。</code></pre><p>3、 <strong>– (void)applicationDidEnterBackground:(UIApplication *)application NS_AVAILABLE_IOS(4_0);</strong></p><pre><code> // Use this method to release shared resources, save user data, invalidate  timers, and store enough application state information to restore your  application to its current state in case it is terminated later.// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.当用户从前台状态转入后台时，调用此方法。使用此方法来释放资源共享，保存用户数据，无效计时器，并储存足够的应用程序状态信息的情况下被终止后，将应用 程序恢复到目前的状态。如果您的应用程序支持后台运行，这种方法被调用，否则调用applicationWillTerminate：用户退出。</code></pre><p>4、<strong>– (void)applicationWillEnterForeground:(UIApplication *)application NS_AVAILABLE_IOS(4_0);</strong></p><pre><code>// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.当应用在后台状态，将要进行动前台运行状态时，会调用此方法。如果应用不在后台状态，而是直接启动，则不会回调此方法。从后台到前台2, 4; 第一次启动1, 2; 从前台到后台3;</code></pre><p>19、NSCache优于NSDictionary的几点？</p><pre><code>NSCache胜过NSDictionary之处在于，当系统资源将要耗尽时，它可以自动删减缓存。如果采用普通的字典，那么就要自己编写挂钩，在系统发出“低内存”通知时手工删减缓存。NSCache并不会“拷贝”键，而是会“保留”它。此行为用NSDictionary也可以实现，然而需要编写相当复杂的代码。NSCache对象不拷贝键的原因在于：很多时候，键都是不支持拷贝操作的对象来充当的。因此，NSCache不会自动拷贝键，所以说，在键不支持拷贝操作的情况下，该类用起来比字典更方便。另外，NSCache是线程安全的，而NSDictionary则绝对不具备此优势</code></pre><p>20、知不知道Designated Initializer？使用它的时候有什么需要注意的问题？</p><p>21、实现description方法能取到什么效果？</p><p>22、objc使用什么机制管理对象内存？</p><p>中级Block</p><p>1、block的实质是什么？一共有几种block？都是什么情况下生成的？</p><p>   结构体</p><pre><code>struct Block_descriptor {    unsigned long int reserved;    unsigned long int size;    void (*copy)(void *dst, void *src);    void (*dispose)(void *);};struct Block_layout {    void *isa;    int flags;    int reserved;     void (*invoke)(void *, ...);    struct Block_descriptor *descriptor;    /* Imported variables. */};根据isa指针，block一共有3种类型的block_NSConcreteGlobalBlock 全局静态_NSConcreteStackBlock  保存在栈中，出函数作用域就销毁_NSConcreteMallocBlock 保存在堆中，retainCount == 0销毁而ARC和MRC中，还略有不同;</code></pre><p>2、为什么在默认情况下无法修改被block捕获的变量？ __block都做了什么？</p><p>3、模拟一下循环引用的一个情况？block实现界面反向传值如何实现？</p><p>Runtime</p><blockquote><p>1、objc在向一个对象发送消息时，发生了什么？</p></blockquote><p>2、什么时候会报unrecognized selector错误？iOS有哪些机制来避免走到这一步？</p><p>3、能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</p><p>4、runtime如何实现weak变量的自动置nil？</p><p>5、给类添加一个属性后，在类结构体里哪些元素会发生变化？</p><p>类结构</p><p>1、isa指针？（对象的isa，类对象的isa，元类的isa都要说）</p><p>2、类方法和实例方法有什么区别？</p><p>3、介绍一下分类，能用分类做什么？内部是如何实现的？它为什么会覆盖掉原来的方法？</p><p>4、运行时能增加成员变量么？能增加属性么？如果能，如何增加？如果不能，为什么？</p><p>5、objc中向一个nil对象发送消息将会发生什么？（返回值是对象，是标量，结构体）</p><p>高级</p><p>1、UITableview的优化方法（缓存高度，异步绘制，减少层级，hide，避免离屏渲染）</p><p>2、有没有用过运行时，用它都能做什么？（交换方法，创建类，给新创建的类增加方法，改变isa指针）</p><p>3、看过哪些第三方框架的源码？都是如何实现的？（如果没有，问一下多图下载的设计）</p><p>4、SDWebImage的缓存策略？</p><p>5、AFN为什么添加一条常驻线程？</p><p>6、KVO的使用？实现原理？（为什么要创建子类来实现）</p><p>7、KVC的使用？实现原理？（KVC拿到key以后，是如何赋值的？知不知道集合操作符，能不能访问私有属性，能不能直接访问_ivar）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iOS 个性化视频录制</title>
+      <link href="/2017/12/25/iOS%E5%BC%80%E5%8F%91/iOS%20%E4%B8%AA%E6%80%A7%E5%8C%96%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6/"/>
+      <url>/2017/12/25/iOS%E5%BC%80%E5%8F%91/iOS%20%E4%B8%AA%E6%80%A7%E5%8C%96%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS-个性化视频录制"><a href="#iOS-个性化视频录制" class="headerlink" title="iOS 个性化视频录制"></a>iOS 个性化视频录制</h1><p>##一、简介</p><p>###1.1、工具类<br>自定义视频录制需要用到的框架主要是AVFoundation和CoreMedia，包括视频输出，输入和文件的读写，下面给大家罗列一下将要用到的类：</p><blockquote><p>AVCaptureSession<br>AVCaptureVideoPreviewLayer<br>AVCaptureDeviceInput<br>AVCaptureConnection<br>AVCaptureVideoDataOutput<br>AVCaptureAudioDataOutput<br>AVAssetWriter<br>AVAssetWriterInput</p></blockquote><p>###1.2、AVCaptureSession<br>AVCaptureSession是AVFoundation捕捉类的中心枢纽，我们先从这个类入手，在视频捕获时,客户端可以实例化AVCaptureSession并添加适当的AVCaptureInputs、AVCaptureDeviceInput和输出，比如AVCaptureMovieFileOutput。通过[AVCaptureSession startRunning]开始数据流从输入到输出,和[AVCaptureSession stopRunning]停止输出输入的流动。客户端可以通过设置sessionPreset属性定制录制质量水平或输出的比特率。</p><p>##二、录制</p><p>###2.1、初始化</p><p>###2.2、开始与暂停</p><p>###2.3、前后摄像头</p><p>###2.4、闪光灯</p><p>###2.5、录制设置（时长、工具显隐）</p><p>##三、保存</p><p>###3.1、压缩存储</p><p>###3.2、格式转换</p><p>###3.3、视频预览</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
