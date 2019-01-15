@@ -8,7 +8,8 @@
     <meta name="keywords" content="关于Mac环境下Hexo搭建指南, ReaperLC的博客">
     <meta name="description" content="环境配置安装Hexo前需要先安装Git和Node.js
 Git安装HomeBrew是一种包管理工具，可以帮助您方便快捷的安装与卸载软件。
-1$ brew install git
+$ brew install git
+
 安装结束后在命令行输入git后运行，如果屏幕上出现git命令的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -397,55 +398,104 @@ Git安装HomeBrew是一种包管理工具，可以帮助您方便快捷的安装
             <div id="articleContent">
                 <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>安装Hexo前需要先安装Git和Node.js</p>
 <h3 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h3><p>HomeBrew是一种包管理工具，可以帮助您方便快捷的安装与卸载软件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ brew <span class="token function">install</span> <span class="token function">git</span>
+</code></pre>
 <p>安装结束后在命令行输入git后运行，如果屏幕上出现git命令的使用帮助，说明安装成功。</p>
 <h3 id="SSH配置"><a href="#SSH配置" class="headerlink" title="SSH配置"></a>SSH配置</h3><p>首先检查本地是否已存在ssh-keys</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -a ~/.ssh/</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">ls</span> -a ~/.ssh/
+</code></pre>
 <p>以上命令列出当前用户主目录下的.ssh目录中的所有文件，如果存在id_rsa和id_rsa.pub则跳过下一步，否则需要手动生成一组ssh-key</p>
 <p>手动生成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ ssh-keygen -t rsa -C <span class="token string">"your_email@example.com"</span>
+</code></pre>
 <p>其中<a href="mailto:your_email@example.com" target="_blank" rel="noopener">your_email@example.com</a>换成自己的git帐号邮箱即可</p>
 <p>生成的文件默认会放在之前提到的.ssh目录中，我们需要获得公钥的值，在命令行输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">cat</span> ~/.ssh/id_rsa.pub
+</code></pre>
 <p>该命令将公钥文件中的值，也就是一个很长的字符串输出到命令行中，复制该值备用。</p>
 <p>###Node.js安装<br>Node是javascript的一种运行时环境，也是近年来非常流行的一门技术。安装Node.js的最佳方式是使用nvm。在命令行输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh <span class="token operator">|</span> <span class="token function">bash</span>
+</code></pre>
 <p>这条命令通过curl下载install.sh脚本，并执行脚本。待执行完成后，它会把nvm命令的执行路径放到~/.bashrc文件里，我们可以用cat命令来查看一下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.bashrc</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">cat</span> ~/.bashrc
+</code></pre>
 <p>确认存在以上配置后，通过执行source命令来使得环境变量生效</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">source</span> ~/.bashrc
+</code></pre>
 <p>至此我们就把nvm安装好了，可以通过以下命令查看nvm版本号</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm --version</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ nvm --version
+</code></pre>
 <p>如果能正确打印出版本信息就证明nvm已经安装成功。接着通过执行以下命令来安装Node.js</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install stable</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ nvm <span class="token function">install</span> stable
+</code></pre>
 <h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>上述环境配置完毕后，即可安装hexo</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
+</code></pre>
 <p>npm是Node.js自带的一个包管理工具，用于安装和卸载Node模块。上面的命令将Hexo这个模块以全局的方式安装到我们的电脑中，是Hexo官方推荐的方式。但笔者在运行这条命令时，出现了如下的错误</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! Error: EACCES: permission denied, mkdir <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span></span><br><span class="line">npm ERR!     at Error (native)</span><br><span class="line">npm ERR!  &#123; [Error: EACCES: permission denied, mkdir <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>]</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: <span class="string">'EACCES'</span>,</span><br><span class="line">npm ERR!   syscall: <span class="string">'mkdir'</span>,</span><br><span class="line">npm ERR!   path: <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>,</span><br><span class="line">npm ERR!   fstream_type: <span class="string">'Directory'</span>,</span><br><span class="line">npm ERR!   fstream_path: <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>,</span><br><span class="line">npm ERR!   fstream_class: <span class="string">'DirWriter'</span>,</span><br><span class="line">npm ERR!   fstream_stack:</span><br><span class="line">npm ERR!    [ <span class="string">'/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25'</span>,</span><br><span class="line">npm ERR!      <span class="string">'/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53'</span>,</span><br><span class="line">npm ERR!      <span class="string">'FSReqWrap.oncomplete (fs.js:82:15)'</span> ] &#125;</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Please try running this <span class="built_in">command</span> again as root/Administrator.</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> ERR<span class="token operator">!</span> Error: EACCES: permission denied, <span class="token function">mkdir</span> <span class="token string">'/usr/local/lib/node_modules/hexo-cli'</span>
+<span class="token function">npm</span> ERR<span class="token operator">!</span>     at Error <span class="token punctuation">(</span>native<span class="token punctuation">)</span>
+<span class="token function">npm</span> ERR<span class="token operator">!</span>  <span class="token punctuation">{</span> <span class="token punctuation">[</span>Error: EACCES: permission denied, <span class="token function">mkdir</span> <span class="token string">'/usr/local/lib/node_modules/hexo-cli'</span><span class="token punctuation">]</span>
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   errno: -13,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   code: <span class="token string">'EACCES'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   syscall: <span class="token string">'mkdir'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   path: <span class="token string">'/usr/local/lib/node_modules/hexo-cli'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   fstream_type: <span class="token string">'Directory'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   fstream_path: <span class="token string">'/usr/local/lib/node_modules/hexo-cli'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   fstream_class: <span class="token string">'DirWriter'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>   fstream_stack:
+<span class="token function">npm</span> ERR<span class="token operator">!</span>    <span class="token punctuation">[</span> <span class="token string">'/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>      <span class="token string">'/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53'</span>,
+<span class="token function">npm</span> ERR<span class="token operator">!</span>      <span class="token string">'FSReqWrap.oncomplete (fs.js:82:15)'</span> <span class="token punctuation">]</span> <span class="token punctuation">}</span>
+<span class="token function">npm</span> ERR<span class="token operator">!</span>
+<span class="token function">npm</span> ERR<span class="token operator">!</span> Please try running this <span class="token function">command</span> again as root/Administrator.
+</code></pre>
 <p>询问度娘，采用另外一种安装方式，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install --unsafe-perm --verbose -g hexo</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> --unsafe-perm --verbose -g hexo
+</code></pre>
 <p>至此，Hexo本人尝试安装成功。</p>
 <h3 id="Hexo使用"><a href="#Hexo使用" class="headerlink" title="Hexo使用"></a>Hexo使用</h3><p>终端切换到一个你准备用来搭建博客的目录，然后执行命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ hexo init blog
+</code></pre>
 <p>其中blog将会作为博客网站的本地主目录，该命令对文件夹进行了初始化，生成了一些建设网站所必须的材料。切换到myblog文件夹下，执行以下命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span>
+</code></pre>
 <p>安装完成后，执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">出现如下即可说明搭建成功</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ hexo server
+</code></pre>
+<p>出现如下即可说明搭建成功</p>
+<pre class=" language-bash"><code class="language-bash">INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
+</code></pre>
 <p>复制<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 到浏览器就可以看到hexo默认配置的landscape主题的博客界面<br>再往后就是定制化，个性化修改你自己想要的风格了。</p>
 <p>###修改配置信息</p>
 <p>###通过git发布</p>
 <p>首先，我们要在github上新建一个Repository，名称固定为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yourNickName.github.io</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ yourNickName.github.io
+</code></pre>
 <p>其中yourNickName指的是你的github账户昵称，注意必须按照这个规则来命名。然后我们编辑myblog/_config.yml文件，在文件的最后几行找到deploy设置项，按照下面的方式进行修改</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: git@github.com:coolBoyGym/coolboygym.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Deployment</span>
+<span class="token comment" spellcheck="true">## Docs: https://hexo.io/docs/deployment.html</span>
+deploy:
+  type: <span class="token function">git</span>
+  repository: git@github.com:coolBoyGym/coolboygym.github.io.git
+  branch: master
+</code></pre>
 <p>其中的repository字段需改成你自己的giuhub项目对应的地址。</p>
 <p>修改完成后，在blog目录下依次运行以下命令（此命令本地修改后 push到git都需要执行）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">$ hexo generate
+$ hexo deploy
+</code></pre>
 <p>Hexo会将所有文件推送到github上对应的项目中。然后访问一下地址：</p>
 <p><a href="https://yourNickName.github.io" target="_blank" rel="noopener">https://yourNickName.github.io</a></p>
 <p>即可查看你自己的博客啦</p>
 <p>##修改背景图</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    background:url(https://source.unsplash.com/random/1600x900);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-attachment:fixed;</span><br><span class="line">    background-position:50% 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">body <span class="token punctuation">{</span>
+    background:url<span class="token punctuation">(</span>https://source.unsplash.com/random/1600x900<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    background-repeat: no-repeat<span class="token punctuation">;</span>
+    background-attachment:fixed<span class="token punctuation">;</span>
+    background-position:50% 50%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>url可更换为自己喜欢的图片的地址。</p>
 <p>repeat：是否重复出现</p>
 <p>attachment：定义背景图片随滚动轴的移动方式</p>

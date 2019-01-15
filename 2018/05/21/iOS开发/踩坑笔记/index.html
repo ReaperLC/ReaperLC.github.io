@@ -452,7 +452,7 @@
 
 <p>  在调用相册前重置就好了<br>  <pre><code>if (@available(iOS 11, *)) {<br>        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;<br>    }</code></pre> </p>
 <h1 id="如何防止反编译"><a href="#如何防止反编译" class="headerlink" title="如何防止反编译"></a>如何防止反编译</h1><p>1、对本地数据存储NSUserDefault,sqlite进行加密处理，保护关键信息    （本地数据加密）<br>2、对程序中出现的URL进行加密处理，防止URL被静态分析                 (URL地址加密)<br>3、对客户端的网路请求数据进行加密，防止通过网络拦截获取数据           (请求数据加密)<br>4、代码混淆<br>5、第三方防护，网易云盾</p>
-<h1 id="Xcode编译错误"><a href="#Xcode编译错误" class="headerlink" title="Xcode编译错误"></a>Xcode编译错误</h1><pre><code>Warning: The Copy Bundle Resources build phase contains this target&apos;s Info.plist file &apos;Proj/Other/Info.plist&apos;.
+<h1 id="Xcode编译错误"><a href="#Xcode编译错误" class="headerlink" title="Xcode编译错误"></a>Xcode编译错误</h1><pre><code>Warning: The Copy Bundle Resources build phase contains this target&#39;s Info.plist file &#39;Proj/Other/Info.plist&#39;.
 编译时将 info.plist文件也进行了编译
 </code></pre><p><strong>解决方案: 在 Copy Bundle Resources中将警告文件删除重新编译即可</strong></p>
 
