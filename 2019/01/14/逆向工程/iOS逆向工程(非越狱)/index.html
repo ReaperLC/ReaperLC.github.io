@@ -428,7 +428,9 @@
 </blockquote>
 <h2 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h2><p><a href="https://github.com/conradev/dumpdecrypted" target="_blank" rel="noopener">dumpdecrypted</a><br><a href="https://github.com/AloneMonkey/frida-ios-dump" target="_blank" rel="noopener">AloneMonkey</a></p>
 <h4 id="AloneMonkey"><a href="#AloneMonkey" class="headerlink" title="AloneMonkey"></a>AloneMonkey</h4><p><a href="https://github.com/AloneMonkey/MonkeyDev/wiki/%E5%AE%89%E8%A3%85" target="_blank" rel="noopener">安装</a></p>
-
+<h2 id="Dump"><a href="#Dump" class="headerlink" title="Dump"></a>Dump</h2><h2 id="Hook"><a href="#Hook" class="headerlink" title="Hook"></a>Hook</h2><h2 id="重签"><a href="#重签" class="headerlink" title="重签"></a>重签</h2><h4 id="完全重签名"><a href="#完全重签名" class="headerlink" title="完全重签名"></a>完全重签名</h4><p>证书，mobileprovision、Bundle ID 三者信息对应一致,这种重签名方式基本上与直接对代码进行签名的效果是一样的；<br>优点：有效期长、稳定性高；<br>缺点：维护成本较高，每一个重签名的ipa都必须修改Bundle ID 并且独享一套证书和mobileprovision文件；<br>适用范围：对签名效果稳定性有要求的公司和团队；</p>
+<h4 id="不完全重签名"><a href="#不完全重签名" class="headerlink" title="不完全重签名"></a>不完全重签名</h4><p>只保证证书和mobileprovision对应一致，至于这两者与原ipa的Bundle ID 等信息是否一致则不考虑；<br>优点：看起来较方便维护；<br>缺点：实际上并没有对原ipa的签名进行完全替换，很容易重签名失败，稳定性不高，多则一两个月，少则三五天就可能发生签名失效，需要重新签名，慎用！！<br>适用范围：市面上出售企业证书进行重签名的个人卖家；</p>
+<h2 id="常用签名工具"><a href="#常用签名工具" class="headerlink" title="常用签名工具"></a>常用签名工具</h2><h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><h4 id="AloneMonkey-1"><a href="#AloneMonkey-1" class="headerlink" title="AloneMonkey"></a>AloneMonkey</h4><h4 id="Xcode-自动化重签"><a href="#Xcode-自动化重签" class="headerlink" title="Xcode 自动化重签"></a>Xcode 自动化重签</h4>
             </div>
             <hr>
 
