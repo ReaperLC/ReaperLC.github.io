@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>App启动速度优化</title>
+      <link href="/2019/01/18/iOS%E5%BC%80%E5%8F%91/App%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96%E7%AF%87/"/>
+      <url>/2019/01/18/iOS%E5%BC%80%E5%8F%91/App%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96%E7%AF%87/</url>
+      
+        <content type="html"><![CDATA[<h2 id="App启动速度优化"><a href="#App启动速度优化" class="headerlink" title="App启动速度优化"></a>App启动速度优化</h2><p>关于App应用启动速度优化的话题：<a href="https://developer.apple.com/videos/play/wwdc2016/406/" target="_blank" rel="noopener">Session 406 Optimizing App Startup Time</a> ，该Session上Apple建议一个App完整的启动时间应该保证400ms之内,而若超过20s后还未完全启动App,那么App进程就会被系统杀死.而如何Debug和优化应用启动的时间,官方提出一系列方法来关注应用启动时执行main()前究竟干了些什么.而通过这个Session,你会了解到以下内容:</p><blockquote><ul><li><strong>如何获得应用加载的时间</strong></li><li><strong>执行程序入门的代码前App加载过程中的流程</strong></li><li><strong>如何优化App的加载时间</strong></li></ul></blockquote><h2 id="测量Pre-main-Time"><a href="#测量Pre-main-Time" class="headerlink" title="测量Pre-main Time"></a>测量Pre-main Time</h2><p>一个App在执行main函数前包括app delegate的系列方法如<font color="#DC143C">applicationWillFinishLaunching</font>时,会做许多系统级别的准备.而在iOS10之前,开发者很难清楚自己App为何启动加载慢.而通过在工程的scheme中添加环境变量<font color="#DC143C"><strong>DYLD_PRINT_STATISTICS</strong></font>,设置Value为1,App启动加载时就会有启动过程的日志输出. 添加方法如下：</p><p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/iOS_bl.png?raw=true" alt=""></p><p>现在(iOS 10之后)Apple对<font color="#DC143C"><strong>DYLD_PRINT_STATISTICS</strong></font>的日志输出结果进行了简化,使得更容易让开发者理解.</p><p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/iOS_speed.png?raw=true" alt=""></p><p>输出内容展示了系统调用main()函前主要进行的工作内容和时间花费,Session上也对每一阶段加载过程具体内容进行了详细的叙述,有兴趣地可观看该Session.</p><h2 id="启动优化"><a href="#启动优化" class="headerlink" title="启动优化"></a>启动优化</h2><p>那么如何尽可能的减少pre-main花费的时间呢,主要就从输出日志给出的四个阶段下手:</p><h4 id="1、对动态库加载的时间优化"><a href="#1、对动态库加载的时间优化" class="headerlink" title="1、对动态库加载的时间优化"></a>1、对动态库加载的时间优化</h4><p>每个App都进行动态库加载,其中系统级别的动态库占据了绝大数,而针对系统级别的动态库都是经过系统高度优化的,不用担心时间的花费.开发者应该关注于自己集成到App的那些动态库,这也是最能消耗加载时间的地方.对此Apple建议减少在App里开发者的动态库集成或者有可能地将其多个动态库最终集成一个动态库后进行导入, 尽量保证将App现有的非系统级的动态库个数保证在6个以内. </p><h4 id="2、减少App的Objective-C类-分类和的唯一Selector的个数"><a href="#2、减少App的Objective-C类-分类和的唯一Selector的个数" class="headerlink" title="2、减少App的Objective-C类,分类和的唯一Selector的个数"></a>2、减少App的Objective-C类,分类和的唯一Selector的个数</h4><p>这样做主要是为了加快程序的整个动态链接, 在进行动态库的重定位和绑定(Rebase/binding)过程中减少指针修正的使用,加快程序机器码的生成.</p><h4 id="3、减少Objc运行初始化的时间花费"><a href="#3、减少Objc运行初始化的时间花费" class="headerlink" title="3、减少Objc运行初始化的时间花费"></a>3、减少Objc运行初始化的时间花费</h4><p>主要是类的注册,分类的注册,唯一选择器的存在,以及涉及子父类内存布局的Non Fragile ivars偏移的更新,都会影响Objective-C运行时初始化的时间消耗.</p><h4 id="4、使用initialize方法"><a href="#4、使用initialize方法" class="headerlink" title="4、使用initialize方法"></a>4、使用initialize方法</h4><p>大家都知道, +Load方法只要引入项目工程中,不管最后有没有引用,他都是调用了的,所以进行必要的初始化工作.用+initialize方法替换调用原先在OC的+load方法中执行初始代码工作,从而加快所有类文件的加载速度.</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后演讲者对加载启动优化的整体概括了Session所要传达的内容:</p><blockquote><ul><li><strong>使用<font color="#DC143C"></font></strong>DYLD_PRINT_STATISTICS<strong>测试启动加载时间</strong></li><li><strong>减少自定义的动态库集成</strong></li><li><strong>精简原有的Objective-C类和代码</strong></li><li><strong>移除静态的初始化操作</strong></li><li><strong>使用更多的Swift代码</strong></li></ul></blockquote><h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><ul><li><a href="https://developer.apple.com/videos/play/wwdc2016/406/" target="_blank" rel="noopener">WWDC 2016 Session 406 Optimizing App Startup Time</a></li><li><a href="http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/" target="_blank" rel="noopener">Objective-C Runtime</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 优化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>iOS逆向工程</title>
       <link href="/2019/01/14/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/iOS%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B(%E9%9D%9E%E8%B6%8A%E7%8B%B1)/"/>
       <url>/2019/01/14/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/iOS%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B(%E9%9D%9E%E8%B6%8A%E7%8B%B1)/</url>
