@@ -393,9 +393,12 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="iOS中的图片自适应拉伸"><a href="#iOS中的图片自适应拉伸" class="headerlink" title="iOS中的图片自适应拉伸"></a>iOS中的图片自适应拉伸</h2><h3 id="iOS5之前"><a href="#iOS5之前" class="headerlink" title="iOS5之前"></a>iOS5之前</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">- (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:(NSInteger)topCapHeight;</span><br></pre></td></tr></table></figure>
-<h3 id="iOS5"><a href="#iOS5" class="headerlink" title="iOS5"></a>iOS5</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">- (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets；</span><br></pre></td></tr></table></figure>
-<h3 id="iOS6"><a href="#iOS6" class="headerlink" title="iOS6"></a>iOS6</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">- (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode；s</span><br></pre></td></tr></table></figure>
+                <h2 id="iOS中的图片自适应拉伸"><a href="#iOS中的图片自适应拉伸" class="headerlink" title="iOS中的图片自适应拉伸"></a>iOS中的图片自适应拉伸</h2><h3 id="iOS5之前"><a href="#iOS5之前" class="headerlink" title="iOS5之前"></a>iOS5之前</h3><pre class=" language-bash"><code class="language-bash">- <span class="token punctuation">(</span>UIImage *<span class="token punctuation">)</span>stretchableImageWithLeftCapWidth:<span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>leftCapWidth topCapHeight:<span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>topCapHeight<span class="token punctuation">;</span>  
+</code></pre>
+<h3 id="iOS5"><a href="#iOS5" class="headerlink" title="iOS5"></a>iOS5</h3><pre class=" language-bash"><code class="language-bash">- <span class="token punctuation">(</span>UIImage *<span class="token punctuation">)</span>resizableImageWithCapInsets:<span class="token punctuation">(</span>UIEdgeInsets<span class="token punctuation">)</span>capInsets；
+</code></pre>
+<h3 id="iOS6"><a href="#iOS6" class="headerlink" title="iOS6"></a>iOS6</h3><pre class=" language-bash"><code class="language-bash">- <span class="token punctuation">(</span>UIImage *<span class="token punctuation">)</span>resizableImageWithCapInsets:<span class="token punctuation">(</span>UIEdgeInsets<span class="token punctuation">)</span>capInsets resizingMode:<span class="token punctuation">(</span>UIImageResizingMode<span class="token punctuation">)</span>resizingMode；s
+</code></pre>
 
             </div>
             <hr>
@@ -623,7 +626,14 @@
                 </a>
                 <div class="card-content article-content">
                     <div class="summary">
-NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用;//否则一旦引入 C 或者 C++ 代码或者框架就会出错!#ifdef __OBJC__//只在开发中用:#ifdef DEBUG//定义 NSLog(__VA_AGR</div>
+NSLog//保证 ifdef 中的宏定义只会在 OC 代码中被引用;
+//否则一旦引入 C 或者 C++ 代码或者框架就会出错!
+#ifdef __OBJC__
+
+//只在开发中用:
+#ifdef DEBUG
+
+//定义 NSLog(_</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-09-14

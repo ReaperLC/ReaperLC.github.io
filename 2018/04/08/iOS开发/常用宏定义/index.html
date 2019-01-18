@@ -6,7 +6,8 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="常用宏定义, ReaperLC的博客">
-    <meta name="description" content="设备尺寸#if __IPHONE_OS_VERSION_MAX_ALLOWED &amp;gt;= 80000 // 当前Xcode支持iOS8及以上#define SCREEN_WIDTH ([[UIScreen mainScreen] resp">
+    <meta name="description" content="设备尺寸#if __IPHONE_OS_VERSION_MAX_ALLOWED &gt;= 80000 // 当前Xcode支持iOS8及以上
+#define SCREEN_WIDTH ([[UIScreen mainScreen] respon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -401,13 +402,91 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="设备尺寸"><a href="#设备尺寸" class="headerlink" title="设备尺寸"></a>设备尺寸</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#if __IPHONE_OS_VERSION_MAX_ALLOWED &gt;= 80000 // 当前Xcode支持iOS8及以上</span></span><br><span class="line"><span class="comment">#define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)</span></span><br><span class="line"><span class="comment">#define SCREENH_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)</span></span><br><span class="line"><span class="comment">#define SCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)</span></span><br><span class="line"><span class="comment">#else</span></span><br><span class="line"><span class="comment">#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width</span></span><br><span class="line"><span class="comment">#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height</span></span><br><span class="line"><span class="comment">#define SCREEN_SIZE [UIScreen mainScreen].bounds.size</span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
-<h2 id="颜色设置"><a href="#颜色设置" class="headerlink" title="颜色设置"></a>颜色设置</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/** 随机颜色 */</span><br><span class="line"><span class="comment">#define LNRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]</span></span><br><span class="line">/** 不透明设置 */</span><br><span class="line"><span class="comment">#define LNRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]</span></span><br><span class="line">/** 带透明设置 */</span><br><span class="line"><span class="comment">#define LNRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]</span></span><br><span class="line">/** clear背景颜色 */</span><br><span class="line"><span class="comment">#define LNClearColor [UIColor clearColor]</span></span><br></pre></td></tr></table></figure>
-<h2 id="视图设置"><a href="#视图设置" class="headerlink" title="视图设置"></a>视图设置</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/** 设置视图圆角和边框 */</span><br><span class="line"><span class="comment">#define LNViewBorderRadius(View, Radius, Width, Color)\</span></span><br><span class="line">\</span><br><span class="line">[View.layer setCornerRadius:(Radius)];\</span><br><span class="line">[View.layer setMasksToBounds:YES];\</span><br><span class="line">[View.layer setBorderWidth:(Width)];\</span><br><span class="line">[View.layer setBorderColor:[Color CGColor]]</span><br><span class="line"></span><br><span class="line">/** 由角度转换弧度 由弧度转换角度 */</span><br><span class="line"><span class="comment">#define LNDegreesToRadian(x) (M_PI * (x) / 180.0)</span></span><br><span class="line"><span class="comment">#define LNRadianToDegrees(radian) (radian*180.0)/(M_PI)</span></span><br><span class="line"></span><br><span class="line">/** 获取图片资源 */</span><br><span class="line"><span class="comment">#define kLNImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]</span></span><br></pre></td></tr></table></figure>
-<h2 id="系统判断"><a href="#系统判断" class="headerlink" title="系统判断"></a>系统判断</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/** 判断是否为iPhone */</span><br><span class="line"><span class="comment">#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)</span></span><br><span class="line">/** 判断是否为iPad */</span><br><span class="line"><span class="comment">#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)</span></span><br><span class="line">/** 判断是否为ipod */</span><br><span class="line"><span class="comment">#define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])</span></span><br><span class="line">/** 判断是否为 iPhone 5SE */</span><br><span class="line"><span class="comment">#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 568.0f</span></span><br><span class="line">/** 判断是否为iPhone 6/6s */</span><br><span class="line"><span class="comment">#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 667.0f</span></span><br><span class="line">/** 判断是否为iPhone 6Plus/6sPlus */</span><br><span class="line"><span class="comment">#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 736.0f</span></span><br><span class="line">/** 判断是否iphone X **/</span><br><span class="line"><span class="comment">#define KISIphoneX (CGSizeEqualToSize(CGSizeMake(375.f, 812.f), [UIScreen mainScreen].bounds.size) || CGSizeEqualToSize(CGSizeMake(812.f, 375.f), [UIScreen mainScreen].bounds.size))</span></span><br><span class="line">/** 获取系统版本 */</span><br><span class="line"><span class="comment">#define IOS_SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]</span></span><br><span class="line">/** 判断 iOS 8 或更高的系统版本 */</span><br><span class="line"><span class="comment">#define IOS_VERSION_8_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] &gt;=8.0)? (YES):(NO))</span></span><br><span class="line">/** 判断是真机还是模拟器 */</span><br><span class="line"><span class="comment">#if TARGET_OS_IPHONE</span></span><br><span class="line">//iPhone Device</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"><span class="comment">#if TARGET_IPHONE_SIMULATOR</span></span><br><span class="line">//iPhone Simulator</span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
-<h2 id="沙盒操作"><a href="#沙盒操作" class="headerlink" title="沙盒操作"></a>沙盒操作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/** 获取temp */</span><br><span class="line"><span class="comment">#define kPathTemp NSTemporaryDirectory()</span></span><br><span class="line">/** 获取沙盒 Document */</span><br><span class="line"><span class="comment">#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]</span></span><br><span class="line">/** 获取沙盒 Cache */</span><br><span class="line"><span class="comment">#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]</span></span><br></pre></td></tr></table></figure>
-<h2 id="GCD常用"><a href="#GCD常用" class="headerlink" title="GCD常用"></a>GCD常用</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/** GCD - 一次性执行 */</span><br><span class="line"><span class="comment">#define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&amp;onceToken, onceBlock);</span></span><br><span class="line">/** GCD - 在Main线程上运行 */</span><br><span class="line"><span class="comment">#define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);</span></span><br><span class="line">/** GCD - 开启异步线程 */</span><br><span class="line"><span class="comment">#define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);</span></span><br></pre></td></tr></table></figure>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#define LNWeakSelf(type)  __weak typeof(type) weaktype = type;</span></span><br><span class="line"><span class="comment">#define LNStrongSelf(type)  __strong typeof(type) type = weaktype;</span></span><br><span class="line">/** 获取通知中心 */</span><br><span class="line"><span class="comment">#define LNNotificationCenter [NSNotificationCenter defaultCenter]</span></span><br><span class="line">/** 自定义<span class="built_in">log</span> */</span><br><span class="line"><span class="comment">#ifdef DEBUG</span></span><br><span class="line"><span class="comment">#define LNLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])</span></span><br><span class="line"><span class="comment">#else</span></span><br><span class="line"><span class="comment">#define LNLog(...)</span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+                <h2 id="设备尺寸"><a href="#设备尺寸" class="headerlink" title="设备尺寸"></a>设备尺寸</h2><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000 // 当前Xcode支持iOS8及以上</span>
+<span class="token comment" spellcheck="true">#define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)</span>
+<span class="token comment" spellcheck="true">#define SCREENH_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)</span>
+<span class="token comment" spellcheck="true">#define SCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)</span>
+<span class="token comment" spellcheck="true">#else</span>
+<span class="token comment" spellcheck="true">#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width</span>
+<span class="token comment" spellcheck="true">#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height</span>
+<span class="token comment" spellcheck="true">#define SCREEN_SIZE [UIScreen mainScreen].bounds.size</span>
+<span class="token comment" spellcheck="true">#endif</span>
+</code></pre>
+<h2 id="颜色设置"><a href="#颜色设置" class="headerlink" title="颜色设置"></a>颜色设置</h2><pre class=" language-bash"><code class="language-bash">/** 随机颜色 */
+<span class="token comment" spellcheck="true">#define LNRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]</span>
+/** 不透明设置 */
+<span class="token comment" spellcheck="true">#define LNRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]</span>
+/** 带透明设置 */
+<span class="token comment" spellcheck="true">#define LNRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]</span>
+/** clear背景颜色 */
+<span class="token comment" spellcheck="true">#define LNClearColor [UIColor clearColor]</span>
+</code></pre>
+<h2 id="视图设置"><a href="#视图设置" class="headerlink" title="视图设置"></a>视图设置</h2><pre class=" language-bash"><code class="language-bash">/** 设置视图圆角和边框 */
+<span class="token comment" spellcheck="true">#define LNViewBorderRadius(View, Radius, Width, Color)\</span>
+\
+<span class="token punctuation">[</span>View.layer setCornerRadius:<span class="token punctuation">(</span>Radius<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>\
+<span class="token punctuation">[</span>View.layer setMasksToBounds:YES<span class="token punctuation">]</span><span class="token punctuation">;</span>\
+<span class="token punctuation">[</span>View.layer setBorderWidth:<span class="token punctuation">(</span>Width<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>\
+<span class="token punctuation">[</span>View.layer setBorderColor:<span class="token punctuation">[</span>Color CGColor<span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+/** 由角度转换弧度 由弧度转换角度 */
+<span class="token comment" spellcheck="true">#define LNDegreesToRadian(x) (M_PI * (x) / 180.0)</span>
+<span class="token comment" spellcheck="true">#define LNRadianToDegrees(radian) (radian*180.0)/(M_PI)</span>
+
+/** 获取图片资源 */
+<span class="token comment" spellcheck="true">#define kLNImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]</span>
+</code></pre>
+<h2 id="系统判断"><a href="#系统判断" class="headerlink" title="系统判断"></a>系统判断</h2><pre class=" language-bash"><code class="language-bash">/** 判断是否为iPhone */
+<span class="token comment" spellcheck="true">#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)</span>
+/** 判断是否为iPad */
+<span class="token comment" spellcheck="true">#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)</span>
+/** 判断是否为ipod */
+<span class="token comment" spellcheck="true">#define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])</span>
+/** 判断是否为 iPhone 5SE */
+<span class="token comment" spellcheck="true">#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 568.0f</span>
+/** 判断是否为iPhone 6/6s */
+<span class="token comment" spellcheck="true">#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 667.0f</span>
+/** 判断是否为iPhone 6Plus/6sPlus */
+<span class="token comment" spellcheck="true">#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 736.0f</span>
+/** 判断是否iphone X **/
+<span class="token comment" spellcheck="true">#define KISIphoneX (CGSizeEqualToSize(CGSizeMake(375.f, 812.f), [UIScreen mainScreen].bounds.size) || CGSizeEqualToSize(CGSizeMake(812.f, 375.f), [UIScreen mainScreen].bounds.size))</span>
+/** 获取系统版本 */
+<span class="token comment" spellcheck="true">#define IOS_SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]</span>
+/** 判断 iOS 8 或更高的系统版本 */
+<span class="token comment" spellcheck="true">#define IOS_VERSION_8_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0)? (YES):(NO))</span>
+/** 判断是真机还是模拟器 */
+<span class="token comment" spellcheck="true">#if TARGET_OS_IPHONE</span>
+//iPhone Device
+<span class="token comment" spellcheck="true">#endif</span>
+<span class="token comment" spellcheck="true">#if TARGET_IPHONE_SIMULATOR</span>
+//iPhone Simulator
+<span class="token comment" spellcheck="true">#endif</span>
+</code></pre>
+<h2 id="沙盒操作"><a href="#沙盒操作" class="headerlink" title="沙盒操作"></a>沙盒操作</h2><pre class=" language-bash"><code class="language-bash">/** 获取temp */
+<span class="token comment" spellcheck="true">#define kPathTemp NSTemporaryDirectory()</span>
+/** 获取沙盒 Document */
+<span class="token comment" spellcheck="true">#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]</span>
+/** 获取沙盒 Cache */
+<span class="token comment" spellcheck="true">#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]</span>
+</code></pre>
+<h2 id="GCD常用"><a href="#GCD常用" class="headerlink" title="GCD常用"></a>GCD常用</h2><pre class=" language-bash"><code class="language-bash">/** GCD - 一次性执行 */
+<span class="token comment" spellcheck="true">#define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&amp;onceToken, onceBlock);</span>
+/** GCD - 在Main线程上运行 */
+<span class="token comment" spellcheck="true">#define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);</span>
+/** GCD - 开启异步线程 */
+<span class="token comment" spellcheck="true">#define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);</span>
+</code></pre>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#define LNWeakSelf(type)  __weak typeof(type) weaktype = type;</span>
+<span class="token comment" spellcheck="true">#define LNStrongSelf(type)  __strong typeof(type) type = weaktype;</span>
+/** 获取通知中心 */
+<span class="token comment" spellcheck="true">#define LNNotificationCenter [NSNotificationCenter defaultCenter]</span>
+/** 自定义log */
+<span class="token comment" spellcheck="true">#ifdef DEBUG</span>
+<span class="token comment" spellcheck="true">#define LNLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])</span>
+<span class="token comment" spellcheck="true">#else</span>
+<span class="token comment" spellcheck="true">#define LNLog(...)</span>
+<span class="token comment" spellcheck="true">#endif</span>
+</code></pre>
 
             </div>
             <hr>
@@ -582,7 +661,8 @@
                 <div class="card-content article-content">
                     <div class="summary">消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例
 Person *p = [[Person alloc] init];
-对于我们平常使用的初始化方法 allo</div>
+
+对于我们平常使用的初始化方法 all</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2018-05-21
@@ -635,7 +715,12 @@ Person *p = [[Person alloc] init];
                 <div class="card-content article-content">
                     <div class="summary">#函数式、链式语法
 Person.h
-#import &lt;Foundation/Foundation.h&gt;@interface Person : NSObject/** 传统写法 */- (void)eat;- (void)sle</div>
+#import &lt;Foundation/Foundation.h>
+
+@interface Person : NSObject
+/** 传统写法 */
+- (void)eat;
+- (void)s</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-04-02

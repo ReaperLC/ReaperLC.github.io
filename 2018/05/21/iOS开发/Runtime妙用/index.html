@@ -8,7 +8,8 @@
     <meta name="keywords" content="iOS Runtime的妙用, ReaperLC的博客">
     <meta name="description" content="消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例
 Person *p = [[Person alloc] init];
-对于我们平常使用的初始化方法 allo">
+
+对于我们平常使用的初始化方法 all">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -412,36 +413,153 @@ Person *p = [[Person alloc] init];
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h2><p>Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Person *p = [[Person alloc] init];</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">Person *p <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>Person alloc<span class="token punctuation">]</span> init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
 <p>对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">//通过类名获取类</span><br><span class="line">Class class = objc_getClass(<span class="string">"Person"</span>);</span><br><span class="line">//注意Class实际上也是对象，所以同样能够接受消息，向Class发送alloc消息</span><br><span class="line">Person *p = objc_msgSend(class,@selector(alloc));</span><br><span class="line">//发送init消息给Person实例p</span><br><span class="line">p = objc_msgSend(p,@selector(init));</span><br><span class="line">//发送run消息给p 即调用run实例方法</span><br><span class="line">objc_msgSend(p, @selector(run));</span><br><span class="line">//汇总传递消息链</span><br><span class="line">objc_msgSend(objc_msgSend(objc_msgSend(objc_getClass(<span class="string">"Person"</span>), @selector(alloc)), @selector(init)), @selector(run));</span><br></pre></td></tr></table></figure>
-<h2 id="动态修改变量"><a href="#动态修改变量" class="headerlink" title="动态修改变量"></a>动态修改变量</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/** 1.动态修改变量（私有变量也可修改)*/</span><br><span class="line">- (void)dynamicModifyVariable &#123;</span><br><span class="line">    NSLog(@<span class="string">"修改前姓名为:%@"</span>, [p valueForKey:@<span class="string">"age"</span>]);</span><br><span class="line">    unsigned int count = 0;</span><br><span class="line">    // 获取类的成员变量列表(包括私有) 获取属性，方法，协议列表 类似</span><br><span class="line">    Ivar *varList = class_copyIvarList([Person class], &amp;count);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        Ivar var = varList[i];</span><br><span class="line">        const char *varName = ivar_getName(var);</span><br><span class="line">        NSString *proname = [NSString stringWithUTF8String:varName];</span><br><span class="line">        NSLog(@<span class="string">"查看成员变量:%@"</span>,proname);</span><br><span class="line">        <span class="keyword">if</span> ([proname isEqualToString:@<span class="string">"_age"</span>]) &#123;</span><br><span class="line">            object_setIvar(p, var, @<span class="string">"22"</span>);</span><br><span class="line">//            [p setValue:@<span class="string">"22"</span> forKey:@<span class="string">"age"</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    NSLog(@<span class="string">"修改后姓名为:%@"</span>, [p valueForKey:@<span class="string">"age"</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">//通过类名获取类
+Class class <span class="token operator">=</span> objc_getClass<span class="token punctuation">(</span><span class="token string">"Person"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+//注意Class实际上也是对象，所以同样能够接受消息，向Class发送alloc消息
+Person *p <span class="token operator">=</span> objc_msgSend<span class="token punctuation">(</span>class,@selector<span class="token punctuation">(</span>alloc<span class="token punctuation">))</span><span class="token punctuation">;</span>
+//发送init消息给Person实例p
+p <span class="token operator">=</span> objc_msgSend<span class="token punctuation">(</span>p,@selector<span class="token punctuation">(</span>init<span class="token punctuation">))</span><span class="token punctuation">;</span>
+//发送run消息给p 即调用run实例方法
+objc_msgSend<span class="token punctuation">(</span>p, @selector<span class="token punctuation">(</span>run<span class="token punctuation">))</span><span class="token punctuation">;</span>
+//汇总传递消息链
+objc_msgSend<span class="token punctuation">(</span>objc_msgSend<span class="token punctuation">(</span>objc_msgSend<span class="token punctuation">(</span>objc_getClass<span class="token punctuation">(</span><span class="token string">"Person"</span><span class="token punctuation">)</span>, @selector<span class="token punctuation">(</span>alloc<span class="token punctuation">))</span>, @selector<span class="token punctuation">(</span>init<span class="token punctuation">))</span>, @selector<span class="token punctuation">(</span>run<span class="token punctuation">))</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="动态修改变量"><a href="#动态修改变量" class="headerlink" title="动态修改变量"></a>动态修改变量</h2><pre class=" language-bash"><code class="language-bash">/** 1.动态修改变量（私有变量也可修改<span class="token punctuation">)</span>*/
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>dynamicModifyVariable <span class="token punctuation">{</span>
+    NSLog<span class="token punctuation">(</span>@<span class="token string">"修改前姓名为:%@"</span>, <span class="token punctuation">[</span>p valueForKey:@<span class="token string">"age"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    unsigned int count <span class="token operator">=</span> 0<span class="token punctuation">;</span>
+    // 获取类的成员变量列表<span class="token punctuation">(</span>包括私有<span class="token punctuation">)</span> 获取属性，方法，协议列表 类似
+    Ivar *varList <span class="token operator">=</span> class_copyIvarList<span class="token punctuation">(</span><span class="token punctuation">[</span>Person class<span class="token punctuation">]</span>, <span class="token operator">&amp;</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>int i <span class="token operator">=</span> 0<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i++<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Ivar var <span class="token operator">=</span> varList<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        const char *varName <span class="token operator">=</span> ivar_getName<span class="token punctuation">(</span>var<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        NSString *proname <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithUTF8String:varName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        NSLog<span class="token punctuation">(</span>@<span class="token string">"查看成员变量:%@"</span>,proname<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>proname isEqualToString:@<span class="token string">"_age"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            object_setIvar<span class="token punctuation">(</span>p, var, @<span class="token string">"22"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+//            <span class="token punctuation">[</span>p setValue:@<span class="token string">"22"</span> forKey:@<span class="token string">"age"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    NSLog<span class="token punctuation">(</span>@<span class="token string">"修改后姓名为:%@"</span>, <span class="token punctuation">[</span>p valueForKey:@<span class="token string">"age"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h2 id="动态添加方法"><a href="#动态添加方法" class="headerlink" title="动态添加方法"></a>动态添加方法</h2><p>分类不能增加方法,Extension 可以</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">//1、注册方法</span><br><span class="line">SEL getInformationSelector = sel_registerName(<span class="string">"getPersonAllInfo"</span>);</span><br><span class="line">//2、添加方法</span><br><span class="line">class_addMethod([Person class], getInformationSelector, (IMP)getInformation, <span class="string">"v@"</span>);</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">//1、注册方法
+SEL getInformationSelector <span class="token operator">=</span> sel_registerName<span class="token punctuation">(</span><span class="token string">"getPersonAllInfo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+//2、添加方法
+class_addMethod<span class="token punctuation">(</span><span class="token punctuation">[</span>Person class<span class="token punctuation">]</span>, getInformationSelector, <span class="token punctuation">(</span>IMP<span class="token punctuation">)</span>getInformation, <span class="token string">"v@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="动态拦截与替换方法"><a href="#动态拦截与替换方法" class="headerlink" title="动态拦截与替换方法"></a>动态拦截与替换方法</h2><p>拦截系统自带方法的调用(Swizzle黑魔法),也可以理解为替换系统方法<br>使用场景:比如数据埋点,搜集某些页面进入次数,或者按钮点击次数,在不改变原有结构的前提下,使用拦截方法可以实现无侵入式埋点或者其他功能, 但是方法拦截需要慎重使用,可能牵一发而动全身.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+(void)load &#123;</span><br><span class="line">    [super load];</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        //获取方法名</span><br><span class="line">        SEL origSel = @selector(sendAction:to:forEvent:);</span><br><span class="line">        SEL swizSel = @selector(ept_sendAction:to:forEvent:);</span><br><span class="line">        Method origMethod = class_getInstanceMethod([self class], origSel);</span><br><span class="line">        Method swizMethod = class_getInstanceMethod([self class], swizSel);</span><br><span class="line">        //判断方法是否添加成功</span><br><span class="line">        BOOL addMethod = class_addMethod([self class], origSel, method_getImplementation(swizMethod), method_getTypeEncoding(swizMethod));</span><br><span class="line">        <span class="keyword">if</span> (addMethod) &#123;</span><br><span class="line">            //替换类中已有方法的实现,如果该方法不存在添加该方法</span><br><span class="line">            class_replaceMethod([self class], swizSel, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            //替换Method</span><br><span class="line">            method_exchangeImplementations(origMethod, swizMethod);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">- (void)ept_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event&#123;</span><br><span class="line">    [self ept_sendAction:action to:target forEvent:event];</span><br><span class="line">    NSLog(@<span class="string">"拦截系统点击方法成功,调用ept_sendAction"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">+<span class="token punctuation">(</span>void<span class="token punctuation">)</span>load <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>super load<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    static dispatch_once_t onceToken<span class="token punctuation">;</span>
+    dispatch_once<span class="token punctuation">(</span><span class="token operator">&amp;</span>onceToken, ^<span class="token punctuation">{</span>
+        //获取方法名
+        SEL origSel <span class="token operator">=</span> @selector<span class="token punctuation">(</span>sendAction:to:forEvent:<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        SEL swizSel <span class="token operator">=</span> @selector<span class="token punctuation">(</span>ept_sendAction:to:forEvent:<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Method origMethod <span class="token operator">=</span> class_getInstanceMethod<span class="token punctuation">(</span><span class="token punctuation">[</span>self class<span class="token punctuation">]</span>, origSel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Method swizMethod <span class="token operator">=</span> class_getInstanceMethod<span class="token punctuation">(</span><span class="token punctuation">[</span>self class<span class="token punctuation">]</span>, swizSel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        //判断方法是否添加成功
+        BOOL addMethod <span class="token operator">=</span> class_addMethod<span class="token punctuation">(</span><span class="token punctuation">[</span>self class<span class="token punctuation">]</span>, origSel, method_getImplementation<span class="token punctuation">(</span>swizMethod<span class="token punctuation">)</span>, method_getTypeEncoding<span class="token punctuation">(</span>swizMethod<span class="token punctuation">))</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>addMethod<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            //替换类中已有方法的实现,如果该方法不存在添加该方法
+            class_replaceMethod<span class="token punctuation">(</span><span class="token punctuation">[</span>self class<span class="token punctuation">]</span>, swizSel, method_getImplementation<span class="token punctuation">(</span>origMethod<span class="token punctuation">)</span>, method_getTypeEncoding<span class="token punctuation">(</span>origMethod<span class="token punctuation">))</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>else<span class="token punctuation">{</span>
+            //替换Method
+            method_exchangeImplementations<span class="token punctuation">(</span>origMethod, swizMethod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>ept_sendAction:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>action to:<span class="token punctuation">(</span>id<span class="token punctuation">)</span>target forEvent:<span class="token punctuation">(</span>UIEvent *<span class="token punctuation">)</span>event<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>self ept_sendAction:action to:target forEvent:event<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    NSLog<span class="token punctuation">(</span>@<span class="token string">"拦截系统点击方法成功,调用ept_sendAction"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>动态拦截替换方法常用函数:</p>
 <blockquote>
 <p><strong><font color="#2E8B57">1、class_getInstanceMethod 获取方法名<br>2、class_addMethod 判断方法是否添加成功<br>3、class_replaceMethod 替换类中已有方法的实现,如果该方法不存在添加该方法<br>4、method_exchangeImplementations 替换Method</font></strong></p>
 </blockquote>
-<h2 id="动态添加属性"><a href="#动态添加属性" class="headerlink" title="动态添加属性"></a>动态添加属性</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 重写<span class="built_in">set</span>和get方法 设置关联</span><br><span class="line">- (NSString *)mobile &#123;</span><br><span class="line">    <span class="built_in">return</span> objc_getAssociatedObject(self, <span class="string">"mobile"</span>);</span><br><span class="line">&#125;</span><br><span class="line">- (void)setMobile:(NSString *)mobile &#123;</span><br><span class="line">    objc_setAssociatedObject(self, <span class="string">"mobile"</span>, mobile, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="动态添加属性"><a href="#动态添加属性" class="headerlink" title="动态添加属性"></a>动态添加属性</h2><pre class=" language-bash"><code class="language-bash">// 重写set和get方法 设置关联
+- <span class="token punctuation">(</span>NSString *<span class="token punctuation">)</span>mobile <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> objc_getAssociatedObject<span class="token punctuation">(</span>self, <span class="token string">"mobile"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>setMobile:<span class="token punctuation">(</span>NSString *<span class="token punctuation">)</span>mobile <span class="token punctuation">{</span>
+    objc_setAssociatedObject<span class="token punctuation">(</span>self, <span class="token string">"mobile"</span>, mobile, OBJC_ASSOCIATION_RETAIN_NONATOMIC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> 
+</code></pre>
 <p>重写set和get方法,设置关联属性</p>
 <blockquote>
 <p>/*<em><br> 第一个参数:当前对象<br> 第二个参数:新增属性键值
  </em>/</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">objc_getAssociatedObject(id _Nonnull object, const void * _Nonnull key)</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">objc_getAssociatedObject<span class="token punctuation">(</span>id _Nonnull object, const void * _Nonnull key<span class="token punctuation">)</span>
+</code></pre>
 <blockquote>
 <p>/*<em><br> 第一个参数id object, 当前对象<br> 第二个参数const void </em>key, 关联的key，是c字符串<br> 第三个参数id value, 被关联的对象的值<br> 第四个参数objc_AssociationPolicy policy关联引用的规则<br> */</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">objc_setAssociatedObject(id _Nonnull object, const void * _Nonnull key,id _Nullable value, objc_AssociationPolicy policy)</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">objc_setAssociatedObject<span class="token punctuation">(</span>id _Nonnull object, const void * _Nonnull key,id _Nullable value, objc_AssociationPolicy policy<span class="token punctuation">)</span>
+</code></pre>
 <h2 id="自动化归解档"><a href="#自动化归解档" class="headerlink" title="自动化归解档"></a>自动化归解档</h2><p>归解档遵循<font color="#2E8B57">NSCoding</font>协议即可,实现归档和解档即可</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pragma mark - coding</span></span><br><span class="line">- (void)encodeWithCoder:(NSCoder *)aCoder;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#pragma mark - coding</span>
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>encodeWithCoder:<span class="token punctuation">(</span>NSCoder *<span class="token punctuation">)</span>aCoder<span class="token punctuation">;</span>
+- <span class="token punctuation">(</span>nullable instancetype<span class="token punctuation">)</span>initWithCoder:<span class="token punctuation">(</span>NSCoder *<span class="token punctuation">)</span>aDecoder<span class="token punctuation">;</span>
+</code></pre>
 <p>对于自定义类型的归解档,最原始的方法就是挨个属性去归档、解档,但是当你要归档的对象永远数亿属性资产的时候,很显然最原始的方法已经无法满足我们对于效率的诉求,从而就有了自动化归解档的诞生</p>
 <p>分别在两个方法去遍历成员变量,取值、设值</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pragma mark - coding</span></span><br><span class="line">- (void)encodeWithCoder:(NSCoder *)aCoder&#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     传统做法:挨个属性去归档</span><br><span class="line">     但是当遇到n多属性的时候 显然一个个去归档就很繁琐了</span><br><span class="line">     */</span><br><span class="line">//    [aCoder encodeObject:self.name forKey:@<span class="string">"name"</span>];</span><br><span class="line">//    [aCoder encodeObject:self.sex forKey:@<span class="string">"sex"</span>];</span><br><span class="line">//    [aCoder encodeObject:self.friends forKey:@<span class="string">"friends"</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    unsigned int count = 0;</span><br><span class="line"></span><br><span class="line">    Ivar *ivarList = class_copyIvarList([Person class], &amp;count);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; count; i ++) &#123;</span><br><span class="line">        Ivar ivar = ivarList[i];                     // 从成员列表中取出成员变量</span><br><span class="line">        const char *name = ivar_getName(ivar);       // 获取成员变量名</span><br><span class="line">        // 进行归档</span><br><span class="line">        NSString *key = [NSString stringWithUTF8String:name];</span><br><span class="line">        id value = [self valueForKey:key];</span><br><span class="line">        [aCoder encodeObject:value forKey:key];</span><br><span class="line">    &#125;</span><br><span class="line">    free(ivarList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#pragma mark - coding</span>
+- <span class="token punctuation">(</span>void<span class="token punctuation">)</span>encodeWithCoder:<span class="token punctuation">(</span>NSCoder *<span class="token punctuation">)</span>aCoder<span class="token punctuation">{</span>
+
+    /**
+     传统做法:挨个属性去归档
+     但是当遇到n多属性的时候 显然一个个去归档就很繁琐了
+     */
+//    <span class="token punctuation">[</span>aCoder encodeObject:self.name forKey:@<span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+//    <span class="token punctuation">[</span>aCoder encodeObject:self.sex forKey:@<span class="token string">"sex"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+//    <span class="token punctuation">[</span>aCoder encodeObject:self.friends forKey:@<span class="token string">"friends"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+    unsigned int count <span class="token operator">=</span> 0<span class="token punctuation">;</span>
+
+    Ivar *ivarList <span class="token operator">=</span> class_copyIvarList<span class="token punctuation">(</span><span class="token punctuation">[</span>Person class<span class="token punctuation">]</span>, <span class="token operator">&amp;</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>int i <span class="token operator">=</span> 0<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i ++<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Ivar ivar <span class="token operator">=</span> ivarList<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>                     // 从成员列表中取出成员变量
+        const char *name <span class="token operator">=</span> ivar_getName<span class="token punctuation">(</span>ivar<span class="token punctuation">)</span><span class="token punctuation">;</span>       // 获取成员变量名
+        // 进行归档
+        NSString *key <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithUTF8String:name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">id</span> value <span class="token operator">=</span> <span class="token punctuation">[</span>self valueForKey:key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>aCoder encodeObject:value forKey:key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    free<span class="token punctuation">(</span>ivarList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>获取成员变量,赋值成员变量</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    <span class="keyword">if</span> (self) &#123;</span><br><span class="line"></span><br><span class="line">//        _name = [aDecoder decodeObjectForKey:@<span class="string">"name"</span>];</span><br><span class="line">//        _sex = [aDecoder decodeObjectForKey:@<span class="string">"sex"</span>];</span><br><span class="line">//        _friends = [aDecoder decodeObjectForKey:@<span class="string">"friends"</span>];</span><br><span class="line"></span><br><span class="line">        unsigned int count = 0;</span><br><span class="line">        Ivar *ivarList = class_copyIvarList([Person class], &amp;count);</span><br><span class="line">        <span class="keyword">for</span> (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">            Ivar ivar = ivarList[i];                        // 从成员列表中取出成员变量</span><br><span class="line">            const char *name = ivar_getName(ivar);       // 获取成员变量名</span><br><span class="line">            // 进行解档</span><br><span class="line">            NSString *key = [NSString stringWithUTF8String:name];</span><br><span class="line">            id value = [aDecoder decodeObjectForKey:key];</span><br><span class="line">            // 将值赋值给成员变量</span><br><span class="line">            [self setValue:value forKey:key];</span><br><span class="line">        &#125;</span><br><span class="line">        free(ivarList);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-bash"><code class="language-bash">- <span class="token punctuation">(</span>nullable instancetype<span class="token punctuation">)</span>initWithCoder:<span class="token punctuation">(</span>NSCoder *<span class="token punctuation">)</span>aDecoder<span class="token punctuation">{</span>
+    self <span class="token operator">=</span> <span class="token punctuation">[</span>super init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+//        _name <span class="token operator">=</span> <span class="token punctuation">[</span>aDecoder decodeObjectForKey:@<span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+//        _sex <span class="token operator">=</span> <span class="token punctuation">[</span>aDecoder decodeObjectForKey:@<span class="token string">"sex"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+//        _friends <span class="token operator">=</span> <span class="token punctuation">[</span>aDecoder decodeObjectForKey:@<span class="token string">"friends"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        unsigned int count <span class="token operator">=</span> 0<span class="token punctuation">;</span>
+        Ivar *ivarList <span class="token operator">=</span> class_copyIvarList<span class="token punctuation">(</span><span class="token punctuation">[</span>Person class<span class="token punctuation">]</span>, <span class="token operator">&amp;</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>int i <span class="token operator">=</span> 0<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i++<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Ivar ivar <span class="token operator">=</span> ivarList<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>                        // 从成员列表中取出成员变量
+            const char *name <span class="token operator">=</span> ivar_getName<span class="token punctuation">(</span>ivar<span class="token punctuation">)</span><span class="token punctuation">;</span>       // 获取成员变量名
+            // 进行解档
+            NSString *key <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithUTF8String:name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">id</span> value <span class="token operator">=</span> <span class="token punctuation">[</span>aDecoder decodeObjectForKey:key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            // 将值赋值给成员变量
+            <span class="token punctuation">[</span>self setValue:value forKey:key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        free<span class="token punctuation">(</span>ivarList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h2 id="字典转模型"><a href="#字典转模型" class="headerlink" title="字典转模型"></a>字典转模型</h2>
             </div>
             <hr>
@@ -649,7 +767,8 @@ Person *p = [[Person alloc] init];
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">设备尺寸#if __IPHONE_OS_VERSION_MAX_ALLOWED &gt;= 80000 // 当前Xcode支持iOS8及以上#define SCREEN_WIDTH ([[UIScreen mainScreen] resp</div>
+                    <div class="summary">设备尺寸#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000 // 当前Xcode支持iOS8及以上
+#define SCREEN_WIDTH ([[UIScreen mainScreen] respon</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-04-08
