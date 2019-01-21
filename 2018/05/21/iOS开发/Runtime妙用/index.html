@@ -6,10 +6,9 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="iOS Runtime的妙用, ReaperLC的博客">
-    <meta name="description" content="消息机制Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例
-Person *p = [[Person alloc] init];
-
-对于我们平常使用的初始化方法 all">
+    <meta name="description" content="
+Runtime是一套底层的C语言API（包含强大的C语言数据类型和函数）,RunTime简称运行时。OC就是运行时机制，其中最主要的是消息机制。
+苹果和GNU各自维护一个开源的runtime版本https://github.com/ope">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -412,7 +411,10 @@ Person *p = [[Person alloc] init];
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h2><p>Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例</p>
+                <p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/Runtime.png?raw=true" alt=""></p>
+<p>Runtime是一套底层的C语言API（包含强大的C语言数据类型和函数）,RunTime简称运行时。OC就是运行时机制，其中最主要的是消息机制。</p>
+<p>苹果和GNU各自维护一个开源的runtime版本<br><a href="https://github.com/opensource-apple/objc4" target="_blank" rel="noopener">https://github.com/opensource-apple/objc4</a> (Apple)</p>
+<h2 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h2><p>Runtime进行方法调用本质上是发送消息，通过objc_msgSend()函数进行消息发送,下面就以一个对象的实例化为例</p>
 <pre class=" language-bash"><code class="language-bash">Person *p <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>Person alloc<span class="token punctuation">]</span> init<span class="token punctuation">]</span><span class="token punctuation">;</span>
 </code></pre>
 <p>对于我们平常使用的初始化方法 alloc、 init、new,如果用消息机制分解步骤具体如下:</p>
@@ -426,6 +428,25 @@ p <span class="token operator">=</span> objc_msgSend<span class="token punctuati
 objc_msgSend<span class="token punctuation">(</span>p, @selector<span class="token punctuation">(</span>run<span class="token punctuation">))</span><span class="token punctuation">;</span>
 //汇总传递消息链
 objc_msgSend<span class="token punctuation">(</span>objc_msgSend<span class="token punctuation">(</span>objc_msgSend<span class="token punctuation">(</span>objc_getClass<span class="token punctuation">(</span><span class="token string">"Person"</span><span class="token punctuation">)</span>, @selector<span class="token punctuation">(</span>alloc<span class="token punctuation">))</span>, @selector<span class="token punctuation">(</span>init<span class="token punctuation">))</span>, @selector<span class="token punctuation">(</span>run<span class="token punctuation">))</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p><strong>如果只申明了方法编号 ,没有对应的方法实现,在method_array_t的方法列表中没有该方法编号</strong></p>
+</blockquote>
+<blockquote>
+<p>使用objc_msgSend消息机制,必须导入头文件 @import &lt;objc/messgae..h&gt;,让后配置<br>Build Setting–&gt;Apple LLVM 6.0 - Preprocessing–&gt;Enable Strict Checking of objc_msgSend Calls 改为 NO</p>
+</blockquote>
+<p>当向一个实例对象发送消息时,对象会根据super class指针找到object_class这个结构体,在这个结构体中,有一个method_array_t存储的方法列表,向对象发送消息就回去</p>
+<p>在消息发送过程中,倘若没找到指定消息,runtime为我们预留了三次补救机会method_array_t中找是否有对应方法的实现,如果没有找到,就会沿着继承树去找,直到找到根类, 如果根类也没有对应方法实现,那么接下来就进入了我们常说的消息转发流程</p>
+<p>消息转发机制,步骤如下图:</p>
+<p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/msg.png?raw=true" alt=""></p>
+<pre class=" language-bash"><code class="language-bash">//第一次 动态方法解析
++<span class="token punctuation">(</span>BOOL<span class="token punctuation">)</span>resolveInstanceMethod:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>sel<span class="token punctuation">;</span>
+//第二次 快速消息转发
+-<span class="token punctuation">(</span>id<span class="token punctuation">)</span>forwardingTargetForSelector:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>aSelector<span class="token punctuation">;</span>
+//第三次 标准消息转发 重定向
+-<span class="token punctuation">(</span>void<span class="token punctuation">)</span>forwardInvocation:<span class="token punctuation">(</span>NSInvocation *<span class="token punctuation">)</span>anInvocation<span class="token punctuation">;</span>
+//消息中转中心
+-<span class="token punctuation">(</span>NSMethodSignature *<span class="token punctuation">)</span>methodSignatureForSelector:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>aSelector<span class="token punctuation">;</span>
 </code></pre>
 <h2 id="动态修改变量"><a href="#动态修改变量" class="headerlink" title="动态修改变量"></a>动态修改变量</h2><pre class=" language-bash"><code class="language-bash">/** 1.动态修改变量（私有变量也可修改<span class="token punctuation">)</span>*/
 - <span class="token punctuation">(</span>void<span class="token punctuation">)</span>dynamicModifyVariable <span class="token punctuation">{</span>
