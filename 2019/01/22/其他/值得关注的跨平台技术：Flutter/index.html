@@ -421,15 +421,20 @@
 flutter doctor
 </code></pre>
 <p>环境安装无误,最终执行结果如下:</p>
-<pre class=" language-bash"><code class="language-bash">Doctor summary <span class="token punctuation">(</span>to see all details, run flutter doctor -v<span class="token punctuation">)</span>:
-<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Flutter <span class="token punctuation">(</span>Channel beta, v0.5.1, on Mac OS X 10.13.5 17F77, locale zh-Hans-CN<span class="token punctuation">)</span>
-<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Android toolchain - develop <span class="token keyword">for</span> Android devices <span class="token punctuation">(</span>Android SDK 27.0.3<span class="token punctuation">)</span>
-<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> iOS toolchain - develop <span class="token keyword">for</span> iOS devices <span class="token punctuation">(</span>Xcode 9.4.1<span class="token punctuation">)</span>
-<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Android Studio <span class="token punctuation">(</span>version 3.1<span class="token punctuation">)</span>
-<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> IntelliJ IDEA Ultimate Edition <span class="token punctuation">(</span>version 2018.1.1<span class="token punctuation">)</span>
-<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> VS Code <span class="token punctuation">(</span>version 1.24.1<span class="token punctuation">)</span>
-<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Connected devices <span class="token punctuation">(</span>2 available<span class="token punctuation">)</span>
+<pre class=" language-bash"><code class="language-bash"> Doctor summary <span class="token punctuation">(</span>to see all details, run flutter doctor -v<span class="token punctuation">)</span>:
+1<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Flutter <span class="token punctuation">(</span>Channel beta, v0.5.1, on Mac OS X 10.13.5 17F77, locale zh-Hans- 
+ CN<span class="token punctuation">)</span>
+2<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Android toolchain - develop <span class="token keyword">for</span> Android devices <span class="token punctuation">(</span>Android SDK 27.0.3<span class="token punctuation">)</span>
+3<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> iOS toolchain - develop <span class="token keyword">for</span> iOS devices <span class="token punctuation">(</span>Xcode 9.4.1<span class="token punctuation">)</span>
+4<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Android Studio <span class="token punctuation">(</span>version 3.1<span class="token punctuation">)</span>
+5<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> IntelliJ IDEA Ultimate Edition <span class="token punctuation">(</span>version 2018.1.1<span class="token punctuation">)</span>
+ <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> VS Code <span class="token punctuation">(</span>version 1.24.1<span class="token punctuation">)</span>
+6<span class="token punctuation">[</span>✓<span class="token punctuation">]</span> Connected devices <span class="token punctuation">(</span>2 available<span class="token punctuation">)</span>
 </code></pre>
+<p>对于上面命令行结果,对照序号给予以下分析:</p>
+<blockquote>
+<p>1、表示Flutter环境安装没问题<br>2、说明安卓工具安装没问题<br>3、说明iOS工具安装没问题<br>4、Android Studio中Flutter插件已经安装<br>5、VS code 编辑器, 直接搜索插件Flutter安装即可<br>6、连接的设备</p>
+</blockquote>
 <h2 id="设定开发环境"><a href="#设定开发环境" class="headerlink" title="设定开发环境"></a>设定开发环境</h2><blockquote>
 <ul>
 <li>开启开发者模式（developer mode的 <a href="https://flutter.io/docs/get-started/install/macos#set-up-your-android-device" target="_blank" rel="noopener">Android</a>) 和 <a href="https://flutter.io/docs/get-started/install/macos#deploy-to-ios-devices" target="_blank" rel="noopener">iOS</a> 真机；</li>
