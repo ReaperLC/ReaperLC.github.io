@@ -4,6 +4,48 @@
   
     
     <entry>
+      <title>不同环境不同icon的打包策略</title>
+      <link href="/2019/02/25/iOS%E5%BC%80%E5%8F%91/%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E4%B8%8D%E5%90%8Cicon%E7%9A%84%E6%89%93%E5%8C%85%E7%AD%96%E7%95%A5/"/>
+      <url>/2019/02/25/iOS%E5%BC%80%E5%8F%91/%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E4%B8%8D%E5%90%8Cicon%E7%9A%84%E6%89%93%E5%8C%85%E7%AD%96%E7%95%A5/</url>
+      
+        <content type="html"><![CDATA[<h2 id="创建Configuration"><a href="#创建Configuration" class="headerlink" title="创建Configuration"></a>创建Configuration</h2><p>系统自带configuration有两个版本 release 和 debug ,有时候可能还存在多个测试环境问题,此时可以自建configuration版本:<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addConfig.png?raw=true" alt=""><br>创建完成如下<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addconfig-done.png?raw=true" alt=""></p><h2 id="数据环境配置"><a href="#数据环境配置" class="headerlink" title="数据环境配置"></a>数据环境配置</h2><p>新增Preform配置后,当前Target的Build Setting下搜索macros找到Preprocessor Macros，可以看到新增的PREFORM,此时需要新增PREFORM=1，来定义标示预发环境的宏变量PREFORM:</p><p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png?raw=true" alt=""></p><p>后续可以在pch中配置数据环境,示意图及环境配置代码如下：</p><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#ifdef DEBUG //开发环境</span><span class="token comment" spellcheck="true">#define AlertBody   @"这是开发环境"</span><span class="token comment" spellcheck="true">#elif PREFORM //预发环境</span><span class="token comment" spellcheck="true">#define AlertBody   @"这是预发环境"</span><span class="token comment" spellcheck="true">#else //正式环境</span><span class="token comment" spellcheck="true">#define AlertBody   @"这是正式环境"</span><span class="token comment" spellcheck="true">#endif</span></code></pre><h2 id="配置Appicon"><a href="#配置Appicon" class="headerlink" title="配置Appicon"></a>配置Appicon</h2><p>设计三套不同的图标,生成appIcon,取好对应的名称放入Assets.xcassets中：<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addIcom.png?raw=true" alt=""></p><p>然后再当前Target的Build Setting下搜索icon找到Asset Catalog App Icon Set Name，配置如下：<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/%E8%AE%BE%E7%BD%AE%E5%9B%BE%E6%A0%87.png?raw=true" alt=""></p><p>然后Edit Scheme选择相应的Configuration进行编译或者打包就能打出不同的图标了。</p><h2 id="配置AppName"><a href="#配置AppName" class="headerlink" title="配置AppName"></a>配置AppName</h2><p>配置不同的应用名称，这里需要使用到User-Defined加上info.plist来进行配置；新增User-Defined,如下:<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addUserDefine.png?raw=true" alt=""><br>将三种Configuration下的应用名分别设置成你需要显示的不同名称,比如:：Demo开发版、Demo预发版、Demo正式版。<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addappName.png?raw=true" alt=""><br>然后在info.plist中加入Bundle display name，将其设置成我们刚刚新建的User-Defined:<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/infoList_displayname.png?raw=true" alt=""></p><p>然后Edit Scheme选择相应的Configuration进行编译或者打包就能打出不同的app名称了。</p><h2 id="配置BundleID"><a href="#配置BundleID" class="headerlink" title="配置BundleID"></a>配置BundleID</h2><p>如上配置后,虽然能打包出来不同图标,不同名称的应用,但是由于bundlID没变,所以无法同时安装,此时我们就想到配置不同的BundleID,此处的配置同名称的配置,新增User-Defined,如下:</p><p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/bundleID.png?raw=true" alt=""></p><p>info.plist中将bundleid 改成配置的环境变量如下:<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/bundleidset.png?raw=true" alt=""></p><p>然后Edit Scheme选择相应的Configuration进行编译或者打包就能打出不同的bundleID了。</p><h2 id="配置打包"><a href="#配置打包" class="headerlink" title="配置打包"></a>配置打包</h2><p>脚本自动打包</p><h2 id="测试源码"><a href="#测试源码" class="headerlink" title="测试源码"></a>测试源码</h2><p><a href="https://github.com/ReaperLC/Hello-World/tree/master/%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E4%B8%8D%E5%90%8Cicon%E6%89%93%E5%8C%85%E7%AD%96%E7%95%A5" target="_blank" rel="noopener">git源码</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> iOS开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 不同icon </tag>
+            
+            <tag> 不同ID </tag>
+            
+            <tag> 不同Name </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2019/02/25/iOS%E5%BC%80%E5%8F%91/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+      <url>/2019/02/25/iOS%E5%BC%80%E5%8F%91/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>详见<a href="https://baike.baidu.com/item/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/4602306?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>详见<a href="https://baike.baidu.com/item/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/9762418?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>详见<a href="https://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/7214992?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p><h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>详见<a href="https://baike.baidu.com/item/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/3229428?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>详见<a href="https://baike.baidu.com/item/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/1639015?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>详见<a href="https://baike.baidu.com/item/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/369842?fromtitle=%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F&amp;fromid=2084344&amp;fr=aladdin" target="_blank" rel="noopener">百度百科</a></p><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>详见<a href="https://baike.baidu.com/item/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">百度百科</a></p><h2 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h2><p>详见<a href="https://baike.baidu.com/item/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">百度百科</a></p><h2 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h2><p>详见<a href="https://baike.baidu.com/item/桶排序/4973777" target="_blank" rel="noopener">百度百科</a></p><h2 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h2><p>详见<a href="https://baike.baidu.com/item/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">百度百科</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>值得关注的跨平台技术：Electron</title>
       <link href="/2019/01/25/%E5%85%B6%E4%BB%96/%E5%80%BC%E5%BE%97%E4%B8%80%E7%9C%8B%E7%9A%84%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%8A%80%E6%9C%AFElectron/"/>
       <url>/2019/01/25/%E5%85%B6%E4%BB%96/%E5%80%BC%E5%BE%97%E4%B8%80%E7%9C%8B%E7%9A%84%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%8A%80%E6%9C%AFElectron/</url>
