@@ -430,6 +430,7 @@
 
 </code></pre>
 <h2 id="配置Appicon"><a href="#配置Appicon" class="headerlink" title="配置Appicon"></a>配置Appicon</h2><p>设计三套不同的图标,生成appIcon,取好对应的名称放入Assets.xcassets中：<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addIcom.png?raw=true" alt=""></p>
+<p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/iconGroup.png?raw=true" alt=""></p>
 <p>然后再当前Target的Build Setting下搜索icon找到Asset Catalog App Icon Set Name，配置如下：<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/%E8%AE%BE%E7%BD%AE%E5%9B%BE%E6%A0%87.png?raw=true" alt=""></p>
 <p>然后Edit Scheme选择相应的Configuration进行编译或者打包就能打出不同的图标了。</p>
 <h2 id="配置AppName"><a href="#配置AppName" class="headerlink" title="配置AppName"></a>配置AppName</h2><p>配置不同的应用名称，这里需要使用到User-Defined加上info.plist来进行配置；新增User-Defined,如下:<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addUserDefine.png?raw=true" alt=""><br>将三种Configuration下的应用名分别设置成你需要显示的不同名称,比如:：Demo开发版、Demo预发版、Demo正式版。<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/addappName.png?raw=true" alt=""><br>然后在info.plist中加入Bundle display name，将其设置成我们刚刚新建的User-Defined:<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/infoList_displayname.png?raw=true" alt=""></p>
@@ -438,7 +439,8 @@
 <p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/bundleID.png?raw=true" alt=""></p>
 <p>info.plist中将bundleid 改成配置的环境变量如下:<br><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/bundleidset.png?raw=true" alt=""></p>
 <p>然后Edit Scheme选择相应的Configuration进行编译或者打包就能打出不同的bundleID了。</p>
-<h2 id="配置打包"><a href="#配置打包" class="headerlink" title="配置打包"></a>配置打包</h2><p>脚本自动打包</p>
+<h2 id="配置打包"><a href="#配置打包" class="headerlink" title="配置打包"></a>配置打包</h2><p>选择对应的版本进行打包即可,不需要再频繁去替换标题、图标、ID等信息</p>
+<p><img src="https://github.com/ReaperLC/Hello-World/blob/master/resource/result.png?raw=true" alt=""></p>
 <h2 id="测试源码"><a href="#测试源码" class="headerlink" title="测试源码"></a>测试源码</h2><p><a href="https://github.com/ReaperLC/Hello-World/tree/master/%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E4%B8%8D%E5%90%8Cicon%E6%89%93%E5%8C%85%E7%AD%96%E7%95%A5" target="_blank" rel="noopener">git源码</a></p>
 
             </div>
